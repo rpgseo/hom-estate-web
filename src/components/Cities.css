@@ -152,47 +152,6 @@
   pointer-events: none;
 }
 
-/* === Window frame bars === */
-.window-frame-bars {
-  position: absolute;
-  inset: 0;
-  z-index: 6;
-  pointer-events: none;
-}
-
-.frame-vertical {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 6px;
-  transform: translateX(-50%);
-  background: linear-gradient(to bottom,
-    #c4bfb3 0%,
-    #d8d3c7 20%,
-    #c4bfb3 50%,
-    #d8d3c7 80%,
-    #c4bfb3 100%
-  );
-  box-shadow: 1px 0 3px rgba(0, 0, 0, 0.2), -1px 0 3px rgba(0, 0, 0, 0.2);
-}
-
-.frame-horizontal {
-  position: absolute;
-  top: 52%;
-  left: 0;
-  right: 0;
-  height: 6px;
-  background: linear-gradient(to right,
-    #c4bfb3 0%,
-    #d8d3c7 20%,
-    #c4bfb3 50%,
-    #d8d3c7 80%,
-    #c4bfb3 100%
-  );
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 -1px 3px rgba(0, 0, 0, 0.2);
-}
-
 /* === SVG Arch frame === */
 .window-arch-frame {
   position: absolute;

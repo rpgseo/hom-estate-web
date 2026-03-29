@@ -77,12 +77,6 @@ function CityWindow({ city, index }) {
             />
           </div>
 
-          {/* Window frame bars */}
-          <div className="window-frame-bars">
-            <div className="frame-vertical" />
-            <div className="frame-horizontal" />
-          </div>
-
           {/* Window arch frame overlay */}
           <svg
             className="window-arch-frame"
