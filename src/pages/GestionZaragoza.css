@@ -1,5 +1,5 @@
 /* ────────────────────────────────────────────
-   GestionZaragoza — Colivings grid + portal
+   GestionZaragoza — Edificio fachada completa
 ──────────────────────────────────────────── */
 
 .gz-page {
@@ -128,16 +128,16 @@
   letter-spacing: 0.5px;
 }
 
-/* ── COLIVINGS GRID ── */
+/* ── BUILDING SECTION ── */
 .gz-building {
-  background: #f5f2ec;
+  background: #f0ece4;
   padding: 80px 0 0;
   overflow: hidden;
 }
 
 .gz-building-header {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 50px;
   padding: 0 24px;
 }
 
@@ -153,111 +153,271 @@
   color: #666;
 }
 
-.gz-colivings-grid {
-  max-width: 1100px;
+/* ══════════════════════════════════════
+   THE BUILDING — "bld-edificio"
+══════════════════════════════════════ */
+
+.bld-edificio {
+  max-width: 920px;
   margin: 0 auto;
-  padding: 0 24px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  position: relative;
 }
 
-/* ── COLIVING CARD ── */
-.coliving-card {
-  background: #fff;
-  border-radius: 120px 120px 20px 20px;
-  overflow: hidden;
-  box-shadow:
-    0 4px 20px rgba(0,0,0,0.08),
-    0 1px 4px rgba(0,0,0,0.06);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+/* ── ROOF ── */
+.bld-roof {
+  position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
-.coliving-card:hover {
-  transform: translateY(-6px);
-  box-shadow:
-    0 16px 48px rgba(27,42,74,0.14),
-    0 4px 12px rgba(0,0,0,0.08);
+.bld-roof-triangle {
+  width: 0;
+  height: 0;
+  border-left: 460px solid transparent;
+  border-right: 460px solid transparent;
+  border-bottom: 70px solid #b8b1a3;
+  position: relative;
 }
 
-/* Card image — arch shape */
-.coliving-card-img {
+.bld-roof-base {
+  width: 100%;
+  height: 12px;
+  background: linear-gradient(to bottom, #a8a193, #b8b1a3);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+/* ── CORNICE ── */
+.bld-cornice {
+  width: 100%;
+  height: 20px;
+  background: linear-gradient(to bottom, #d4cfc5, #c8c2b6);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.bld-cornice-detail {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    #bfb9ad 0px,
+    #bfb9ad 14px,
+    #d4cfc5 14px,
+    #d4cfc5 16px
+  );
+}
+
+/* ── WALL ── */
+.bld-wall {
+  background: #e8e3d9;
+  border-left: 18px solid #d4cfc5;
+  border-right: 18px solid #d4cfc5;
+  padding: 0;
+  position: relative;
+}
+
+/* Floor */
+.bld-floor {
+  padding: 18px 16px;
+  position: relative;
+}
+
+.bld-floor-label {
+  position: absolute;
+  left: -14px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #b0a89a;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Windows row — 3 per floor */
+.bld-windows-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+/* Floor divider line */
+.bld-floor-divider {
+  height: 6px;
+  background: linear-gradient(to bottom, #cdc7bb, #d8d3c7, #cdc7bb);
+  margin: 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+/* ── INDIVIDUAL WINDOW ── */
+.bld-window {
+  position: relative;
+}
+
+.bld-window-hole {
   position: relative;
   width: 100%;
-  aspect-ratio: 3 / 3.2;
-  border-radius: 120px 120px 0 0;
+  aspect-ratio: 3 / 4;
+  border-radius: 100px 100px 4px 4px;
   overflow: hidden;
+  box-shadow:
+    inset 0 0 20px rgba(0,0,0,0.3),
+    inset 0 0 4px rgba(0,0,0,0.15),
+    0 3px 12px rgba(0,0,0,0.15);
+  cursor: pointer;
 }
 
-.coliving-card-img-inner {
+/* Glass / image area */
+.bld-window-glass {
   position: absolute;
   inset: 0;
   overflow: hidden;
 }
 
-.coliving-card-img-inner img {
+.bld-window-glass img {
   position: absolute;
   inset: -30% 0;
   width: 100%;
   height: 160%;
   object-fit: cover;
   will-change: transform;
+  transition: filter 0.3s;
 }
 
-/* Card info */
-.coliving-card-info {
-  padding: 20px 22px 22px;
+.bld-window:hover .bld-window-glass img {
+  filter: brightness(1.05);
+}
+
+/* Info overlay at bottom */
+.bld-window-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px 12px 12px;
+  background: linear-gradient(to top, rgba(27,42,74,0.92) 0%, rgba(27,42,74,0.6) 60%, transparent 100%);
+  color: #fff;
+  z-index: 3;
   display: flex;
   flex-direction: column;
-  flex: 1;
+  gap: 4px;
 }
 
-.coliving-card-info h3 {
-  font-size: 1.05rem;
+.bld-window-overlay h3 {
+  font-size: 0.85rem;
   font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.bld-window-overlay p {
+  font-size: 0.68rem;
+  line-height: 1.4;
+  opacity: 0.8;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.bld-window-arrow {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(247,242,134,0.9);
   color: #1B2A4A;
-  margin-bottom: 8px;
-}
-
-.coliving-card-info p {
-  font-size: 0.82rem;
-  color: #666;
-  line-height: 1.55;
-  flex: 1;
-  margin-bottom: 16px;
-}
-
-.coliving-card-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.25s, transform 0.25s;
+  z-index: 4;
+}
+
+.bld-window:hover .bld-window-arrow {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Window sill */
+.bld-window-sill {
+  height: 6px;
+  background: linear-gradient(to bottom, #c8c2b6, #d8d3c7);
+  border-radius: 0 0 2px 2px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin: 0 -2px;
+}
+
+/* ── BAND ── */
+.bld-band {
   background: #1B2A4A;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
   color: #F7F286;
-  transition: transform 0.2s, background 0.2s;
-  align-self: flex-end;
+  font-weight: 700;
 }
 
-.coliving-card-link:hover {
-  transform: scale(1.1);
-  background: #243660;
-}
-
-/* ── PORTAL ILLUSTRATION ── */
-.gz-portal-illustration {
+/* ── GROUND / PORTAL ── */
+.bld-ground {
+  background: #e8e3d9;
+  border-left: 18px solid #d4cfc5;
+  border-right: 18px solid #d4cfc5;
   display: flex;
   justify-content: center;
-  padding: 60px 24px 0;
+  padding: 20px 16px 0;
+  min-height: 240px;
+  position: relative;
 }
 
-.gz-portal-svg {
+.bld-portal {
+  position: relative;
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bld-portal-arch {
   width: 100%;
-  max-width: 420px;
+  position: relative;
+}
+
+.bld-portal-svg {
+  width: 100%;
   height: auto;
+  display: block;
+}
+
+.bld-portal-plaque {
+  background: #1B2A4A;
+  color: #F7F286;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  padding: 6px 18px;
+  border-radius: 3px 3px 0 0;
+  margin-top: -2px;
+}
+
+/* ── SOCLE ── */
+.bld-socle {
+  height: 24px;
+  background: linear-gradient(to top, #a8a193, #bfb9ad);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
 }
 
 /* ── SERVICES ── */
@@ -423,6 +583,11 @@
   .gz-services-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .bld-roof-triangle {
+    border-left-width: 50vw;
+    border-right-width: 50vw;
+    border-bottom-width: 50px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -434,15 +599,33 @@
     border-right: none;
     border-bottom: 1px solid rgba(255,255,255,0.08);
   }
-  .gz-colivings-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+  .bld-wall {
+    border-left-width: 10px;
+    border-right-width: 10px;
   }
-  .coliving-card {
-    border-radius: 80px 80px 16px 16px;
+  .bld-ground {
+    border-left-width: 10px;
+    border-right-width: 10px;
   }
-  .coliving-card-img {
-    border-radius: 80px 80px 0 0;
+  .bld-floor {
+    padding: 12px 10px;
+  }
+  .bld-windows-row {
+    gap: 8px;
+  }
+  .bld-floor-label {
+    display: none;
+  }
+  .bld-window-overlay h3 {
+    font-size: 0.75rem;
+  }
+  .bld-window-overlay p {
+    display: none;
+  }
+  .bld-roof-triangle {
+    border-left-width: 50vw;
+    border-right-width: 50vw;
+    border-bottom-width: 40px;
   }
   .gz-services-grid {
     grid-template-columns: 1fr;
@@ -454,14 +637,19 @@
   .gz-ventajas-img {
     order: -1;
   }
-  .gz-portal-svg {
-    max-width: 300px;
+  .bld-portal {
+    width: 180px;
   }
 }
 
 @media (max-width: 480px) {
-  .gz-colivings-grid {
-    grid-template-columns: 1fr;
-    max-width: 360px;
+  .bld-window-overlay {
+    padding: 24px 8px 8px;
+  }
+  .bld-window-overlay h3 {
+    font-size: 0.7rem;
+  }
+  .bld-window-hole {
+    border-radius: 60px 60px 3px 3px;
   }
 }

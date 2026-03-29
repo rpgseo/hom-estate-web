@@ -7,47 +7,47 @@ const COLIVINGS = [
   {
     name: 'Coliving CA53.1',
     img: '/images/colivings-zaragoza/coliving-01.webp',
-    desc: 'Coliving en el centro de Zaragoza, zona residencial-universitaria, ideal para estudiantes o trabajadores del hospital ya que ambos están a 5 minutos.',
+    desc: 'Centro de Zaragoza, zona residencial-universitaria, a 5 min del hospital.',
   },
   {
     name: 'Coliving PSA31',
     img: '/images/colivings-zaragoza/coliving-02.webp',
-    desc: 'Coliving premium en Paseo de Sagasta, zona residencial-comercial, una de las calles más importantes de la ciudad, con todo lo que necesitas a 5 minutos.',
+    desc: 'Premium en Paseo de Sagasta, zona residencial-comercial.',
   },
   {
     name: 'Coliving TB11',
     img: '/images/colivings-zaragoza/coliving-03.webp',
-    desc: 'Coliving en zona centro-universidad en Zaragoza, perfecto para trabajadores de hospital, temporales o estudiantes. Todos los servicios en menos de 5 min.',
+    desc: 'Zona centro-universidad, perfecto para trabajadores y estudiantes.',
   },
   {
     name: 'Coliving CA47-49',
     img: '/images/colivings-zaragoza/coliving-04.webp',
-    desc: 'Coliving en el centro de Zaragoza, zona residencial-universitaria, ideal para estudiantes o trabajadores del hospital ya que ambos están a 5 minutos.',
+    desc: 'Centro de Zaragoza, ideal para estudiantes o trabajadores del hospital.',
   },
   {
     name: 'Coliving JJR5',
     img: '/images/colivings-zaragoza/coliving-05.webp',
-    desc: 'Exclusivo coliving de solo tres habitaciones en Zona centro - universidad muy próximo a hospitales.',
+    desc: 'Exclusivo coliving de tres habitaciones, zona centro-universidad.',
   },
   {
     name: 'Coliving PC29',
     img: '/images/colivings-zaragoza/coliving-06.webp',
-    desc: 'Coliving en la mejor calle universitaria de Zaragoza, Pedro Cerbuna, una calle llena de ambiente y vida universitaria con todo tipo de recursos.',
+    desc: 'Calle Pedro Cerbuna, ambiente y vida universitaria.',
   },
   {
     name: 'Coliving STDJ20',
     img: '/images/colivings-zaragoza/coliving-07.webp',
-    desc: 'Coliving en zona residencial, zona universitaria. Ideal para estudiantes o trabajadores del hospital ya que ambos están a 7 minutos andando.',
+    desc: 'Zona residencial-universitaria, a 7 min andando del hospital.',
   },
   {
     name: 'Coliving CA53.P',
     img: '/images/colivings-zaragoza/coliving-08.webp',
-    desc: 'Coliving en el centro de Zaragoza, zona residencial-universitaria, ideal para estudiantes o trabajadores del hospital ya que ambos están a 5 minutos.',
+    desc: 'Centro de Zaragoza, zona residencial-universitaria.',
   },
   {
     name: 'LOFT CA12',
     img: '/images/colivings-zaragoza/coliving-09.webp',
-    desc: 'Acogedor loft en plena zona residencial-universitaria de Zaragoza, un concepto independiente y único decorado hasta el mínimo detalle.',
+    desc: 'Loft independiente con decoración cuidada al detalle.',
   },
 ]
 
@@ -74,159 +74,36 @@ const VENTAJAS = [
   'Contratos y documentación legal',
 ]
 
-function ColivingCard({ coliving, index }) {
+function WindowCard({ coliving, index }) {
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const y = useTransform(scrollYProgress, [0, 1], ['-30%', '30%'])
+  const y = useTransform(scrollYProgress, [0, 1], ['-25%', '25%'])
 
   return (
     <motion.div
       ref={ref}
-      className="coliving-card"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.6, delay: index * 0.08 }}
+      className="bld-window"
+      initial={{ opacity: 0, scale: 0.9 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.5, delay: index * 0.06 }}
     >
-      <div className="coliving-card-img">
-        <div className="coliving-card-img-inner">
+      {/* Window hole in the wall */}
+      <div className="bld-window-hole">
+        <div className="bld-window-glass">
           <motion.img src={coliving.img} alt={coliving.name} loading="lazy" style={{ y }} />
         </div>
+        {/* Info overlay at bottom of window */}
+        <div className="bld-window-overlay">
+          <h3>{coliving.name}</h3>
+          <p>{coliving.desc}</p>
+          <a href="#contacto" className="bld-window-arrow" aria-label={`Ver ${coliving.name}`}>
+            <ArrowRight size={16} />
+          </a>
+        </div>
       </div>
-      <div className="coliving-card-info">
-        <h3>{coliving.name}</h3>
-        <p>{coliving.desc}</p>
-        <a href="#contacto" className="coliving-card-link" aria-label={`Ver ${coliving.name}`}>
-          <ArrowRight size={18} />
-        </a>
-      </div>
-    </motion.div>
-  )
-}
-
-function PortalSVG() {
-  return (
-    <motion.div
-      className="gz-portal-illustration"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.9 }}
-    >
-      <svg
-        className="gz-portal-svg"
-        viewBox="0 0 500 700"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-label="Portal edificio HOM.ESTATE"
-      >
-        {/* Building outline */}
-        <rect x="50" y="40" width="400" height="660" rx="4" stroke="#1B2A4A" strokeWidth="3" fill="none" />
-
-        {/* Top cornice decoration */}
-        <line x1="40" y1="40" x2="460" y2="40" stroke="#1B2A4A" strokeWidth="4" />
-        <line x1="45" y1="32" x2="455" y2="32" stroke="#1B2A4A" strokeWidth="2" />
-
-        {/* Decorative top element */}
-        <path d="M 220,32 L 250,10 L 280,32" stroke="#1B2A4A" strokeWidth="2.5" fill="none" />
-        <circle cx="250" cy="10" r="5" stroke="#1B2A4A" strokeWidth="1.5" fill="none" />
-
-        {/* Upper floor windows - row of 3 small arched windows */}
-        {[130, 250, 370].map((cx) => (
-          <g key={`upper-${cx}`}>
-            <path
-              d={`M ${cx - 35},160 L ${cx - 35},100 A 35 35 0 0 1 ${cx + 35},100 L ${cx + 35},160`}
-              stroke="#1B2A4A" strokeWidth="2.5" fill="none"
-            />
-            <line x1={cx} y1="100" x2={cx} y2="160" stroke="#1B2A4A" strokeWidth="1.2" />
-            <line x1={cx - 35} y1="130" x2={cx + 35} y2="130" stroke="#1B2A4A" strokeWidth="1.2" />
-          </g>
-        ))}
-
-        {/* Horizontal band between floors */}
-        <line x1="50" y1="185" x2="450" y2="185" stroke="#1B2A4A" strokeWidth="2" />
-        <line x1="50" y1="192" x2="450" y2="192" stroke="#1B2A4A" strokeWidth="1" />
-
-        {/* Middle floor windows - 2 arched windows */}
-        {[175, 325].map((cx) => (
-          <g key={`mid-${cx}`}>
-            <path
-              d={`M ${cx - 45},310 L ${cx - 45},240 A 45 45 0 0 1 ${cx + 45},240 L ${cx + 45},310`}
-              stroke="#1B2A4A" strokeWidth="2.5" fill="none"
-            />
-            <line x1={cx} y1="240" x2={cx} y2="310" stroke="#1B2A4A" strokeWidth="1.2" />
-            <line x1={cx - 45} y1="275" x2={cx + 45} y2="275" stroke="#1B2A4A" strokeWidth="1.2" />
-            {/* Window sill */}
-            <line x1={cx - 50} y1="312" x2={cx + 50} y2="312" stroke="#1B2A4A" strokeWidth="2" />
-          </g>
-        ))}
-
-        {/* Second horizontal band */}
-        <line x1="50" y1="340" x2="450" y2="340" stroke="#1B2A4A" strokeWidth="2" />
-        <line x1="50" y1="347" x2="450" y2="347" stroke="#1B2A4A" strokeWidth="1" />
-
-        {/* Logo area */}
-        <g className="gz-portal-logo-group">
-          {/* Shield / crest shape */}
-          <path
-            d="M 210,380 L 210,400 C 210,430 230,450 250,460 C 270,450 290,430 290,400 L 290,380 Z"
-            stroke="#1B2A4A" strokeWidth="2" fill="none"
-          />
-          <text x="250" y="425" textAnchor="middle" fill="#1B2A4A" fontSize="14" fontWeight="700" fontFamily="Poppins, sans-serif">
-            HOM
-          </text>
-          {/* HOM.ESTATE text below crest */}
-          <text x="250" y="490" textAnchor="middle" fill="#1B2A4A" fontSize="22" fontWeight="800" fontFamily="Poppins, sans-serif" letterSpacing="3">
-            HOM.ESTATE
-          </text>
-        </g>
-
-        {/* Main portal arch */}
-        <path
-          d="M 150,700 L 150,560 A 100 100 0 0 1 350,560 L 350,700"
-          stroke="#1B2A4A" strokeWidth="3.5" fill="none"
-        />
-        {/* Inner arch line */}
-        <path
-          d="M 160,700 L 160,565 A 90 90 0 0 1 340,565 L 340,700"
-          stroke="#1B2A4A" strokeWidth="1.5" fill="none"
-        />
-
-        {/* Portal doors */}
-        <line x1="250" y1="560" x2="250" y2="700" stroke="#1B2A4A" strokeWidth="2" />
-
-        {/* Left door panels */}
-        <rect x="170" y="580" width="70" height="50" rx="3" stroke="#1B2A4A" strokeWidth="1.2" fill="none" />
-        <rect x="170" y="640" width="70" height="50" rx="3" stroke="#1B2A4A" strokeWidth="1.2" fill="none" />
-
-        {/* Right door panels */}
-        <rect x="260" y="580" width="70" height="50" rx="3" stroke="#1B2A4A" strokeWidth="1.2" fill="none" />
-        <rect x="260" y="640" width="70" height="50" rx="3" stroke="#1B2A4A" strokeWidth="1.2" fill="none" />
-
-        {/* Door handles */}
-        <circle cx="235" cy="635" r="3" fill="#1B2A4A" />
-        <circle cx="265" cy="635" r="3" fill="#1B2A4A" />
-
-        {/* Transom window above doors (semi-circle divided) */}
-        <path
-          d="M 165,560 A 85 50 0 0 1 335,560"
-          stroke="#1B2A4A" strokeWidth="1.2" fill="none"
-        />
-        <line x1="250" y1="515" x2="250" y2="560" stroke="#1B2A4A" strokeWidth="1" />
-        <line x1="200" y1="525" x2="200" y2="560" stroke="#1B2A4A" strokeWidth="0.8" />
-        <line x1="300" y1="525" x2="300" y2="560" stroke="#1B2A4A" strokeWidth="0.8" />
-
-        {/* Pilasters on sides of portal */}
-        <rect x="130" y="510" width="20" height="190" stroke="#1B2A4A" strokeWidth="2" fill="none" />
-        <rect x="350" y="510" width="20" height="190" stroke="#1B2A4A" strokeWidth="2" fill="none" />
-
-        {/* Pilaster capitals */}
-        <rect x="126" y="505" width="28" height="8" rx="2" stroke="#1B2A4A" strokeWidth="1.5" fill="none" />
-        <rect x="346" y="505" width="28" height="8" rx="2" stroke="#1B2A4A" strokeWidth="1.5" fill="none" />
-
-        {/* Base plinth */}
-        <line x1="50" y1="700" x2="450" y2="700" stroke="#1B2A4A" strokeWidth="4" />
-      </svg>
+      {/* Window sill */}
+      <div className="bld-window-sill" />
     </motion.div>
   )
 }
@@ -273,7 +150,7 @@ function GestionZaragoza() {
         ))}
       </section>
 
-      {/* COLIVINGS GRID */}
+      {/* BUILDING FACADE */}
       <section className="gz-building">
         <motion.div
           className="gz-building-header"
@@ -285,14 +162,95 @@ function GestionZaragoza() {
           <p>Vive en los mejores espacios del centro de la ciudad</p>
         </motion.div>
 
-        <div className="gz-colivings-grid">
-          {COLIVINGS.map((c, i) => (
-            <ColivingCard key={c.name} coliving={c} index={i} />
-          ))}
-        </div>
+        <div className="bld-edificio">
+          {/* Roof / pediment */}
+          <div className="bld-roof">
+            <div className="bld-roof-triangle" />
+            <div className="bld-roof-base" />
+          </div>
 
-        {/* Portal illustration */}
-        <PortalSVG />
+          {/* Cornice */}
+          <div className="bld-cornice">
+            <div className="bld-cornice-detail" />
+          </div>
+
+          {/* Wall with windows — 3 floors of 3 */}
+          <div className="bld-wall">
+            {/* Floor 3 (top) */}
+            <div className="bld-floor">
+              <div className="bld-floor-label">3a planta</div>
+              <div className="bld-windows-row">
+                {COLIVINGS.slice(0, 3).map((c, i) => (
+                  <WindowCard key={c.name} coliving={c} index={i} />
+                ))}
+              </div>
+            </div>
+
+            {/* Floor divider */}
+            <div className="bld-floor-divider" />
+
+            {/* Floor 2 */}
+            <div className="bld-floor">
+              <div className="bld-floor-label">2a planta</div>
+              <div className="bld-windows-row">
+                {COLIVINGS.slice(3, 6).map((c, i) => (
+                  <WindowCard key={c.name} coliving={c} index={i + 3} />
+                ))}
+              </div>
+            </div>
+
+            {/* Floor divider */}
+            <div className="bld-floor-divider" />
+
+            {/* Floor 1 */}
+            <div className="bld-floor">
+              <div className="bld-floor-label">1a planta</div>
+              <div className="bld-windows-row">
+                {COLIVINGS.slice(6, 9).map((c, i) => (
+                  <WindowCard key={c.name} coliving={c} index={i + 6} />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Band with text */}
+          <div className="bld-band">
+            <span>HOM.ESTATE · Colivings Zaragoza</span>
+          </div>
+
+          {/* Portal / entrance */}
+          <div className="bld-ground">
+            <div className="bld-portal">
+              <div className="bld-portal-arch">
+                <svg viewBox="0 0 240 320" fill="none" aria-hidden="true" className="bld-portal-svg">
+                  {/* Arch shape */}
+                  <path d="M 0,320 L 0,120 A 120 120 0 0 1 240,120 L 240,320"
+                    stroke="#c8c2b6" strokeWidth="16" fill="none" />
+                  <path d="M 8,320 L 8,120 A 112 112 0 0 1 232,120 L 232,320"
+                    stroke="#e0dbd2" strokeWidth="3" fill="none" />
+                  {/* Door division */}
+                  <line x1="120" y1="130" x2="120" y2="320" stroke="#c8c2b6" strokeWidth="4" />
+                  {/* Transom arc */}
+                  <path d="M 16,135 A 104 60 0 0 1 224,135"
+                    stroke="#c8c2b6" strokeWidth="2" fill="none" />
+                  {/* Left door panels */}
+                  <rect x="24" y="150" width="88" height="70" rx="4" stroke="#c8c2b6" strokeWidth="2" fill="none" />
+                  <rect x="24" y="232" width="88" height="80" rx="4" stroke="#c8c2b6" strokeWidth="2" fill="none" />
+                  {/* Right door panels */}
+                  <rect x="128" y="150" width="88" height="70" rx="4" stroke="#c8c2b6" strokeWidth="2" fill="none" />
+                  <rect x="128" y="232" width="88" height="80" rx="4" stroke="#c8c2b6" strokeWidth="2" fill="none" />
+                  {/* Door handles */}
+                  <circle cx="108" cy="240" r="4" fill="#c8c2b6" />
+                  <circle cx="132" cy="240" r="4" fill="#c8c2b6" />
+                </svg>
+              </div>
+              <div className="bld-portal-plaque">ENTRADA</div>
+            </div>
+          </div>
+
+          {/* Socle / base */}
+          <div className="bld-socle" />
+        </div>
       </section>
 
       {/* SERVICES */}
