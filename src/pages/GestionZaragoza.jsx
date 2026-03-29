@@ -272,7 +272,6 @@ function GestionZaragoza() {
                   <polygon points="92,4 100,0 108,4 106,14 94,14" fill="#c8c2b6" stroke="#b5a999" strokeWidth="1" />
                 </svg>
               </div>
-              <div className="bld-portal-plaque">ENTRADA</div>
             </div>
             <div className="bld-ground-side">
               <div className="bld-ground-slats" />
