@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /
+
+# Sitemap (disabled while noindex is active)
+# Sitemap: https://www.hom.estate/sitemap.xml
