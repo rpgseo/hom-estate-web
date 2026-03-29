@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import {
   Home,
   MapPin,
@@ -9,38 +10,43 @@ import {
 import './Footer.css'
 
 const QUICK_LINKS = [
-  { label: 'Inicio', href: '#inicio' },
-  { label: 'Servicios', href: '#servicios' },
-  { label: 'Ciudades', href: '#ciudades' },
-  { label: 'Flex Living', href: '#flex-living' },
+  { label: 'Inicio', href: '/' },
+  { label: 'Colivings Zaragoza', href: '/colivings-zaragoza' },
+  { label: 'Por que Coliving', href: '/por-que-coliving' },
+  { label: 'Blog', href: '/blog' },
 ]
 
 const SERVICES_LINKS = [
-  { label: 'House Flipping', href: '#servicios' },
-  { label: 'Buy to Rent', href: '#servicios' },
-  { label: 'Property Management', href: '#servicios' },
-  { label: 'Consulting', href: '#servicios' },
+  { label: 'Consulting', href: '/consulting' },
+  { label: 'Reformas', href: '/reformas' },
+  { label: 'Gestion Zaragoza', href: '/gestion-alquiler-habitaciones-zaragoza' },
+  { label: 'Gestion Madrid', href: '/gestion-alquiler-habitaciones-madrid' },
+]
+
+const LEGAL_LINKS = [
+  { label: 'Aviso legal', href: '/aviso-legal' },
+  { label: 'Politica de privacidad', href: '/politica-de-privacidad' },
 ]
 
 function Footer() {
   return (
-    <footer id="contacto" className="footer" role="contentinfo">
+    <footer className="footer" role="contentinfo">
       <div className="footer-grid">
         <div className="footer-brand">
-          <a href="#inicio" className="logo" aria-label="HOM.ESTATE">
+          <Link to="/" className="logo" aria-label="HOM.ESTATE">
             <Home size={22} strokeWidth={2.5} />
             HOM<span>.</span>ESTATE
-          </a>
+          </Link>
           <p>
             Nos especializamos en optimizar el rendimiento de sus activos
-            inmobiliarios a través de estrategias avanzadas y un enfoque
+            inmobiliarios a traves de estrategias avanzadas y un enfoque
             integral.
           </p>
           <div className="footer-social">
-            <a href="#" aria-label="Web">
+            <a href="https://www.hom.estate" aria-label="Web" target="_blank" rel="noopener noreferrer">
               <Globe size={18} />
             </a>
-            <a href="#" aria-label="Enlace externo">
+            <a href="https://www.hom.estate" aria-label="Enlace externo" target="_blank" rel="noopener noreferrer">
               <ExternalLink size={18} />
             </a>
           </div>
@@ -51,7 +57,7 @@ function Footer() {
           <ul>
             {QUICK_LINKS.map((link) => (
               <li key={link.label}>
-                <a href={link.href}>{link.label}</a>
+                <Link to={link.href}>{link.label}</Link>
               </li>
             ))}
           </ul>
@@ -62,7 +68,7 @@ function Footer() {
           <ul>
             {SERVICES_LINKS.map((link) => (
               <li key={link.label}>
-                <a href={link.href}>{link.label}</a>
+                <Link to={link.href}>{link.label}</Link>
               </li>
             ))}
           </ul>
@@ -83,6 +89,13 @@ function Footer() {
               <Mail size={16} className="footer-contact-icon" />
               <a href="mailto:info@hom.estate">info@hom.estate</a>
             </li>
+          </ul>
+          <ul className="footer-legal">
+            {LEGAL_LINKS.map((link) => (
+              <li key={link.label}>
+                <Link to={link.href}>{link.label}</Link>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

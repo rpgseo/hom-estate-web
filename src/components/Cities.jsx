@@ -30,8 +30,7 @@ function CityWindow({ city, index }) {
     offset: ['start end', 'end start'],
   })
 
-  const imageY = useTransform(scrollYProgress, [0, 1], ['-20%', '20%'])
-  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.15, 1.05, 1.15])
+  const imageY = useTransform(scrollYProgress, [0, 1], ['-40%', '40%'])
   const shadowOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.4, 0.15, 0.4])
 
   return (
@@ -56,7 +55,7 @@ function CityWindow({ city, index }) {
           <div className="window-glass">
             <motion.div
               className="city-parallax-wrapper"
-              style={{ y: imageY, scale: imageScale }}
+              style={{ y: imageY }}
             >
               <img
                 className="city-image"

@@ -107,7 +107,7 @@
 
 .city-parallax-wrapper {
   position: absolute;
-  inset: -25% 0;
+  inset: -50% 0;
   will-change: transform;
 }
 
@@ -120,7 +120,7 @@
 }
 
 .city-window:hover .city-image {
-  filter: brightness(1.05) saturate(1.1);
+  filter: brightness(1.05);
 }
 
 /* === Glass reflection === */
