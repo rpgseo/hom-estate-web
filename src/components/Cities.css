@@ -1,118 +1,277 @@
 .cities-section {
-  padding: var(--section-padding) 0;
-  background: var(--color-light);
+  padding: 100px 0 120px;
+  background: var(--color-navy);
   overflow: hidden;
+}
+
+.cities-section .section-title,
+.cities-section .section-subtitle {
+  color: var(--color-white);
+}
+
+.cities-section .section-subtitle {
+  opacity: 0.7;
 }
 
 .cities-header {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 70px;
 }
 
 .cities-windows {
   display: flex;
-  gap: 32px;
+  gap: 48px;
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 24px;
   justify-content: center;
+  perspective: 1200px;
 }
 
+/* === Window container === */
 .city-window {
-  position: relative;
   flex: 1;
-  max-width: 360px;
-  height: 480px;
-  overflow: hidden;
-  cursor: default;
+  max-width: 380px;
 }
 
-.window-frame {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
+.window-wall {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.window-frame-svg {
+/* === Window opening with 3D depth === */
+.window-opening {
+  position: relative;
   width: 100%;
-  height: 100%;
+  aspect-ratio: 5 / 7;
+  border-radius: 200px 200px 4px 4px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 3px rgba(212, 207, 197, 0.3),
+    inset 0 0 60px rgba(0, 0, 0, 0.3),
+    0 20px 60px rgba(0, 0, 0, 0.4),
+    0 5px 15px rgba(0, 0, 0, 0.2);
+  transform: perspective(800px) rotateX(1deg);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
 
-.city-image-container {
+.city-window:hover .window-opening {
+  transform: perspective(800px) rotateX(0deg);
+  box-shadow:
+    0 0 0 3px rgba(212, 207, 197, 0.5),
+    inset 0 0 40px rgba(0, 0, 0, 0.2),
+    0 30px 80px rgba(0, 0, 0, 0.5),
+    0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* === 3D depth edges === */
+.window-depth-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 15px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.35), transparent);
+  z-index: 5;
+  border-radius: 200px 200px 0 0;
+}
+
+.window-depth-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 12px;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.25), transparent);
+  z-index: 5;
+}
+
+.window-depth-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 12px;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.25), transparent);
+  z-index: 5;
+}
+
+/* === Glass / Image area === */
+.window-glass {
   position: absolute;
   inset: 0;
-  z-index: 1;
   overflow: hidden;
-  clip-path: url(#windowClip);
+  border-radius: inherit;
+}
+
+.city-parallax-wrapper {
+  position: absolute;
+  inset: -25% 0;
+  will-change: transform;
 }
 
 .city-image {
   width: 100%;
-  height: 130%;
+  height: 100%;
   object-fit: cover;
   object-position: center;
-  transition: transform 0.6s ease;
+  transition: filter 0.5s ease;
 }
 
 .city-window:hover .city-image {
-  transform: scale(1.08);
+  filter: brightness(1.05) saturate(1.1);
 }
 
-.city-info {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 4;
-  padding: 24px 20px;
-  background: linear-gradient(to top, rgba(27, 42, 74, 0.95) 0%, rgba(27, 42, 74, 0.7) 60%, transparent 100%);
-  color: var(--color-white);
-}
-
-.city-info h3 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-  color: var(--color-yellow);
-}
-
-.city-info p {
-  font-size: 0.85rem;
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.85);
-  font-weight: 300;
-}
-
-.window-shadow {
+/* === Glass reflection === */
+.window-reflection {
   position: absolute;
   inset: 0;
-  z-index: 2;
-  border-radius: 180px 180px 12px 12px;
-  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  z-index: 4;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.city-window:hover .window-reflection {
+  opacity: 0.5;
+}
+
+/* === Atmospheric haze === */
+.window-haze {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(27, 42, 74, 0.3) 100%);
+  z-index: 3;
   pointer-events: none;
 }
 
+/* === Window frame bars === */
+.window-frame-bars {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.frame-vertical {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  transform: translateX(-50%);
+  background: linear-gradient(to bottom,
+    #c4bfb3 0%,
+    #d8d3c7 20%,
+    #c4bfb3 50%,
+    #d8d3c7 80%,
+    #c4bfb3 100%
+  );
+  box-shadow: 1px 0 3px rgba(0, 0, 0, 0.2), -1px 0 3px rgba(0, 0, 0, 0.2);
+}
+
+.frame-horizontal {
+  position: absolute;
+  top: 52%;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(to right,
+    #c4bfb3 0%,
+    #d8d3c7 20%,
+    #c4bfb3 50%,
+    #d8d3c7 80%,
+    #c4bfb3 100%
+  );
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 -1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* === SVG Arch frame === */
+.window-arch-frame {
+  position: absolute;
+  inset: -2px;
+  z-index: 7;
+  pointer-events: none;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* === City info plaque === */
+.city-plaque {
+  margin-top: 24px;
+  text-align: center;
+  padding: 0 8px;
+}
+
+.city-plaque h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-yellow);
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+
+.city-plaque p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 300;
+  margin-bottom: 16px;
+}
+
+.city-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-yellow);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: gap 0.3s ease, opacity 0.3s ease;
+  opacity: 0.8;
+}
+
+.city-link:hover {
+  gap: 10px;
+  opacity: 1;
+}
+
+/* === Responsive === */
 @media (max-width: 1024px) {
   .cities-windows {
-    gap: 20px;
-  }
-
-  .city-window {
-    height: 400px;
+    gap: 32px;
   }
 }
 
 @media (max-width: 768px) {
+  .cities-section {
+    padding: 80px 0 100px;
+  }
+
   .cities-windows {
     flex-direction: column;
     align-items: center;
-    gap: 32px;
+    gap: 48px;
   }
 
   .city-window {
     max-width: 320px;
     width: 100%;
-    height: 420px;
+  }
+
+  .window-opening {
+    transform: none;
+  }
+
+  .city-window:hover .window-opening {
+    transform: none;
   }
 }

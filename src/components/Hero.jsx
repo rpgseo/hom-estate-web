@@ -6,9 +6,17 @@ function Hero() {
   return (
     <section id="inicio" className="hero-section">
       <div className="hero-bg">
+        <img
+          className="hero-bg-image"
+          src="/images/hero-bg.webp"
+          alt=""
+          aria-hidden="true"
+          width="1920"
+          height="932"
+        />
+        <div className="hero-overlay" />
         <div className="hero-gradient-1" />
         <div className="hero-gradient-2" />
-        <div className="hero-gradient-3" />
         <div className="hero-grid" />
       </div>
 

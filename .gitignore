@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Original source assets (not for web)
+src/assets/HOME/
+src/assets/Coliving*

@@ -5,19 +5,19 @@ import './Cities.css'
 const CITIES = [
   {
     name: 'Barcelona',
-    image: 'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=1200',
+    image: '/images/barcelona.webp',
     description:
       'La ciudad más cosmopolita de España, combina a la perfección su icónica arquitectura y su rica historia con magníficas playas.',
   },
   {
     name: 'Madrid',
-    image: 'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=1200',
+    image: '/images/madrid.webp',
     description:
       'La capital, ciudad llena de energía y vitalidad, te sentirás como en casa con una gran oferta socio-cultural y un divertidísimo ocio nocturno.',
   },
   {
     name: 'Zaragoza',
-    image: 'https://images.unsplash.com/photo-1504019347908-b45f9b0b8dd5?w=1200',
+    image: '/images/zaragoza.webp',
     description:
       'La cuarta ciudad más grande de España. Con una ubicación perfecta y una gran calidad de vida. La calidez de su gente la hace inigualable.',
   },
@@ -29,76 +29,111 @@ function CityWindow({ city, index }) {
     target: ref,
     offset: ['start end', 'end start'],
   })
-  const y = useTransform(scrollYProgress, [0, 1], ['-10%', '10%'])
 
-  const clipId = `windowClip-${index}`
+  const imageY = useTransform(scrollYProgress, [0, 1], ['-20%', '20%'])
+  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.15, 1.05, 1.15])
+  const shadowOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.4, 0.15, 0.4])
 
   return (
     <motion.div
       ref={ref}
       className="city-window"
-      initial={{ opacity: 0, y: 60 }}
+      initial={{ opacity: 0, y: 80 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.6, delay: index * 0.15 }}
+      viewport={{ once: true, margin: '-100px' }}
+      transition={{ duration: 0.8, delay: index * 0.2, ease: 'easeOut' }}
     >
-      {/* SVG clip for arch shape */}
-      <svg width="0" height="0" style={{ position: 'absolute' }}>
-        <defs>
-          <clipPath id={clipId} clipPathUnits="objectBoundingBox">
-            <path d="M 0.03,1 L 0.03,0.38 C 0.03,0.15 0.2,0.02 0.5,0.02 C 0.8,0.02 0.97,0.15 0.97,0.38 L 0.97,1 Z" />
-          </clipPath>
-        </defs>
-      </svg>
+      {/* Outer wall / room context */}
+      <div className="window-wall">
+        {/* Window opening with depth */}
+        <div className="window-opening">
+          {/* Window sill depth (3D ledge) */}
+          <div className="window-depth-top" />
+          <div className="window-depth-left" />
+          <div className="window-depth-right" />
 
-      {/* Window frame drawn with SVG */}
-      <svg
-        className="window-frame-svg"
-        viewBox="0 0 360 480"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        style={{ position: 'absolute', inset: 0, zIndex: 3, pointerEvents: 'none' }}
-        aria-hidden="true"
-      >
-        {/* Outer frame */}
-        <path
-          d="M 8,480 L 8,180 C 8,75 80,8 180,8 C 280,8 352,75 352,180 L 352,480"
-          stroke="#1B2A4A"
-          strokeWidth="16"
-          fill="none"
-          strokeLinecap="round"
-        />
-        {/* Inner shadow line */}
-        <path
-          d="M 18,478 L 18,182 C 18,82 86,18 180,18 C 274,18 342,82 342,182 L 342,478"
-          stroke="rgba(27,42,74,0.15)"
-          strokeWidth="2"
-          fill="none"
-        />
-        {/* Center mullion */}
-        <line x1="180" y1="8" x2="180" y2="480" stroke="#1B2A4A" strokeWidth="6" />
-        {/* Horizontal transom */}
-        <line x1="8" y1="240" x2="352" y2="240" stroke="#1B2A4A" strokeWidth="6" />
-      </svg>
+          {/* City image with parallax — the "outside" view */}
+          <div className="window-glass">
+            <motion.div
+              className="city-parallax-wrapper"
+              style={{ y: imageY, scale: imageScale }}
+            >
+              <img
+                className="city-image"
+                src={city.image}
+                alt={`Vista de ${city.name} desde la ventana`}
+                loading="lazy"
+                width="400"
+                height="600"
+              />
+            </motion.div>
 
-      {/* City image with parallax */}
-      <div
-        className="city-image-container"
-        style={{ clipPath: `url(#${clipId})` }}
-      >
-        <motion.img
-          className="city-image"
-          src={city.image}
-          alt={`Vista de ${city.name}`}
-          loading="lazy"
-          style={{ y }}
-        />
-      </div>
+            {/* Light reflection on glass */}
+            <div className="window-reflection" />
 
-      {/* Info panel */}
-      <div className="city-info" style={{ clipPath: `url(#${clipId})` }}>
-        <h3>{city.name}</h3>
-        <p>{city.description}</p>
+            {/* Atmospheric haze for depth */}
+            <motion.div
+              className="window-haze"
+              style={{ opacity: shadowOpacity }}
+            />
+          </div>
+
+          {/* Window frame bars */}
+          <div className="window-frame-bars">
+            <div className="frame-vertical" />
+            <div className="frame-horizontal" />
+          </div>
+
+          {/* Window arch frame overlay */}
+          <svg
+            className="window-arch-frame"
+            viewBox="0 0 400 560"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            {/* Main arch frame */}
+            <path
+              d="M 0,560 L 0,200 C 0,89 89,0 200,0 C 311,0 400,89 400,200 L 400,560"
+              fill="none"
+              stroke="#d4cfc5"
+              strokeWidth="24"
+            />
+            {/* Inner frame border */}
+            <path
+              d="M 12,558 L 12,200 C 12,96 96,12 200,12 C 304,12 388,96 388,200 L 388,558"
+              fill="none"
+              stroke="#e8e3d9"
+              strokeWidth="4"
+            />
+            {/* Outer frame border */}
+            <path
+              d="M -2,560 L -2,200 C -2,88 88,-2 200,-2 C 312,-2 402,88 402,200 L 402,560"
+              fill="none"
+              stroke="#bfb9ad"
+              strokeWidth="3"
+            />
+            {/* Keystone at top of arch */}
+            <path
+              d="M 185,2 L 200,-6 L 215,2"
+              fill="none"
+              stroke="#bfb9ad"
+              strokeWidth="4"
+            />
+          </svg>
+        </div>
+
+        {/* Info panel - like a plaque below the window */}
+        <div className="city-plaque">
+          <h3>{city.name}</h3>
+          <p>{city.description}</p>
+          <a href="#contacto" className="city-link" aria-label={`Explorar ${city.name}`}>
+            <span>Explorar</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
       </div>
     </motion.div>
   )
