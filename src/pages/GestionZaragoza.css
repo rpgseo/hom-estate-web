@@ -1,0 +1,611 @@
+/* ────────────────────────────────────────────
+   GestionZaragoza — Fachada de edificio
+──────────────────────────────────────────── */
+
+.gz-page {
+  background: #fff;
+  overflow-x: hidden;
+}
+
+/* ── HERO ── */
+.gz-hero {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.gz-hero-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.gz-hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.gz-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(27,42,74,0.8), rgba(27,42,74,0.92));
+}
+
+.gz-hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: #fff;
+  max-width: 780px;
+  padding: 120px 24px 60px;
+}
+
+.gz-hero-tag {
+  display: inline-block;
+  border: 1px solid rgba(247,242,134,0.4);
+  border-radius: 50px;
+  padding: 6px 18px;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #F7F286;
+  margin-bottom: 20px;
+}
+
+.gz-hero-content h1 {
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.gz-yellow { color: #F7F286; }
+
+.gz-hero-content p {
+  font-size: 1.05rem;
+  opacity: 0.8;
+  line-height: 1.7;
+  margin-bottom: 36px;
+  font-weight: 300;
+}
+
+.gz-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #F7F286;
+  color: #1B2A4A;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 14px 36px;
+  border-radius: 50px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.gz-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(247,242,134,0.35);
+}
+
+/* ── STATS ── */
+.gz-stats {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  background: #1B2A4A;
+  padding: 0;
+}
+
+.gz-stat {
+  flex: 1;
+  max-width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 36px 20px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  color: #fff;
+}
+
+.gz-stat:last-child { border-right: none; }
+
+.gz-stat strong {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #F7F286;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.gz-stat span {
+  font-size: 0.82rem;
+  opacity: 0.65;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+/* ── BUILDING FACADE ── */
+.gz-building {
+  background: #f0ece4;
+  padding: 80px 0 0;
+  overflow: hidden;
+}
+
+.gz-building-header {
+  text-align: center;
+  margin-bottom: 60px;
+  padding: 0 24px;
+}
+
+.gz-building-header h2 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: #1B2A4A;
+  margin-bottom: 12px;
+}
+
+.gz-building-header p {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* The facade structure */
+.gz-facade {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Cornice */
+.gz-cornice {
+  height: 28px;
+  background: linear-gradient(to bottom, #bfb9ad, #d4cfc5);
+  border-radius: 4px 4px 0 0;
+  box-shadow: 0 -3px 0 #c8c2b6, 0 4px 12px rgba(0,0,0,0.15);
+  margin-bottom: 0;
+}
+
+/* Windows row — 3 per row on desktop, 6 total */
+.gz-windows-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  background: #e8e3d9;
+  padding: 32px 24px 20px;
+  border-left: 24px solid #d4cfc5;
+  border-right: 24px solid #d4cfc5;
+}
+
+/* Individual window */
+.building-window {
+  position: relative;
+}
+
+.bw-opening {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 100px 100px 3px 3px;
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 20px rgba(0,0,0,0.25),
+    0 4px 16px rgba(0,0,0,0.2);
+}
+
+.bw-glass {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.bw-glass img {
+  position: absolute;
+  inset: -50% 0;
+  width: 100%;
+  height: 200%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+.bw-reflection {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.15) 0%,
+    transparent 50%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+.bw-frame-v {
+  position: absolute;
+  left: 50%; top: 0; bottom: 0;
+  width: 4px;
+  transform: translateX(-50%);
+  background: #c8c2b6;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.bw-frame-h {
+  position: absolute;
+  left: 0; right: 0;
+  top: 55%;
+  height: 4px;
+  background: #c8c2b6;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.bw-arch {
+  position: absolute;
+  inset: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  z-index: 4;
+  pointer-events: none;
+  filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.25));
+}
+
+/* Middle band */
+.gz-band {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 24px;
+  background: #d4cfc5;
+  border-left: 24px solid #c4bfb3;
+  border-right: 24px solid #c4bfb3;
+  font-size: 0.78rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #6b6259;
+  font-weight: 600;
+}
+
+.gz-band-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(107,98,89,0.3);
+}
+
+/* Portal row */
+.gz-portal-row {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr;
+  gap: 12px;
+  padding: 20px 24px 0;
+  background: #e8e3d9;
+  border-left: 24px solid #d4cfc5;
+  border-right: 24px solid #d4cfc5;
+  align-items: end;
+}
+
+/* Side portal images */
+.portal-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  border-radius: 80px 80px 3px 3px;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.2), 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.portal-img-inner {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.portal-img-inner img {
+  position: absolute;
+  inset: -40% 0;
+  width: 100%;
+  height: 180%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+.portal-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+}
+
+/* Central portal */
+.gz-portal {
+  position: relative;
+}
+
+.gz-portal-inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 2.9;
+  overflow: hidden;
+  border-radius: 140px 140px 0 0;
+  box-shadow:
+    inset 0 0 30px rgba(0,0,0,0.3),
+    0 -4px 20px rgba(0,0,0,0.2);
+}
+
+.gz-portal-arch-img {
+  position: absolute;
+  inset: 0;
+}
+
+.gz-portal-arch-img .portal-img-wrap {
+  border-radius: 0;
+  aspect-ratio: unset;
+  position: absolute;
+  inset: 0;
+}
+
+.gz-portal-arch-img .portal-img-inner img {
+  inset: -30% 0;
+  height: 160%;
+}
+
+.gz-portal-arch-frame {
+  position: absolute;
+  inset: -3px;
+  width: calc(100% + 6px);
+  height: calc(100% + 6px);
+  z-index: 4;
+  pointer-events: none;
+  filter: drop-shadow(2px 3px 6px rgba(0,0,0,0.3));
+}
+
+.gz-portal-frame-v {
+  position: absolute;
+  left: 50%; top: 0; bottom: 0;
+  width: 6px;
+  transform: translateX(-50%);
+  background: linear-gradient(to right, #bfb9ad, #d8d3c7, #bfb9ad);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.gz-portal-plaque {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  background: #1B2A4A;
+  color: #F7F286;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  padding: 8px 20px;
+  border-radius: 4px 4px 0 0;
+}
+
+/* Socle / base */
+.gz-socle {
+  background: #d4cfc5;
+  padding: 0 24px;
+  border-left: 24px solid #c4bfb3;
+  border-right: 24px solid #c4bfb3;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.gz-socle-inner {
+  flex: 1;
+  height: 8px;
+  background: rgba(0,0,0,0.08);
+  border-radius: 2px;
+}
+
+/* ── SERVICES ── */
+.gz-container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.gz-services {
+  padding: 100px 0;
+  background: #fff;
+}
+
+.gz-services h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  font-weight: 700;
+  color: #1B2A4A;
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.gz-services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+.gz-service-card {
+  background: #f9f8f5;
+  border-radius: 16px;
+  padding: 36px 24px;
+  text-align: center;
+  border: 1px solid #ede9e0;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.gz-service-card:hover {
+  box-shadow: 0 12px 40px rgba(27,42,74,0.1);
+  transform: translateY(-4px);
+}
+
+.gz-service-icon {
+  width: 56px;
+  height: 56px;
+  background: #1B2A4A;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #F7F286;
+  margin: 0 auto 20px;
+}
+
+.gz-service-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1B2A4A;
+  margin-bottom: 12px;
+}
+
+.gz-service-card p {
+  font-size: 0.88rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* ── VENTAJAS ── */
+.gz-ventajas {
+  padding: 100px 0;
+  background: #f0ece4;
+}
+
+.gz-ventajas-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.gz-ventajas-text h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: #1B2A4A;
+  margin-bottom: 20px;
+  line-height: 1.25;
+}
+
+.gz-ventajas-text > p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.gz-ventajas-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.gz-ventajas-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.gz-ventajas-list li svg {
+  color: #1B2A4A;
+  flex-shrink: 0;
+}
+
+.gz-ventajas-img {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  aspect-ratio: 4/3;
+}
+
+.gz-ventajas-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.gz-ventajas-img:hover img {
+  transform: scale(1.04);
+}
+
+/* ── CTA ── */
+.gz-cta {
+  background: #1B2A4A;
+  padding: 100px 24px;
+  text-align: center;
+}
+
+.gz-cta-inner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.gz-cta h2 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.gz-cta p {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 40px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .gz-windows-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .gz-services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .gz-stats {
+    flex-wrap: wrap;
+  }
+  .gz-stat {
+    min-width: 50%;
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .gz-windows-row {
+    grid-template-columns: repeat(2, 1fr);
+    border-left: 12px solid #d4cfc5;
+    border-right: 12px solid #d4cfc5;
+  }
+  .gz-portal-row {
+    grid-template-columns: 1fr;
+  }
+  .gz-services-grid {
+    grid-template-columns: 1fr;
+  }
+  .gz-ventajas-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .gz-ventajas-img {
+    order: -1;
+  }
+  .gz-band {
+    border-left: 12px solid #c4bfb3;
+    border-right: 12px solid #c4bfb3;
+  }
+  .gz-socle {
+    border-left: 12px solid #c4bfb3;
+    border-right: 12px solid #c4bfb3;
+  }
+}

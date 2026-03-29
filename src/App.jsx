@@ -8,6 +8,7 @@ import ColivingsZaragoza from './pages/ColivingsZaragoza'
 import ColivingDetail from './pages/ColivingDetail'
 import ApartamentoBruc from './pages/ApartamentoBruc'
 import GestionAlquiler from './pages/GestionAlquiler'
+import GestionZaragoza from './pages/GestionZaragoza'
 import PorQueColiving from './pages/PorQueColiving'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
@@ -30,7 +31,7 @@ function App() {
           <Route path="/coliving-zaragoza-pc29" element={<ColivingDetail />} />
           <Route path="/coliving-zaragoza-ca47" element={<ColivingDetail />} />
           <Route path="/apartamento-bruc" element={<ApartamentoBruc />} />
-          <Route path="/gestion-alquiler-habitaciones-zaragoza" element={<GestionAlquiler />} />
+          <Route path="/gestion-alquiler-habitaciones-zaragoza" element={<GestionZaragoza />} />
           <Route path="/gestion-alquiler-habitaciones-madrid" element={<GestionAlquiler />} />
           <Route path="/por-que-coliving" element={<PorQueColiving />} />
           <Route path="/blog" element={<Blog />} />
