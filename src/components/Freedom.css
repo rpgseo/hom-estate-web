@@ -1,0 +1,52 @@
+.freedom-section {
+  position: relative;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--color-navy);
+}
+
+.freedom-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(27, 42, 74, 0.95) 0%, rgba(17, 29, 53, 0.85) 100%),
+    url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600') center/cover no-repeat;
+}
+
+.freedom-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(27, 42, 74, 0.3) 0%,
+    rgba(27, 42, 74, 0.6) 100%
+  );
+}
+
+.freedom-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 80px 24px;
+}
+
+.freedom-title {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 800;
+  color: var(--color-white);
+  line-height: 1.05;
+}
+
+.freedom-title .dot {
+  color: var(--color-yellow);
+}
+
+.freedom-line {
+  width: 60px;
+  height: 3px;
+  background: var(--color-yellow);
+  margin: 24px auto 0;
+}
