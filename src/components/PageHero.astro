@@ -1,0 +1,38 @@
+---
+import './PageHero.css'
+
+const { title, breadcrumbs = [], image } = Astro.props
+const bgImage = image || 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1200&fm=webp'
+---
+
+<section class="page-hero">
+  <div class="page-hero-bg" id="page-hero-bg">
+    <img src={bgImage} alt="" aria-hidden="true" width="1920" height="600" loading="eager" />
+  </div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content" style="animation: fadeUp 0.6s ease-out both;">
+    <nav class="page-breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Inicio</a>
+      {breadcrumbs.map((crumb) => (
+        <span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+          {crumb.href ? (
+            <a href={crumb.href}>{crumb.label}</a>
+          ) : (
+            <span class="breadcrumb-current">{crumb.label}</span>
+          )}
+        </span>
+      ))}
+    </nav>
+    <h1 class="page-hero-title">{title}</h1>
+  </div>
+</section>
+
+<script>
+  const bg = document.getElementById('page-hero-bg')
+  if (bg) {
+    window.addEventListener('scroll', () => {
+      bg.style.transform = `translateY(${window.scrollY * 0.3}px)`
+    }, { passive: true })
+  }
+</script>

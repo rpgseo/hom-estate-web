@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PageHero from '../components/PageHero.astro'
+import PropertyCard from '../components/PropertyCard.astro'
+import { COLIVINGS_LIST } from '../data/colivings.js'
+import './pages.css'
+---
+
+<BaseLayout>
+  <PageHero
+    title="Colivings en Zaragoza"
+    breadcrumbs={[{ label: 'Colivings Zaragoza' }]}
+    image="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1200&fm=webp"
+  />
+
+  <section class="page-section">
+    <div class="page-container">
+      <div class="page-section-header" data-animate>
+        <h2 class="section-title">Nuestros Colivings</h2>
+        <p class="section-subtitle">
+          Descubre nuestros espacios de coliving en las mejores ubicaciones de Zaragoza.
+        </p>
+      </div>
+
+      <div class="property-grid">
+        {COLIVINGS_LIST.map((coliving) => (
+          <PropertyCard
+            name={coliving.name}
+            location={coliving.location}
+            price={coliving.price}
+            href={coliving.href}
+            image={coliving.image}
+            features={coliving.features}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section page-section-light">
+    <div class="page-container">
+      <div class="page-section-header" data-animate>
+        <h2 class="section-title">Ventajas del Coliving</h2>
+      </div>
+
+      <div class="benefits-row">
+        <div class="benefit-card" data-animate data-delay="1">
+          <div class="benefit-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+          </div>
+          <h3>Todo incluido</h3>
+          <p>Suministros, WiFi, limpieza y mantenimiento incluidos en el precio.</p>
+        </div>
+        <div class="benefit-card" data-animate data-delay="2">
+          <div class="benefit-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Comunidad</h3>
+          <p>Espacios comunes disenados para fomentar la convivencia y el networking.</p>
+        </div>
+        <div class="benefit-card" data-animate data-delay="3">
+          <div class="benefit-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+          </div>
+          <h3>Flexibilidad</h3>
+          <p>Contratos flexibles adaptados a tus necesidades, sin permanencia minima.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

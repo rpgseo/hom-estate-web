@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import BuildingFacade from '../components/BuildingFacade.jsx'
+import { SEO_CONFIG } from '../data/seo-config.js'
+import { BUILDING_COLIVINGS } from '../data/colivings.js'
+import '../pages/GestionZaragoza.css'
+
+const seo = SEO_CONFIG['/gestion-alquiler-habitaciones-zaragoza']
+
+const SERVICES = [
+  { icon: '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>', title: 'Gestión integral', desc: 'Desde la búsqueda de inquilinos hasta el mantenimiento, nos encargamos de todo el proceso.' },
+  { icon: '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>', title: 'Maximización de renta', desc: 'Análisis continuo del mercado para asegurar que su propiedad esté al precio óptimo.' },
+  { icon: '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>', title: 'Gestión documental', desc: 'Contratos, facturas, seguros y documentación legal gestionada por profesionales.' },
+  { icon: '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z"/></svg>', title: 'Atención 24/7', desc: 'Servicio de atención permanente para resolver cualquier incidencia de forma rápida.' },
+]
+
+const STATS = [
+  { value: '+50', label: 'Propiedades gestionadas' },
+  { value: '98%', label: 'Tasa de ocupación' },
+  { value: '+15%', label: 'Rentabilidad media' },
+  { value: '24/7', label: 'Soporte al inquilino' },
+]
+
+const VENTAJAS = [
+  'Selección rigurosa de inquilinos',
+  'Gestión de incidencias incluida',
+  'Informes de rentabilidad mensuales',
+  'Optimización fiscal de sus ingresos',
+  'Sin preocupaciones para el propietario',
+  'Contratos y documentación legal',
+]
+---
+
+<BaseLayout title={seo.title} description={seo.description} keywords={seo.keywords} pathname="/gestion-alquiler-habitaciones-zaragoza">
+  <!-- HERO -->
+  <section class="gz-hero">
+    <div class="gz-hero-bg">
+      <img src="/images/colivings-zaragoza/coliving-01.webp" alt="" aria-hidden="true" />
+      <div class="gz-hero-overlay"></div>
+    </div>
+    <div class="gz-hero-content" style="animation: fadeUp 0.8s ease-out both;">
+      <span class="gz-hero-tag">Zaragoza</span>
+      <h1>Gestión integral de<br /><span class="gz-yellow">alquiler de habitaciones</span></h1>
+      <p>Especialistas en gestión integral y alquiler de habitaciones en Zaragoza. Aumentamos su rentabilidad sin preocupaciones.</p>
+      <a href="tel:+34636155847" class="gz-btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Solicitar valoración gratuita
+      </a>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="gz-stats">
+    {STATS.map((s, i) => (
+      <div class="gz-stat" data-animate data-delay={i + 1}>
+        <strong>{s.value}</strong>
+        <span>{s.label}</span>
+      </div>
+    ))}
+  </section>
+
+  <!-- BUILDING FACADE -->
+  <section class="gz-building">
+    <div class="gz-building-header" data-animate>
+      <h2>Nuestros colivings en Zaragoza</h2>
+      <p>Vive en los mejores espacios del centro de la ciudad</p>
+    </div>
+    <BuildingFacade colivings={BUILDING_COLIVINGS} client:visible />
+  </section>
+
+  <!-- SERVICES -->
+  <section class="gz-services">
+    <div class="gz-container">
+      <h2 data-animate>Nuestros Servicios</h2>
+      <div class="gz-services-grid">
+        {SERVICES.map((s, i) => (
+          <div class="gz-service-card" data-animate data-delay={i + 1}>
+            <div class="gz-service-icon"><Fragment set:html={s.icon} /></div>
+            <h3>{s.title}</h3>
+            <p>{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- VENTAJAS -->
+  <section class="gz-ventajas">
+    <div class="gz-container gz-ventajas-inner">
+      <div class="gz-ventajas-text" data-animate="slide-left">
+        <h2>¿Por qué elegir HOM.ESTATE en Zaragoza?</h2>
+        <p>Somos especialistas en la gestión de habitaciones y colivings en Zaragoza. Nuestro equipo se encarga de todo para que usted obtenga la máxima rentabilidad sin ninguna preocupación.</p>
+        <ul class="gz-ventajas-list">
+          {VENTAJAS.map((v, i) => (
+            <li data-animate="slide-left" data-delay={i + 1}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+              {v}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="gz-ventajas-img" data-animate="slide-right">
+        <img src="/images/colivings-zaragoza/coliving-04.webp" alt="Coliving Zaragoza interior" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="gz-cta" id="contacto">
+    <div class="gz-cta-inner" data-animate>
+      <h2>Confíenos la gestión de su propiedad en Zaragoza</h2>
+      <p>Solicite una valoración gratuita y descubra cuánto puede rendir su propiedad.</p>
+      <a href="tel:+34636155847" class="gz-btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +34 636 155 847
+      </a>
+    </div>
+  </section>
+</BaseLayout>

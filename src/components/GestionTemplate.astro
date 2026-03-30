@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PageHero from './PageHero.astro'
+import '../pages/pages.css'
+
+const { data } = Astro.props
+
+const SERVICES = [
+  {
+    title: 'Gestion integral',
+    description: 'Desde la busqueda de inquilinos hasta el mantenimiento, nos encargamos de todo el proceso.',
+    icon: 'key',
+  },
+  {
+    title: 'Maximizacion de renta',
+    description: 'Analisis continuo del mercado para asegurar que su propiedad esta al precio optimo.',
+    icon: 'chart',
+  },
+  {
+    title: 'Gestion documental',
+    description: 'Contratos, facturas, seguros y toda la documentacion legal gestionada por profesionales.',
+    icon: 'file',
+  },
+  {
+    title: 'Atencion al inquilino',
+    description: 'Servicio de atencion 24/7 para resolver cualquier incidencia de forma rapida y eficaz.',
+    icon: 'headphones',
+  },
+]
+
+const ICONS = {
+  key: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.3 9.3"/><path d="m18.5 5.5 3 3"/></svg>',
+  chart: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>',
+  file: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>',
+  headphones: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg>',
+}
+---
+
+<BaseLayout>
+  <PageHero
+    title={`Gestion de Alquiler en ${data.city}`}
+    breadcrumbs={[{ label: `Gestion ${data.city}` }]}
+    image={data.heroImage}
+  />
+
+  <section class="page-section">
+    <div class="page-container">
+      <div class="page-section-header" data-animate>
+        <h2 class="section-title">Gestion profesional en {data.city}</h2>
+        <p class="section-subtitle">{data.description}</p>
+      </div>
+
+      <div class="stats-row">
+        {data.stats.map((stat, i) => (
+          <div class="stat-card" data-animate data-delay={String(i + 1)}>
+            <span class="stat-value">{stat.value}</span>
+            <span class="stat-label">{stat.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section page-section-light">
+    <div class="page-container">
+      <div class="page-section-header" data-animate>
+        <h2 class="section-title">Nuestros Servicios</h2>
+      </div>
+
+      <div class="services-grid-4">
+        {SERVICES.map((service, i) => (
+          <div class="service-card" data-animate data-delay={String(i + 1)}>
+            <div class="service-card-icon" set:html={ICONS[service.icon]} />
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section page-section-dark">
+    <div class="page-container page-cta-block">
+      <h2 data-animate>Confienos la gestion de su propiedad en {data.city}</h2>
+      <p data-animate data-delay="1">Solicite una valoracion gratuita y descubra cuanto puede rendir su propiedad.</p>
+      <a href="tel:+34636155847" class="btn-primary" data-animate="scale" data-delay="2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Contactar
+      </a>
+    </div>
+  </section>
+</BaseLayout>

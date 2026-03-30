@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PageHero from '../components/PageHero.astro'
+import './pages.css'
+
+const BENEFITS = [
+  { title: 'Ahorro economico', text: 'Reduce tus gastos mensuales en vivienda hasta un 40% comparado con el alquiler tradicional.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>' },
+  { title: 'Comunidad', text: 'Vive rodeado de personas con intereses similares. Networking, eventos y convivencia.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>' },
+  { title: 'Todo incluido', text: 'Suministros, WiFi, limpieza y mantenimiento. Sin sorpresas ni gastos ocultos.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>' },
+  { title: 'Flexibilidad', text: 'Contratos adaptados a tus necesidades. Sin largas permanencias ni depositos excesivos.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>' },
+  { title: 'Calidad de vida', text: 'Espacios disenados para el bienestar: zonas de trabajo, descanso y socializacion.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>' },
+  { title: 'Ubicaciones premium', text: 'Nuestros colivings estan en las mejores zonas de la ciudad, cerca de todo.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>' },
+]
+
+const COMPARISON = [
+  { feature: 'Precio mensual medio', coliving: 'Desde 400 EUR', traditional: 'Desde 700 EUR' },
+  { feature: 'Suministros incluidos', coliving: 'Si', traditional: 'No' },
+  { feature: 'WiFi incluido', coliving: 'Si', traditional: 'No' },
+  { feature: 'Amueblado', coliving: 'Si', traditional: 'Normalmente no' },
+  { feature: 'Limpieza zonas comunes', coliving: 'Si', traditional: 'No' },
+  { feature: 'Deposito', coliving: '1 mes', traditional: '2-3 meses' },
+  { feature: 'Permanencia minima', coliving: 'Flexible', traditional: '12 meses' },
+  { feature: 'Comunidad', coliving: 'Si', traditional: 'No' },
+]
+
+const TESTIMONIALS = [
+  { name: 'Maria G.', text: 'El coliving ha cambiado mi forma de vivir. La comunidad es increible y el ahorro notable.' },
+  { name: 'Carlos R.', text: 'La flexibilidad del contrato fue clave para mi. Poder mudarme sin complicaciones es un gran plus.' },
+  { name: 'Ana P.', text: 'Todo incluido, sin preocupaciones. Llego a casa y solo tengo que disfrutar del espacio.' },
+]
+---
+
+<BaseLayout>
+  <PageHero
+    title="Por Que Coliving"
+    breadcrumbs={[{ label: 'Por que Coliving' }]}
+    image="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&fm=webp"
+  />
+
+  <section class="page-section">
+    <div class="page-container">
+      <div class="page-section-header" data-animate>
+        <h2 class="section-title">Ventajas del Coliving</h2>
+        <p class="section-subtitle">
+          El coliving es mucho mas que compartir piso. Es una nueva forma de vivir
+          disenada para el estilo de vida actual.
+        </p>
+      </div>
+
+      <div class="benefits-grid-6">
+        {BENEFITS.map((b, i) => (
+          <div class="benefit-card" data-animate data-delay={String(Math.min(i + 1, 6))}>
+            <div class="benefit-icon" set:html={b.icon} />
+            <h3>{b.title}</h3>
+            <p>{b.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section page-section-light">
+    <div class="page-container">
+      <div class="page-section-header" data-animate>
+        <h2 class="section-title">Coliving vs Alquiler Tradicional</h2>
+      </div>
+
+      <div class="comparison-table-wrapper" data-animate>
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Caracteristica</th>
+              <th class="highlight-col">Coliving</th>
+              <th>Alquiler Tradicional</th>
+            </tr>
+          </thead>
+          <tbody>
+            {COMPARISON.map((row) => (
+              <tr>
+                <td>{row.feature}</td>
+                <td class="highlight-col">{row.coliving}</td>
+                <td>{row.traditional}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="page-container">
+      <div class="page-section-header" data-animate>
+        <h2 class="section-title">Lo que dicen nuestros residentes</h2>
+      </div>
+
+      <div class="testimonials-row">
+        {TESTIMONIALS.map((t, i) => (
+          <div class="testimonial-card" data-animate data-delay={String(i + 1)}>
+            <p>"{t.text}"</p>
+            <span class="testimonial-name">{t.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

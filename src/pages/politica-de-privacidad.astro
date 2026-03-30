@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PageHero from '../components/PageHero.astro'
+import './pages.css'
+
+const sections = [
+  {
+    heading: 'Responsable del tratamiento',
+    text: 'HOM.ESTATE es el responsable del tratamiento de los datos personales del usuario y le informa que estos datos seran tratados de conformidad con lo dispuesto en el Reglamento (UE) 2016/679 (RGPD) y la Ley Organica 3/2018 (LOPDGDD).',
+  },
+  {
+    heading: 'Finalidad del tratamiento',
+    text: 'Los datos personales se tratan con la finalidad de gestionar la relacion comercial, atender consultas, enviar informacion comercial sobre nuestros servicios inmobiliarios y mantener la comunicacion con los usuarios interesados.',
+  },
+  {
+    heading: 'Derechos del usuario',
+    text: 'El usuario puede ejercer sus derechos de acceso, rectificacion, supresion, oposicion, limitacion del tratamiento y portabilidad de los datos enviando una solicitud a info@hom.estate junto con una copia de su documento de identidad.',
+  },
+  {
+    heading: 'Conservacion de datos',
+    text: 'Los datos personales se conservaran mientras se mantenga la relacion comercial o durante los anos necesarios para cumplir con las obligaciones legales. Se procedera a la supresion de los datos una vez que dejen de ser necesarios para la finalidad para la que fueron recabados.',
+  },
+]
+---
+
+<BaseLayout>
+  <PageHero title="Politica de Privacidad" breadcrumbs={[{ label: 'Politica de Privacidad' }]} />
+
+  <section class="page-section">
+    <div class="page-container">
+      <div class="legal-content" data-animate>
+        {sections.map((section) => (
+          <div class="legal-section">
+            <h2>{section.heading}</h2>
+            <p>{section.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

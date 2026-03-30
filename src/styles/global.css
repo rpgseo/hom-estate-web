@@ -1,0 +1,178 @@
+:root {
+  --color-navy: #1B2A4A;
+  --color-navy-light: #2a3f6a;
+  --color-navy-dark: #111d35;
+  --color-yellow: #F7F286;
+  --color-yellow-dark: #e0db5a;
+  --color-white: #FFFFFF;
+  --color-light: #F5F5F5;
+  --color-text: #333333;
+  --color-text-light: #666666;
+  --color-text-lighter: #999999;
+  --font-primary: 'Poppins', sans-serif;
+  --header-height: 80px;
+  --section-padding: 100px;
+  --max-width: 1200px;
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.4s ease;
+  --transition-slow: 0.6s ease;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-primary);
+  color: var(--color-text);
+  background-color: var(--color-white);
+  line-height: 1.6;
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-primary);
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color var(--transition-fast);
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  font-family: var(--font-primary);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.highlight {
+  background: linear-gradient(180deg, transparent 50%, var(--color-yellow) 50%);
+  padding: 0 4px;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--color-navy);
+  margin-bottom: 16px;
+}
+
+.section-subtitle {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  color: var(--color-text-light);
+  max-width: 600px;
+  margin: 0 auto 60px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --header-height: 64px;
+    --section-padding: 60px;
+  }
+}
+
+::selection {
+  background: var(--color-yellow);
+  color: var(--color-navy);
+}
+
+/* =============================================
+   SCROLL ANIMATION UTILITIES
+   Replaces Framer Motion whileInView
+   ============================================= */
+
+[data-animate] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+[data-animate="scale"] {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+[data-animate="slide-left"] {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+[data-animate="slide-right"] {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+[data-animate="fade"] {
+  opacity: 0;
+  transform: none;
+  transition: opacity 0.5s ease-out;
+}
+
+[data-animate].visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1);
+}
+
+/* Stagger delays */
+[data-delay="1"] { transition-delay: 0.05s; }
+[data-delay="2"] { transition-delay: 0.1s; }
+[data-delay="3"] { transition-delay: 0.15s; }
+[data-delay="4"] { transition-delay: 0.2s; }
+[data-delay="5"] { transition-delay: 0.25s; }
+[data-delay="6"] { transition-delay: 0.3s; }
+[data-delay="7"] { transition-delay: 0.35s; }
+[data-delay="8"] { transition-delay: 0.4s; }
+[data-delay="9"] { transition-delay: 0.45s; }
+
+/* Entry animations (replaces Framer Motion initial/animate) */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}

@@ -1,0 +1,17 @@
+---
+import GestionTemplate from '../components/GestionTemplate.astro'
+
+const data = {
+  city: 'Madrid',
+  heroImage: 'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=1200&fm=webp',
+  description: 'Servicio profesional de gestion de alquiler en Madrid. Nos encargamos de todo para que usted disfrute de los beneficios sin preocupaciones.',
+  stats: [
+    { value: '+30', label: 'Propiedades gestionadas' },
+    { value: '97%', label: 'Tasa de ocupacion' },
+    { value: '+12%', label: 'Rentabilidad media' },
+    { value: '24/7', label: 'Soporte al inquilino' },
+  ],
+}
+---
+
+<GestionTemplate data={data} />
