@@ -1,113 +1,127 @@
 .flex-living-section {
+  position: relative;
   padding: var(--section-padding) 0;
-  background: var(--color-white);
 }
 
 .flex-living-header {
   text-align: center;
+  margin-bottom: 50px;
+}
+
+.flex-living-header .section-title {
+  color: var(--color-white);
+}
+
+.flex-living-header .highlight {
+  background: linear-gradient(180deg, transparent 55%, var(--color-yellow) 55%);
+  color: var(--color-white);
+}
+
+/* Definition block */
+.flex-definition {
+  max-width: 750px;
+  margin: 0 auto 80px;
+  text-align: center;
+}
+
+.flex-question {
+  font-size: 1.4rem;
+  color: var(--color-white);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.flex-answer {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.flex-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 36px;
+  background: var(--color-yellow);
+  color: var(--color-navy);
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 50px;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.flex-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(247, 242, 134, 0.3);
+}
+
+/* Lifestyle section */
+.flex-lifestyle {
+  max-width: 750px;
+  margin: 0 auto 80px;
+  text-align: center;
+}
+
+.flex-tag {
+  display: inline-block;
+  padding: 6px 18px;
+  border: 1px solid rgba(247, 242, 134, 0.3);
+  border-radius: 50px;
+  color: var(--color-yellow);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
   margin-bottom: 16px;
 }
 
-.flex-living-subtitle {
-  text-align: center;
-  font-size: 1.1rem;
-  color: var(--color-text-light);
-  margin-bottom: 20px;
-  font-weight: 300;
+.flex-lifestyle-title {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--color-white);
+  font-weight: 700;
+  margin-bottom: 32px;
   font-style: italic;
 }
 
-.flex-living-description {
-  text-align: center;
+.flex-benefits p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.8;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.flex-summary {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  border-left: 3px solid var(--color-yellow);
+  padding-left: 20px;
+  margin-top: 8px;
+}
+
+/* Advantages */
+.flex-advantages {
   max-width: 700px;
-  margin: 0 auto 50px;
-  font-size: 1rem;
-  color: var(--color-text-light);
-  line-height: 1.7;
-}
-
-.advantages-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 24px;
+  text-align: center;
+  padding: 48px 32px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
 }
 
-.advantage-card {
-  background: var(--color-light);
-  border-radius: 16px;
-  overflow: hidden;
-  transition: box-shadow var(--transition-medium);
+.flex-advantages-title {
+  font-size: 1.5rem;
+  color: var(--color-white);
+  font-weight: 700;
+  margin-bottom: 16px;
 }
 
-.advantage-card:hover {
-  box-shadow: 0 8px 30px rgba(27, 42, 74, 0.08);
-}
-
-.advantage-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 24px 24px;
-  cursor: pointer;
-  user-select: none;
-}
-
-.advantage-header-left {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.advantage-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: var(--color-navy);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-yellow);
-  flex-shrink: 0;
-}
-
-.advantage-header h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--color-navy);
-}
-
-.advantage-toggle {
-  color: var(--color-navy);
-  transition: transform var(--transition-fast);
-  flex-shrink: 0;
-}
-
-.advantage-toggle.open {
-  transform: rotate(180deg);
-}
-
-.advantage-content {
-  overflow: hidden;
-}
-
-.advantage-content-inner {
-  padding: 0 24px 24px;
-  font-size: 0.9rem;
-  color: var(--color-text-light);
-  line-height: 1.6;
-}
-
-@media (max-width: 1024px) {
-  .advantages-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .advantages-grid {
-    grid-template-columns: 1fr;
-  }
+.flex-advantages-text {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.75;
 }

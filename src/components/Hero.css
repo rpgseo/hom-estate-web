@@ -1,17 +1,8 @@
-.hero-section {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background: var(--color-navy);
-}
-
-.hero-bg {
-  position: absolute;
+/* Fixed background — stays behind all scrolling content */
+.hero-bg-fixed {
+  position: fixed;
   inset: 0;
-  z-index: 0;
+  z-index: -1;
 }
 
 .hero-bg-image {
@@ -28,9 +19,9 @@
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(27, 42, 74, 0.75) 0%,
-    rgba(27, 42, 74, 0.85) 50%,
-    rgba(27, 42, 74, 0.95) 100%
+    rgba(27, 42, 74, 0.7) 0%,
+    rgba(27, 42, 74, 0.8) 50%,
+    rgba(27, 42, 74, 0.88) 100%
   );
 }
 
@@ -75,6 +66,16 @@
   background-size: 60px 60px;
 }
 
+/* Hero section — transparent, content scrolls over fixed bg */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
 .hero-content {
   position: relative;
   z-index: 1;
@@ -114,30 +115,124 @@
   color: rgba(255, 255, 255, 0.7);
   line-height: 1.7;
   max-width: 620px;
-  margin: 0 auto 40px;
+  margin: 0 auto 16px;
   font-weight: 300;
 }
 
-.hero-cta {
+.hero-commitment {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  margin-bottom: 0;
+}
+
+/* Tabs bar — sits between hero and panels */
+.hero-tabs-bar {
+  text-align: center;
+  padding: 40px 24px 32px;
+}
+
+.hero-tabs {
   display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 16px 40px;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50px;
+  padding: 4px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.hero-tab {
+  padding: 12px 32px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all var(--transition-fast);
+  font-family: var(--font-primary);
+  letter-spacing: 0.5px;
+}
+
+.hero-tab:hover {
+  color: var(--color-white);
+}
+
+.hero-tab.active {
   background: var(--color-yellow);
   color: var(--color-navy);
-  font-size: 1rem;
-  font-weight: 600;
+  box-shadow: 0 2px 12px rgba(247, 242, 134, 0.3);
+}
+
+/* Panels */
+.hero-panels {
+  position: relative;
+  min-height: 300px;
+}
+
+.hero-panel {
+  display: none;
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.hero-panel.active {
+  display: block;
+  animation: panelFadeIn 0.4s ease-out both;
+}
+
+@keyframes panelFadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.panel-inner {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.panel-tag {
+  display: inline-block;
+  padding: 6px 18px;
+  border: 1px solid rgba(247, 242, 134, 0.4);
   border-radius: 50px;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-  border: none;
-  cursor: pointer;
+  color: var(--color-yellow);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
 }
 
-.hero-cta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(247, 242, 134, 0.3);
+.panel-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  color: var(--color-white);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 24px;
 }
 
+.panel-title .highlight {
+  background: linear-gradient(180deg, transparent 55%, var(--color-yellow) 55%);
+  color: var(--color-white);
+}
+
+.hero-panel p {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+
+.panel-highlight {
+  font-weight: 600;
+  color: var(--color-white);
+  font-size: 1.1rem;
+  margin-top: 8px;
+}
+
+/* Scroll indicator */
 .hero-scroll-indicator {
   position: absolute;
   bottom: 40px;
@@ -168,5 +263,14 @@
 @media (max-width: 768px) {
   .hero-scroll-indicator {
     display: none;
+  }
+
+  .hero-tab {
+    padding: 10px 24px;
+    font-size: 0.85rem;
+  }
+
+  .hero-panel {
+    padding: 60px 24px;
   }
 }

@@ -2,46 +2,39 @@
 import '../components/Hero.css'
 ---
 
-<section id="inicio" class="hero-section">
-  <div class="hero-bg">
-    <img
-      class="hero-bg-image"
-      src="/images/hero-bg.webp"
-      alt=""
-      aria-hidden="true"
-      width="1920"
-      height="932"
-    />
-    <div class="hero-overlay"></div>
-    <div class="hero-gradient-1"></div>
-    <div class="hero-gradient-2"></div>
-    <div class="hero-grid"></div>
-  </div>
+<!-- Fixed background for entire page -->
+<div class="hero-bg-fixed" aria-hidden="true">
+  <img
+    class="hero-bg-image"
+    src="/images/hero-bg.webp"
+    alt=""
+    width="1920"
+    height="932"
+  />
+  <div class="hero-overlay"></div>
+  <div class="hero-gradient-1"></div>
+  <div class="hero-gradient-2"></div>
+  <div class="hero-grid"></div>
+</div>
 
+<section id="inicio" class="hero-section">
   <div class="hero-content" style="animation: fadeUp 0.8s ease-out both;">
     <span class="hero-tag" style="animation: fadeUp 0.6s ease-out 0.2s both;">
-      Real Estate Investment
+      ¡Únete al cambio!
     </span>
 
     <h1 class="hero-title" style="animation: fadeUp 0.7s ease-out 0.4s both;">
-      Inversión inmobiliaria{' '}
-      <span class="highlight">inteligente</span>
+      Transformamos espacios,{' '}
+      <span class="highlight">generamos valor.</span>
     </h1>
 
     <p class="hero-description" style="animation: fadeUp 0.6s ease-out 0.6s both;">
-      En Hom Estate, nos especializamos en optimizar el rendimiento de sus
-      activos inmobiliarios a través de estrategias avanzadas y un enfoque
-      integral.
+      Calidad para nuestros inquilinos, rentabilidad para nuestros inversores.
     </p>
 
-    <a
-      href="#servicios"
-      class="hero-cta"
-      style="animation: scaleIn 0.5s ease-out 0.8s both;"
-    >
-      Descubre más
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
-    </a>
+    <p class="hero-commitment" style="animation: fadeUp 0.5s ease-out 0.7s both;">
+      Comprometidos con la mejora continua del mercado de vivienda.
+    </p>
   </div>
 
   <div class="hero-scroll-indicator" aria-hidden="true">
@@ -49,3 +42,75 @@ import '../components/Hero.css'
     <div class="hero-scroll-line"></div>
   </div>
 </section>
+
+<!-- Tabs + Panels below hero -->
+<div class="hero-panels">
+  <div class="hero-tabs-bar" data-animate>
+    <div class="hero-tabs">
+      <button class="hero-tab active" data-tab="inquilino">Inquilino</button>
+      <button class="hero-tab" data-tab="inversor">Inversor</button>
+    </div>
+  </div>
+  <div class="hero-panel active" id="panel-inquilino">
+    <div class="panel-inner">
+      <h2 class="panel-title" data-animate>Aumenta tu calidad de vida</h2>
+      <p data-animate data-delay="1">
+        Comprometidos con una vivienda de calidad. Nuestro objetivo es solucionar
+        las necesidades del mercado ofertando viviendas dignas y de calidad que
+        mejoren la vida de nuestros inquilinos.
+      </p>
+      <p data-animate data-delay="2">
+        Nuestra orientación hacia la excelencia nos permite no solo ofrecer
+        propiedades que cumplen con las expectativas de nuestros inquilinos,
+        sino también estar maximizando la rentabilidad de nuestros propietarios.
+      </p>
+      <p class="panel-highlight" data-animate data-delay="3">
+        Garantizamos que cada propiedad que transformamos sea una inversión exitosa.
+      </p>
+    </div>
+  </div>
+
+  <div class="hero-panel" id="panel-inversor">
+    <div class="panel-inner">
+      <span class="panel-tag" data-animate>Hom.estate</span>
+      <h2 class="panel-title" data-animate data-delay="1">
+        Inversión inmobiliaria <span class="highlight">inteligente.</span>
+      </h2>
+      <p data-animate data-delay="2">
+        En Hom Estate, nos especializamos en optimizar el rendimiento de sus
+        activos inmobiliarios a través de estrategias avanzadas y un enfoque
+        integral.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const tabs = document.querySelectorAll('.hero-tab')
+  const panels = document.querySelectorAll('.hero-panel')
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab
+
+      tabs.forEach((t) => t.classList.remove('active'))
+      tab.classList.add('active')
+
+      panels.forEach((panel) => {
+        const isTarget = panel.id === `panel-${target}`
+        if (isTarget) {
+          panel.classList.add('active')
+          // Re-trigger animations on newly visible panel
+          panel.querySelectorAll('[data-animate]').forEach((el) => {
+            el.classList.remove('visible')
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => el.classList.add('visible'))
+            })
+          })
+        } else {
+          panel.classList.remove('active')
+        }
+      })
+    })
+  })
+</script>

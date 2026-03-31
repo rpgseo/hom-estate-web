@@ -1,29 +1,9 @@
 .freedom-section {
   position: relative;
-  min-height: 60vh;
+  min-height: 50vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  background: var(--color-navy);
-}
-
-.freedom-bg {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(135deg, rgba(27, 42, 74, 0.95) 0%, rgba(17, 29, 53, 0.85) 100%),
-    url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600') center/cover no-repeat;
-}
-
-.freedom-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(27, 42, 74, 0.3) 0%,
-    rgba(27, 42, 74, 0.6) 100%
-  );
 }
 
 .freedom-content {

@@ -5,6 +5,7 @@ import Services from '../components/Services.astro'
 import Cities from '../components/Cities.astro'
 import CtaBanner from '../components/CtaBanner.astro'
 import FlexLiving from '../components/FlexLiving.astro'
+import Testimonials from '../components/Testimonials.astro'
 import Freedom from '../components/Freedom.astro'
 import { SEO_CONFIG } from '../data/seo-config.js'
 
@@ -12,10 +13,19 @@ const seo = SEO_CONFIG['/']
 ---
 
 <BaseLayout title={seo.title} description={seo.description} keywords={seo.keywords} pathname="/">
-  <Hero />
-  <Services />
-  <Cities />
-  <CtaBanner />
-  <FlexLiving />
-  <Freedom />
+  <div class="home-flow">
+    <Hero />
+    <Services />
+    <Cities />
+    <CtaBanner />
+    <FlexLiving />
+    <Testimonials />
+    <Freedom />
+  </div>
 </BaseLayout>
+
+<style>
+  .home-flow {
+    position: relative;
+  }
+</style>
