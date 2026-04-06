@@ -3,79 +3,94 @@ import "../components/FlexLiving.css";
 ---
 
 <section id="flex-living" class="flex-living-section">
-  <!-- Part 1: Definition -->
-  <div class="container">
-    <div class="flex-living-header" data-animate>
-      <h2 class="section-title">
-        Únete al cambio. <span class="highlight">Flex Living.</span>
-      </h2>
-    </div>
+  <!-- Part 1: Hero title + Two-column definition -->
+  <div class="flex-living-part1">
+    <div class="container">
+      <div class="flex-living-header" data-animate>
+        <h2 class="section-title">
+          Únete al cambio<span class="dot">.</span>
+        </h2>
+      </div>
 
-    <div class="flex-definition" data-animate data-delay="1">
-      <h3 class="flex-question">¿Qué es el Flex living?</h3>
-      <p class="flex-answer">
-        El Flex living es un estilo de vida que se ajusta a las necesidades
-        cambiantes de las personas en cuanto a vivienda y trabajo. Implica la
-        capacidad de cambiar rápidamente de lugar de residencia y de modalidad
-        laboral, permitiendo vivir en diferentes ubicaciones por períodos
-        cortos, alternando entre el trabajo remoto y en un lugar físico, y
-        ajustando la configuración de la vivienda según las necesidades
-        individuales.
-      </p>
-      <a href="/por-que-coliving" class="flex-cta" data-animate data-delay="2"
-        >Explora</a
-      >
-    </div>
-  </div>
-
-  <!-- Part 2: Lifestyle benefits -->
-  <div class="container">
-    <div class="flex-lifestyle" data-animate>
-      <span class="flex-tag">Flex Living</span>
-      <h3 class="flex-lifestyle-title">Un estilo de vida</h3>
-
-      <div class="flex-benefits">
-        <p data-animate data-delay="1">
-          Es una respuesta a la creciente demanda de mayor flexibilidad en la
-          forma en que las personas viven y trabajan, especialmente en un
-          entorno cada vez más digital y globalizado.
-        </p>
-        <p data-animate data-delay="2">
-          Esto puede incluir vivir en diferentes lugares durante períodos de
-          tiempo más cortos.
-        </p>
-        <p data-animate data-delay="3">
-          También puede estar asociado con compartir espacios y recursos —
-          coworking o colivings, donde se comparten áreas comunes y se fomenta
-          la interacción social.
-        </p>
-        <p data-animate data-delay="4">
-          Este estilo de vida flexible ha sido impulsado en parte por los
-          avances tecnológicos que permiten un mayor grado de movilidad y
-          conectividad. La capacidad de trabajar de forma remota y acceder a
-          servicios y recursos en línea ha hecho posible que las personas puedan
-          vivir y trabajar en diferentes lugares sin estar atadas a una
-          ubicación fija.
-        </p>
-        <p class="flex-summary" data-animate data-delay="5">
-          El Flex living se refiere a un enfoque de vida flexible que se adapta
-          a las necesidades cambiantes de las personas en cuanto a la vivienda y
-          el trabajo, permitiendo una mayor movilidad y adaptabilidad en un
-          mundo cada vez más digital y globalizado.
-        </p>
+      <div class="flex-definition" data-animate data-delay="1">
+        <div class="flex-def-left">
+          <h3 class="flex-def-title">
+            Flex<br />Living<span class="dot">.</span>
+          </h3>
+          <div class="flex-def-line"></div>
+          <a href="/por-que-coliving" class="flex-cta">Leer más</a>
+        </div>
+        <div class="flex-def-right">
+          <h4 class="flex-question">¿Qué es el Flex living?</h4>
+          <p class="flex-answer">
+            El Flex living es un estilo de vida que se ajusta a las necesidades
+            cambiantes de las personas en cuanto a vivienda y trabajo. Implica la
+            capacidad de cambiar rápidamente de lugar de residencia y de modalidad
+            laboral, permitiendo vivir en diferentes ubicaciones por períodos
+            cortos, alternando entre el trabajo remoto y en un lugar físico, y
+            ajustando la configuración de la vivienda según las necesidades
+            individuales.
+          </p>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Part 3: Advantages -->
-  <div class="container">
-    <div class="flex-advantages" data-animate>
-      <h3 class="flex-advantages-title">Ventajas del Flex living</h3>
-      <p class="flex-advantages-text">
-        En Hom.estate cuidamos minuciosamente la selección de nuestros
-        inquilinos para garantizar las mejores experiencias con el objetivo de
-        generar una comunidad de impacto.
-      </p>
+  <!-- Parallax image divider -->
+  <div class="flex-parallax-divider">
+    <div class="flex-parallax-overlay"></div>
+    <h3 class="flex-parallax-text" data-animate="fade">Bienvenido/a al flex living</h3>
+  </div>
+
+  <!-- Part 2: Lifestyle benefits -->
+  <div class="flex-living-part2">
+    <div class="container">
+      <div class="flex-lifestyle" data-animate>
+        <span class="flex-tag">Flex Living</span>
+        <h3 class="flex-lifestyle-title">Un estilo de vida</h3>
+
+        <div class="flex-benefits">
+          <p data-animate data-delay="1">
+            Es una respuesta a la creciente demanda de mayor flexibilidad en la
+            forma en que las personas viven y trabajan, especialmente en un
+            entorno cada vez más digital y globalizado.
+          </p>
+          <p data-animate data-delay="2">
+            Esto puede incluir vivir en diferentes lugares durante períodos de
+            tiempo más cortos.
+          </p>
+          <p data-animate data-delay="3">
+            También puede estar asociado con compartir espacios y recursos —
+            coworking o colivings, donde se comparten áreas comunes y se fomenta
+            la interacción social.
+          </p>
+          <p data-animate data-delay="4">
+            Este estilo de vida flexible ha sido impulsado en parte por los
+            avances tecnológicos que permiten un mayor grado de movilidad y
+            conectividad. La capacidad de trabajar de forma remota y acceder a
+            servicios y recursos en línea ha hecho posible que las personas puedan
+            vivir y trabajar en diferentes lugares sin estar atadas a una
+            ubicación fija.
+          </p>
+          <p class="flex-summary" data-animate data-delay="5">
+            El Flex living se refiere a un enfoque de vida flexible que se adapta
+            a las necesidades cambiantes de las personas en cuanto a la vivienda y
+            el trabajo, permitiendo una mayor movilidad y adaptabilidad en un
+            mundo cada vez más digital y globalizado.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="flex-advantages" data-animate>
+        <h3 class="flex-advantages-title">Ventajas del Flex living</h3>
+        <p class="flex-advantages-text">
+          En Hom.estate cuidamos minuciosamente la selección de nuestros
+          inquilinos para garantizar las mejores experiencias con el objetivo de
+          generar una comunidad de impacto.
+        </p>
+      </div>
     </div>
   </div>
 </section>

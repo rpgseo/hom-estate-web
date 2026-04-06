@@ -18,7 +18,7 @@ import './Header.css'
               {dropdown.label}
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chevron"><path d="m6 9 6 6 6-6"/></svg>
             </button>
-            <div class="nav-dropdown-menu" style="display:none;opacity:0;transform:translateY(-8px) scale(0.96);transition:opacity 0.2s ease-out,transform 0.2s ease-out;">
+            <div class="nav-dropdown-menu">
               {dropdown.items.map((item) => (
                 <a href={item.href} class="nav-dropdown-item">{item.label}</a>
               ))}
@@ -84,15 +84,10 @@ import './Header.css'
 
     wrapper.addEventListener('mouseenter', () => {
       if (dropdownTimeout) clearTimeout(dropdownTimeout)
-      // Close all others
       dropdownWrappers.forEach((w) => {
         if (w !== wrapper) closeDropdown(w)
       })
-      menu.style.display = 'block'
-      requestAnimationFrame(() => {
-        menu.style.opacity = '1'
-        menu.style.transform = 'translateY(0) scale(1)'
-      })
+      menu.classList.add('open')
       trigger.setAttribute('aria-expanded', 'true')
       chevron.classList.add('rotated')
     })
@@ -106,11 +101,9 @@ import './Header.css'
     const menu = wrapper.querySelector('.nav-dropdown-menu')
     const trigger = wrapper.querySelector('.nav-dropdown-trigger')
     const chevron = trigger.querySelector('.chevron')
-    menu.style.opacity = '0'
-    menu.style.transform = 'translateY(-8px) scale(0.96)'
+    menu.classList.remove('open')
     trigger.setAttribute('aria-expanded', 'false')
     chevron.classList.remove('rotated')
-    setTimeout(() => { menu.style.display = 'none' }, 200)
   }
 
   // Hamburger toggle

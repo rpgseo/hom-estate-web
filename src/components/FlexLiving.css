@@ -1,28 +1,87 @@
 .flex-living-section {
   position: relative;
-  padding: var(--section-padding) 0;
+  padding: 0;
   background: var(--color-white);
+}
+
+.flex-living-part1 {
+  padding: var(--section-padding) 0;
 }
 
 .flex-living-header {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
 }
 
 .flex-living-header .section-title {
   color: var(--color-navy);
+  font-style: italic;
 }
 
-.flex-living-header .highlight {
-  background: linear-gradient(180deg, transparent 55%, var(--color-yellow) 55%);
-  color: var(--color-navy);
+.flex-living-header .dot {
+  color: var(--color-navy-light);
 }
 
-/* Definition block */
+/* Two-column definition */
 .flex-definition {
-  max-width: 750px;
-  margin: 0 auto 80px;
-  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 0;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  min-height: 360px;
+}
+
+.flex-def-left {
+  background: var(--color-navy);
+  border-radius: 20px;
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.flex-def-title {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  color: var(--color-white);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 0;
+}
+
+.flex-def-title .dot {
+  color: var(--color-yellow);
+}
+
+.flex-def-line {
+  width: 40px;
+  height: 3px;
+  background: var(--color-white);
+  margin: 28px 0;
+  opacity: 0.5;
+}
+
+.flex-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-white);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: opacity var(--transition-fast);
+}
+
+.flex-cta:hover {
+  opacity: 0.7;
+}
+
+/* Right column */
+.flex-def-right {
+  padding: 48px 0 48px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .flex-question {
@@ -33,31 +92,54 @@
 }
 
 .flex-answer {
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--color-text-light);
-  line-height: 1.8;
-  margin-bottom: 32px;
+  line-height: 1.85;
 }
 
-.flex-cta {
-  display: inline-flex;
+/* Parallax image divider */
+.flex-parallax-divider {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background-image: url('../assets/HOME/chica-bg.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0;
+  display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 14px 36px;
-  background: var(--color-navy);
-  color: var(--color-white);
-  font-size: 0.95rem;
-  font-weight: 600;
-  border-radius: 50px;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  justify-content: center;
 }
 
-.flex-cta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(27, 42, 74, 0.2);
+.flex-parallax-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(27, 42, 74, 0.45);
+}
+
+.flex-parallax-text {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  color: var(--color-white);
+  text-align: center;
+  padding: 0 24px;
+}
+
+@supports (-webkit-touch-callout: none) {
+  .flex-parallax-divider {
+    background-attachment: scroll;
+  }
 }
 
 /* Lifestyle section */
+.flex-living-part2 {
+  padding: var(--section-padding) 0;
+}
+
 .flex-lifestyle {
   max-width: 750px;
   margin: 0 auto 80px;
@@ -123,4 +205,21 @@
   font-size: 1.05rem;
   color: var(--color-text-light);
   line-height: 1.75;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .flex-definition {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .flex-def-left {
+    border-radius: 20px 20px 0 0;
+    padding: 36px 28px;
+  }
+
+  .flex-def-right {
+    padding: 28px 0 0;
+  }
 }
