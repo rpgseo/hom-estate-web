@@ -681,6 +681,293 @@
   line-height: 1.8;
 }
 
+/* Property Summary */
+.property-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--color-light);
+}
+
+.property-summary-specs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.95rem;
+  color: var(--color-text);
+}
+
+.spec-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.spec-item svg {
+  color: var(--color-navy);
+}
+
+.spec-divider {
+  color: var(--color-text-lighter);
+}
+
+.property-summary-price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.price-label {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+}
+
+.price-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-navy);
+}
+
+.price-period {
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+}
+
+.property-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+/* Room Specs */
+.room-specs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 24px 0 32px;
+}
+
+.room-spec-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 12px;
+  background: var(--color-white);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  text-align: center;
+}
+
+.room-spec-card svg {
+  color: var(--color-yellow-dark);
+}
+
+.room-spec-card span {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-navy);
+}
+
+/* Full Description */
+.detail-description-full {
+  margin-bottom: 32px;
+}
+
+.detail-description-full p {
+  font-size: 1rem;
+  color: var(--color-text);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+/* Section titles (dark) */
+.section-title-light {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  color: var(--color-white);
+  margin-bottom: 12px;
+}
+
+.section-subtitle-light {
+  font-size: 1rem;
+  color: var(--color-white);
+  opacity: 0.8;
+  margin-bottom: 40px;
+}
+
+/* Tour Virtual Placeholder */
+.tour-virtual-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 80px 40px;
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  color: var(--color-white);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.tour-virtual-placeholder:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tour-play-btn {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--color-yellow);
+  color: var(--color-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast);
+}
+
+.tour-virtual-placeholder:hover .tour-play-btn {
+  transform: scale(1.1);
+}
+
+/* Pricing Grid */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.pricing-card {
+  background: var(--color-white);
+  border-radius: 16px;
+  padding: 40px 28px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 2px solid transparent;
+  transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.pricing-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.pricing-card-featured {
+  border-color: var(--color-yellow);
+  position: relative;
+}
+
+.pricing-card h3 {
+  font-size: 1.2rem;
+  color: var(--color-navy);
+  margin-bottom: 8px;
+}
+
+.pricing-tagline {
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  margin-bottom: 16px;
+}
+
+.pricing-price {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.pricing-amount {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--color-navy);
+}
+
+.pricing-period {
+  font-size: 1rem;
+  color: var(--color-text-light);
+}
+
+.pricing-saving {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-yellow-dark);
+}
+
+/* Offer Content */
+.offer-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.offer-content h3 {
+  font-size: 1.2rem;
+  color: var(--color-navy);
+  margin: 32px 0 12px;
+}
+
+.offer-content h3:first-child {
+  margin-top: 0;
+}
+
+.offer-content p {
+  font-size: 0.95rem;
+  color: var(--color-text);
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+.offer-plans-detail {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.offer-plan-item {
+  background: var(--color-white);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.offer-plan-item strong {
+  display: block;
+  font-size: 1rem;
+  color: var(--color-navy);
+  margin-bottom: 8px;
+}
+
+.offer-plan-item p {
+  font-size: 0.85rem;
+  margin-bottom: 0;
+}
+
+.legal-note {
+  font-size: 0.85rem !important;
+  color: var(--color-text-lighter) !important;
+  font-style: italic;
+  margin-top: 16px;
+}
+
+/* Neighborhood */
+.neighborhood-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.neighborhood-content p {
+  font-size: 1rem;
+  color: var(--color-text);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
 /* =============================================
    RESPONSIVE
    ============================================= */
@@ -705,6 +992,20 @@
 
   .sidebar-card {
     position: static;
+  }
+
+  .room-specs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .offer-plans-detail {
+    grid-template-columns: 1fr;
   }
 }
 

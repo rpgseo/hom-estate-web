@@ -11,43 +11,138 @@ const GALLERY = [
 ]
 
 const FEATURES = [
-  { label: '2 Dormitorios', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>' },
+  { label: '1 Salon-Cocina', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3"/><path d="M2 11v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v2H6v-2a2 2 0 0 0-4 0Z"/><path d="M4 18v2"/><path d="M20 18v2"/><path d="M12 4v9"/></svg>' },
+  { label: '1 Dormitorio', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>' },
   { label: '1 Bano completo', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><line x1="10" x2="8" y1="5" y2="7"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M7 19v2"/><path d="M17 19v2"/></svg>' },
-  { label: 'WiFi alta velocidad', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13a10 10 0 0 1 14 0"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><path d="M2 8.82a15 15 0 0 1 20 0"/><line x1="12" x2="12.01" y1="20" y2="20"/></svg>' },
-  { label: 'Totalmente amueblado', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3"/><path d="M2 11v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v2H6v-2a2 2 0 0 0-4 0Z"/><path d="M4 18v2"/><path d="M20 18v2"/><path d="M12 4v9"/></svg>' },
-  { label: 'Portero 24h', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>' },
-  { label: 'Acabados premium', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>' },
+  { label: 'Laundry independiente', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="2"/><circle cx="12" cy="12" r="5"/><path d="M12 7v0"/></svg>' },
+  { label: 'Garaje (opcional)', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>' },
+  { label: 'WiFi alta velocidad + Smart TV', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13a10 10 0 0 1 14 0"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><path d="M2 8.82a15 15 0 0 1 20 0"/><line x1="12" x2="12.01" y1="20" y2="20"/></svg>' },
+  { label: 'Aire acondicionado frio/calor', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M2 12h20"/><path d="m4.93 4.93 14.14 14.14"/><path d="m19.07 4.93-14.14 14.14"/></svg>' },
+  { label: 'Ropa de cama y bano', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>' },
+  { label: 'Limpieza semanal completa', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>' },
+  { label: 'Consumos incluidos', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>' },
+  { label: 'Cocina completa (Lavavajillas + Microondas + Horno)', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 11h.01"/><path d="M11 15h.01"/><path d="M16 16h.01"/><path d="m2 16 20 6-6-20A20 20 0 0 0 2 16"/><path d="M5.71 17.11a17.04 17.04 0 0 1 11.4-11.4"/></svg>' },
+  { label: 'Ventilador de techo en habitacion', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/></svg>' },
+]
+
+const PLANS = [
+  { name: 'Mensual', price: '2.100', tagline: 'Ahorra meses de mas' },
+  { name: 'Semestral', price: '1.780', tagline: 'Ahorra 320\u20AC/mes' },
+  { name: 'Anual', price: '1.580', tagline: 'Ahorra 520\u20AC/mes' },
+]
+
+const BENEFITS = [
+  { title: 'Estancia flexible', desc: 'Paga solo lo que utilizas' },
+  { title: 'Todos los gastos incluidos', desc: 'Un unico pago sin preocupaciones' },
+  { title: 'Maxima comodidad', desc: 'Instalaciones totalmente equipadas y actuales' },
 ]
 ---
 
 <BaseLayout>
   <PageHero
-    title="Apartamento de Lujo en Barcelona"
+    title="Espectacular HOM en Barcelona"
     breadcrumbs={[{ label: 'Apartamento Bruc' }]}
     image="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&fm=webp"
   />
 
+  <!-- Property Summary -->
   <section class="page-section">
+    <div class="page-container">
+      <div class="property-summary" data-animate>
+        <div class="property-summary-specs">
+          <span class="spec-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3"/><path d="M2 11v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v2H6v-2a2 2 0 0 0-4 0Z"/></svg>
+            1 Salon-cocina
+          </span>
+          <span class="spec-divider">&bull;</span>
+          <span class="spec-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>
+            1 Dormitorio
+          </span>
+          <span class="spec-divider">&bull;</span>
+          <span class="spec-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><line x1="2" x2="22" y1="12" y2="12"/></svg>
+            1 Bano
+          </span>
+          <span class="spec-divider">&bull;</span>
+          <span class="spec-item">Laundry</span>
+          <span class="spec-divider">&bull;</span>
+          <span class="spec-item">Garaje (opcional)</span>
+        </div>
+        <div class="property-summary-price">
+          <span class="price-label">Desde</span>
+          <span class="price-value">1.580&euro;</span>
+          <span class="price-period">/mes</span>
+        </div>
+      </div>
+
+      <div class="property-actions" data-animate data-delay="1">
+        <a href="#contacto" class="btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Contactanos
+        </a>
+        <a href="#tour-virtual" class="btn-outline">Tour virtual</a>
+        <a href="#planes" class="btn-outline">Planes y precios</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detail Content -->
+  <section class="page-section page-section-light">
     <div class="page-container">
       <div class="detail-layout">
         <div class="detail-main">
+          <!-- Info Header -->
           <div data-animate>
             <span class="luxury-badge">Premium</span>
-            <h2 class="detail-tagline">Apartamento exclusivo en Calle Bruc, Barcelona</h2>
+            <h2 class="detail-tagline">Disfruta de nuestra HOM en Barcelona</h2>
             <p class="detail-location">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-              Eixample, Barcelona
-            </p>
-            <p class="detail-description">
-              Exclusivo apartamento de lujo situado en una de las calles mas
-              emblematicas de Barcelona. Completamente reformado con acabados de
-              alta gama, este espacio combina la elegancia clasica del Eixample con
-              todas las comodidades modernas. Ideal para profesionales que buscan
-              una experiencia residencial premium en el corazon de Barcelona.
+              Dreta de l'Eixample, Barcelona
             </p>
           </div>
 
-          <div class="detail-gallery" data-animate data-delay="1">
+          <!-- Room Specs -->
+          <div class="room-specs" data-animate data-delay="1">
+            <div class="room-spec-card">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3"/><path d="M2 11v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v2H6v-2a2 2 0 0 0-4 0Z"/></svg>
+              <span>1 Salon-Cocina</span>
+            </div>
+            <div class="room-spec-card">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>
+              <span>1 Dormitorio</span>
+            </div>
+            <div class="room-spec-card">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><line x1="2" x2="22" y1="12" y2="12"/></svg>
+              <span>1 Bano</span>
+            </div>
+            <div class="room-spec-card">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              <span>Garaje (Opcional)</span>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="detail-description-full" data-animate data-delay="2">
+            <p>Espectacular apartamento ubicado en la Dreta de l'Eixample en Barcelona. Este elegante apartamento cuenta con una distribucion unica que combina comodidad y estilo en cada uno de sus espacios.</p>
+
+            <p>Al entrar, les recibira una cocina amplia y luminosa, disenada con un enfoque moderno y funcional. La cocina esta completamente equipada con electrodomesticos de ultima generacion y ofrece mucho espacio de almacenamiento. Ademas, esta conectada con el espacioso salon-comedor, creando un ambiente abierto y acogedor para disfrutar tanto del cocinar, como de las comidas con familiares y amigos.</p>
+
+            <p>En el salon, encontraras dos puestos de trabajo ideales para aquellos que necesitan teletrabajar o tener un espacio de estudio. Estos espacios estan estrategicamente ubicados para aprovechar la luz natural que se filtra a traves de las ventanas, lo que crea un entorno inspirador y productivo.</p>
+
+            <p>El apartamento tambien cuenta con un amplio dormitorio, minimalista y relajado. Este dormitorio esta equipado con un armario empotrado, que ofrece un generoso espacio de almacenamiento para satisfacer todas tus necesidades.</p>
+
+            <p>Ademas, en este apartamento encontraras un cuarto de lavado (laundry), que brinda la maxima comodidad para el cuidado de tu ropa.</p>
+
+            <p>El lujoso bano del apartamento esta meticulosamente disenado con grandes acabados. Los materiales de alta calidad y los detalles cuidadosamente seleccionados crean un ambiente de lujo y confort. Cuenta con una ducha de alta gama, que permite la posibilidad de disfrutar de una ducha revitalizante al final del dia.</p>
+
+            <p>Por ultimo, este apartamento es exterior y tiene vistas a la calle Bruc. Desde la sala de estar, podras acceder a una terraza muy acogedora, perfecta para disfrutar del clima mediterraneo y relajarte al aire libre. Este espacio intimo es ideal para tomar una taza de cafe por la manana o para compartir una cena romantica al atardecer.</p>
+
+            <p>En resumen, este apartamento en la Dreta de l'Eixample de Barcelona combina una distribucion moderna con acabados de alta calidad y una ubicacion privilegiada. La cocina amplia conectada con el salon-comedor, los puestos de teletrabajo, el dormitorio con armario empotrado, el laundry y el lujoso bano reflejan la atencion al detalle y el confort en cada rincon de esta vivienda. Ademas, su terraza acogedora y su ubicacion en la calle Bruc te permitiran disfrutar de la esencia de Barcelona desde la comodidad de tu hogar.</p>
+          </div>
+
+          <!-- Gallery -->
+          <div class="detail-gallery" data-animate data-delay="3">
             {GALLERY.map((img, i) => (
               <div class="gallery-item">
                 <img src={img} alt={`Apartamento Bruc foto ${i + 1}`} width="600" height="400" loading="lazy" />
@@ -55,8 +150,9 @@ const FEATURES = [
             ))}
           </div>
 
-          <div class="detail-features" data-animate data-delay="2">
-            <h3>Caracteristicas del apartamento</h3>
+          <!-- Features / Incluimos -->
+          <div class="detail-features" data-animate data-delay="4">
+            <h3>Incluimos</h3>
             <ul class="features-list">
               {FEATURES.map((feat) => (
                 <li>
@@ -68,8 +164,9 @@ const FEATURES = [
           </div>
         </div>
 
+        <!-- Sidebar -->
         <aside class="detail-sidebar">
-          <div class="sidebar-card sidebar-card-luxury" data-animate="slide-left" data-delay="3">
+          <div class="sidebar-card sidebar-card-luxury" id="contacto" data-animate="slide-left" data-delay="2">
             <div class="sidebar-luxury-header">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
               <span>Propiedad Premium</span>
@@ -78,13 +175,139 @@ const FEATURES = [
             <p>Contacte con nosotros para conocer precios y disponibilidad de este exclusivo apartamento.</p>
             <a href="tel:+34636155847" class="btn-primary btn-full">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              Llamar ahora
+              (+34) 636 155 847
             </a>
             <a href="mailto:info@hom.estate" class="btn-outline btn-full" style="border-color:rgba(255,255,255,0.3);color:var(--color-white);">
               Solicitar visita
             </a>
           </div>
         </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tour Virtual -->
+  <section class="page-section page-section-dark" id="tour-virtual">
+    <div class="page-container" style="text-align:center;">
+      <h2 class="section-title-light" data-animate>Tour virtual - BRUC</h2>
+      <p class="section-subtitle-light" data-animate data-delay="1">Explora cada rincon del apartamento desde la comodidad de tu pantalla</p>
+      <div class="tour-virtual-placeholder" data-animate data-delay="2">
+        <div class="tour-play-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <p>Reproducir video</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Planes y Precios -->
+  <section class="page-section" id="planes">
+    <div class="page-container">
+      <div class="page-section-header" data-animate>
+        <h2>Planes y precios</h2>
+      </div>
+      <div class="pricing-grid" data-animate data-delay="1">
+        {PLANS.map((plan, i) => (
+          <div class={`pricing-card ${i === 2 ? 'pricing-card-featured' : ''}`}>
+            <h3>{plan.name}</h3>
+            <p class="pricing-tagline">Todo incluido! desde:</p>
+            <div class="pricing-price">
+              <span class="pricing-amount">{plan.price}&euro;</span>
+              <span class="pricing-period">/mes</span>
+            </div>
+            <p class="pricing-saving">{plan.tagline}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Disponibilidad y Contratos -->
+  <section class="page-section page-section-light">
+    <div class="page-container">
+      <div class="page-section-header" data-animate>
+        <h2>Nuestra oferta y garantias</h2>
+      </div>
+
+      <div class="offer-content" data-animate data-delay="1">
+        <h3>Que disponibilidad ofrecemos?</h3>
+        <p>Tenemos tres planes diferentes que varian segun la duracion de la estancia:</p>
+
+        <div class="offer-plans-detail">
+          <div class="offer-plan-item">
+            <strong>Mensual</strong>
+            <p>Muy aconsejable para personas que vienen por un proyecto de trabajo, vacaciones, una estancia temporal o simplemente quieren tener la flexibilidad de mudarse a corto plazo.</p>
+          </div>
+          <div class="offer-plan-item">
+            <strong>Semestral</strong>
+            <p>Ideal para personas que vienen de Erasmus, estan de practicas en empresas, estudiando un semestre o simplemente porque tienen fecha de vuelta.</p>
+          </div>
+          <div class="offer-plan-item">
+            <strong>Anual</strong>
+            <p>Lo mas convencional, perfecto para estancias largas.</p>
+          </div>
+        </div>
+
+        <p>Todas estas opciones pueden ser combinables entre si (Ej: Si necesitas estar 7 meses, puedes consumir 1 semestre y 1 mes, con sus respectivas tarifas). Esto es una gran ventaja puesto que vas a ahorrar los meses que no necesitas y al mismo tiempo a tener la flexibilidad para poder modular el periodo de estancia.</p>
+
+        <p><strong>Importante:</strong> el periodo de estancia siempre se podra alargar, pero nunca acortar.</p>
+
+        <h3>Los contratos</h3>
+        <p>Los contratos se estableceran segun la duracion de la estancia y son de obligado cumplimiento (Ej: Si has firmado por 6 meses, se cobraran los 6 meses sin excepciones).</p>
+        <p>Para garantizar una correcta estancia, se tendra que cumplir lo pactado en el contrato (Cuidado y conservacion del mobiliario, normas del vecindario, normas de convivencia y respeto, normas de higiene, etc...)</p>
+        <p>Se depositara como garantia: <strong>1 mes de fianza y otro mes de garantia</strong> por conservacion del mobiliario e instalaciones.</p>
+        <p class="legal-note">(*) En caso de incumplimiento de contrato por parte de los inquilinos, HOM.ESTATE se reserva el derecho a la rescision unilateral del contrato, con la consecuente perdida de la fianza.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vecindario -->
+  <section class="page-section">
+    <div class="page-container">
+      <div class="page-section-header" data-animate>
+        <h2>Vecindario</h2>
+      </div>
+
+      <div class="neighborhood-content" data-animate data-delay="1">
+        <p>La Dreta de l'Eixample es un encantador barrio situado en el corazon de Barcelona. Conocido por su elegante arquitectura modernista, calles amplias y ambiente cosmopolita, el barrio ofrece una combinacion unica de historia y modernidad.</p>
+
+        <p>Caminar por las calles de la Dreta de l'Eixample te sumergira en un ambiente vibrante y sofisticado. Podras admirar magnificos edificios disenados por reconocidos arquitectos como Antoni Gaudi y Lluis Domenech i Montaner. Ademas, el barrio alberga tiendas de lujo, boutiques de diseno y una amplia variedad de restaurantes, cafes y bares que deleitaran tus sentidos.</p>
+
+        <p>La Dreta de l'Eixample tambien es conocida por su vida cultural. Aqui encontraras una gran cantidad de museos, galerias de arte y teatros que ofrecen una amplia gama de eventos culturales y exposiciones.</p>
+
+        <p>El barrio esta muy bien comunicado, lo que facilita el acceso a otras partes de la ciudad. Ademas, cuenta con una excelente oferta de transporte publico, incluyendo estaciones de metro y autobus que te permitiran desplazarte facilmente por Barcelona.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Por que nuestra HOM -->
+  <section class="page-section page-section-light">
+    <div class="page-container">
+      <div class="page-section-header" data-animate>
+        <h2>Por que nuestra HOM?</h2>
+        <p>Descubre la satisfaccion de vivir en una de nuestras HOMs, todo incluido incluso servicio de limpieza</p>
+      </div>
+      <div class="benefits-row" data-animate data-delay="1">
+        {BENEFITS.map((b) => (
+          <div class="benefit-card">
+            <h3>{b.title}</h3>
+            <p>{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <section class="page-section page-section-dark">
+    <div class="page-container" style="display:flex;justify-content:center;">
+      <div class="page-cta-block" data-animate>
+        <h2>Disfruta de nuestra HOM en Barcelona!</h2>
+        <p>Contactanos para conocer la disponibilidad y reservar tu estancia.</p>
+        <a href="tel:+34636155847" class="btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          (+34) 636 155 847
+        </a>
       </div>
     </div>
   </section>
