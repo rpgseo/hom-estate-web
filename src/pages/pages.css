@@ -682,113 +682,39 @@
 }
 
 /* =============================================
-   LISTING HERO (Property Detail Page)
-   Same frame system as Home hero (16px padding + border-radius: 20px)
+   LISTING HERO (Muppy-style)
+   Title + price on top, photo grid below
    ============================================= */
 
 .listing-hero {
   width: 100%;
-  min-height: 100vh;
-  min-height: 100dvh;
-  padding: 16px;
-  box-sizing: border-box;
   background: #fff;
+  padding-top: var(--header-height);
 }
 
-.listing-hero-frame {
-  width: 100%;
-  height: calc(100vh - 32px);
-  height: calc(100dvh - 32px);
-  border-radius: 20px;
-  overflow: hidden;
-  background: var(--color-light);
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  align-items: stretch;
+.listing-hero-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 32px 24px 0;
 }
 
-/* ---- Photo Grid ---- */
-.listing-hero-gallery {
-  display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 6px;
-  padding: 6px;
-}
-
-.hero-photo-main {
-  position: relative;
-  grid-row: 1 / -1;
-  overflow: hidden;
-  cursor: pointer;
-  border-radius: 14px;
-}
-
-.hero-photo-main img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.hero-photo-main:hover img {
-  transform: scale(1.03);
-}
-
-.hero-photo-grid-right {
-  display: contents;
-}
-
-.hero-photo-thumb {
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  border-radius: 14px;
-}
-
-.hero-photo-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.hero-photo-thumb:hover img {
-  transform: scale(1.05);
-}
-
-.hero-photo-label {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--color-navy);
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  backdrop-filter: blur(6px);
-  pointer-events: none;
-}
-
-/* ---- Property Info Column ---- */
-.listing-hero-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 20px;
-  padding: 40px 48px 40px 32px;
-}
-
+/* ---- Header: title left, price right ---- */
 .listing-hero-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.listing-hero-header-left {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
 .listing-hero-title {
-  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
   color: var(--color-navy);
   line-height: 1.15;
   letter-spacing: -0.02em;
@@ -796,28 +722,16 @@
 }
 
 .listing-hero-address {
-  display: flex;
-  align-items: center;
-  gap: 6px;
   color: var(--color-text-light);
-  font-size: 0.88rem;
+  font-size: 0.92rem;
 }
 
-.listing-hero-address svg {
+.listing-hero-header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
   flex-shrink: 0;
-  opacity: 0.5;
-}
-
-.listing-hero-meta {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.listing-hero-price-block {
-  display: flex;
-  align-items: baseline;
-  gap: 2px;
 }
 
 .listing-hero-price {
@@ -826,12 +740,6 @@
   color: #22C55E;
   line-height: 1;
   letter-spacing: -0.03em;
-}
-
-.listing-hero-price-label {
-  font-size: 0.85rem;
-  color: var(--color-text-lighter);
-  font-weight: 400;
 }
 
 .listing-availability-badge {
@@ -846,56 +754,64 @@
   letter-spacing: 0.03em;
 }
 
-.listing-hero-divider {
-  height: 1px;
-  background: rgba(0, 0, 0, 0.08);
-}
-
-.listing-hero-specs {
+/* ---- Photo Grid: 1 large left + 2x2 right ---- */
+.listing-hero-gallery {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: 1.2fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   gap: 8px;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 2.2 / 1;
 }
 
-.listing-spec {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  padding: 14px 6px;
+.hero-photo-main {
+  position: relative;
+  grid-row: 1 / -1;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.hero-photo-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-photo-main:hover img {
+  transform: scale(1.03);
+}
+
+.hero-photo-thumb {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.hero-photo-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-photo-thumb:hover img {
+  transform: scale(1.04);
+}
+
+.hero-photo-label {
+  position: absolute;
+  top: 12px;
+  left: 12px;
   background: var(--color-white);
-  border-radius: 12px;
-  text-align: center;
-  transition: box-shadow var(--transition-fast);
-}
-
-.listing-spec:hover {
-  box-shadow: 0 2px 12px rgba(27, 42, 74, 0.08);
-}
-
-.listing-spec svg {
-  color: var(--color-yellow-dark);
-  width: 22px;
-  height: 22px;
-}
-
-.listing-spec span {
-  font-size: 0.7rem;
-  font-weight: 600;
   color: var(--color-navy);
-  line-height: 1.25;
-}
-
-.listing-hero-tagline {
-  font-size: 0.92rem;
-  color: var(--color-text-light);
-  line-height: 1.65;
-}
-
-.listing-hero-actions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
 }
 
 /* Property Summary */
@@ -1211,26 +1127,8 @@
     position: static;
   }
 
-  .listing-hero {
-    min-height: auto;
-    height: auto;
-  }
-
-  .listing-hero-frame {
-    height: auto;
-    grid-template-columns: 1fr;
-  }
-
   .listing-hero-gallery {
-    padding: 8px;
-  }
-
-  .listing-hero-info {
-    padding: 24px 32px 32px;
-  }
-
-  .listing-hero-specs {
-    grid-template-columns: repeat(3, 1fr);
+    aspect-ratio: 1.6 / 1;
   }
 
   .room-specs {
@@ -1257,27 +1155,26 @@
     grid-template-columns: 1fr;
   }
 
-  .listing-hero-info {
-    padding: 20px 20px 28px;
+  .listing-hero-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .listing-hero-header-right {
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 12px;
   }
 
   .listing-hero-gallery {
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
+    grid-template-rows: auto auto auto;
+    aspect-ratio: auto;
   }
 
   .hero-photo-main {
-    grid-row: auto;
     grid-column: 1 / -1;
     aspect-ratio: 16 / 10;
-  }
-
-  .listing-hero-specs {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .listing-spec {
-    padding: 12px 4px;
   }
 
   .listing-hero-header {
