@@ -1,6 +1,7 @@
 .flex-living-section {
   position: relative;
   padding: var(--section-padding) 0;
+  background: var(--color-white);
 }
 
 .flex-living-header {
@@ -9,12 +10,12 @@
 }
 
 .flex-living-header .section-title {
-  color: var(--color-white);
+  color: var(--color-navy);
 }
 
 .flex-living-header .highlight {
   background: linear-gradient(180deg, transparent 55%, var(--color-yellow) 55%);
-  color: var(--color-white);
+  color: var(--color-navy);
 }
 
 /* Definition block */
@@ -26,14 +27,14 @@
 
 .flex-question {
   font-size: 1.4rem;
-  color: var(--color-white);
+  color: var(--color-navy);
   font-weight: 700;
   margin-bottom: 20px;
 }
 
 .flex-answer {
   font-size: 1.05rem;
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--color-text-light);
   line-height: 1.8;
   margin-bottom: 32px;
 }
@@ -43,8 +44,8 @@
   align-items: center;
   gap: 8px;
   padding: 14px 36px;
-  background: var(--color-yellow);
-  color: var(--color-navy);
+  background: var(--color-navy);
+  color: var(--color-white);
   font-size: 0.95rem;
   font-weight: 600;
   border-radius: 50px;
@@ -53,7 +54,7 @@
 
 .flex-cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(247, 242, 134, 0.3);
+  box-shadow: 0 8px 24px rgba(27, 42, 74, 0.2);
 }
 
 /* Lifestyle section */
@@ -66,9 +67,9 @@
 .flex-tag {
   display: inline-block;
   padding: 6px 18px;
-  border: 1px solid rgba(247, 242, 134, 0.3);
+  border: 1px solid rgba(27, 42, 74, 0.2);
   border-radius: 50px;
-  color: var(--color-yellow);
+  color: var(--color-navy);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 2px;
@@ -78,7 +79,7 @@
 
 .flex-lifestyle-title {
   font-size: clamp(1.6rem, 3vw, 2.2rem);
-  color: var(--color-white);
+  color: var(--color-navy);
   font-weight: 700;
   margin-bottom: 32px;
   font-style: italic;
@@ -86,7 +87,7 @@
 
 .flex-benefits p {
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--color-text-light);
   line-height: 1.8;
   margin-bottom: 20px;
   text-align: left;
@@ -94,8 +95,8 @@
 
 .flex-summary {
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.8);
-  border-left: 3px solid var(--color-yellow);
+  color: var(--color-text);
+  border-left: 3px solid var(--color-navy);
   padding-left: 20px;
   margin-top: 8px;
 }
@@ -106,22 +107,20 @@
   margin: 0 auto;
   text-align: center;
   padding: 48px 32px;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--color-light);
+  border: 1px solid rgba(27, 42, 74, 0.06);
   border-radius: 24px;
 }
 
 .flex-advantages-title {
   font-size: 1.5rem;
-  color: var(--color-white);
+  color: var(--color-navy);
   font-weight: 700;
   margin-bottom: 16px;
 }
 
 .flex-advantages-text {
   font-size: 1.05rem;
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--color-text-light);
   line-height: 1.75;
 }

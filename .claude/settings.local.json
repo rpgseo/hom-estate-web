@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__stitch__update_design_system",
+      "mcp__stitch__generate_screen_from_text",
+      "mcp__stitch__list_screens"
+    ]
+  }
+}

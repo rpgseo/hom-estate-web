@@ -56,13 +56,14 @@
 }
 
 .page-breadcrumbs a {
-  color: var(--color-yellow);
+  color: rgba(255, 255, 255, 0.8);
   font-size: 0.85rem;
   font-weight: 500;
 }
 
 .page-breadcrumbs a:hover {
   text-decoration: underline;
+  color: var(--color-white);
 }
 
 .page-breadcrumbs span {

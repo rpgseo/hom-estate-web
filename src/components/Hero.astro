@@ -1,45 +1,43 @@
 ---
 import '../components/Hero.css'
+import introVideo from '../assets/hom-estate-intro.webm'
 ---
 
-<!-- Fixed background for entire page -->
-<div class="hero-bg-fixed" aria-hidden="true">
-  <img
-    class="hero-bg-image"
-    src="/images/hero-bg.webp"
-    alt=""
-    width="1920"
-    height="932"
-  />
-  <div class="hero-overlay"></div>
-  <div class="hero-gradient-1"></div>
-  <div class="hero-gradient-2"></div>
-  <div class="hero-grid"></div>
-</div>
-
 <section id="inicio" class="hero-section">
-  <div class="hero-content" style="animation: fadeUp 0.8s ease-out both;">
-    <span class="hero-tag" style="animation: fadeUp 0.6s ease-out 0.2s both;">
-      ¡Únete al cambio!
-    </span>
+  <div class="hero-frame">
+    <!-- Video background -->
+    <video
+      class="hero-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+    >
+      <source src={introVideo} type="video/webm" />
+    </video>
+    <div class="hero-video-overlay"></div>
 
-    <h1 class="hero-title" style="animation: fadeUp 0.7s ease-out 0.4s both;">
-      Transformamos espacios,{' '}
-      <span class="highlight">generamos valor.</span>
-    </h1>
+    <!-- Content at bottom-left -->
+    <div class="hero-content" style="animation: fadeUp 0.8s ease-out 0.4s both;">
+      <span class="hero-tag" style="animation: fadeUp 0.6s ease-out 0.2s both;">
+        ¡Únete al cambio!
+      </span>
 
-    <p class="hero-description" style="animation: fadeUp 0.6s ease-out 0.6s both;">
-      Calidad para nuestros inquilinos, rentabilidad para nuestros inversores.
-    </p>
+      <h1 class="hero-title" style="animation: fadeUp 0.7s ease-out 0.4s both;">
+        Transformamos espacios,{' '}
+        <span class="highlight">generamos valor.</span>
+      </h1>
 
-    <p class="hero-commitment" style="animation: fadeUp 0.5s ease-out 0.7s both;">
-      Comprometidos con la mejora continua del mercado de vivienda.
-    </p>
-  </div>
+      <p class="hero-description" style="animation: fadeUp 0.6s ease-out 0.6s both;">
+        Calidad para nuestros inquilinos, rentabilidad para nuestros inversores.
+      </p>
+    </div>
 
-  <div class="hero-scroll-indicator" aria-hidden="true">
-    <span>Scroll</span>
-    <div class="hero-scroll-line"></div>
+    <div class="hero-scroll-indicator" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="hero-scroll-line"></div>
+    </div>
   </div>
 </section>
 
@@ -47,6 +45,7 @@ import '../components/Hero.css'
 <div class="hero-panels">
   <div class="hero-tabs-bar" data-animate>
     <div class="hero-tabs">
+      <div class="hero-tabs-slider"></div>
       <button class="hero-tab active" data-tab="inquilino">Inquilino</button>
       <button class="hero-tab" data-tab="inversor">Inversor</button>
     </div>
@@ -86,8 +85,21 @@ import '../components/Hero.css'
 </div>
 
 <script>
+  const tabsContainer = document.querySelector('.hero-tabs')
   const tabs = document.querySelectorAll('.hero-tab')
+  const slider = document.querySelector('.hero-tabs-slider')
   const panels = document.querySelectorAll('.hero-panel')
+
+  function moveSlider(tab) {
+    const containerRect = tabsContainer.getBoundingClientRect()
+    const tabRect = tab.getBoundingClientRect()
+    slider.style.width = tabRect.width + 'px'
+    slider.style.left = (tabRect.left - containerRect.left) + 'px'
+  }
+
+  // Position slider on load
+  const activeTab = document.querySelector('.hero-tab.active')
+  if (activeTab) moveSlider(activeTab)
 
   tabs.forEach((tab) => {
     tab.addEventListener('click', () => {
@@ -95,12 +107,12 @@ import '../components/Hero.css'
 
       tabs.forEach((t) => t.classList.remove('active'))
       tab.classList.add('active')
+      moveSlider(tab)
 
       panels.forEach((panel) => {
         const isTarget = panel.id === `panel-${target}`
         if (isTarget) {
           panel.classList.add('active')
-          // Re-trigger animations on newly visible panel
           panel.querySelectorAll('[data-animate]').forEach((el) => {
             el.classList.remove('visible')
             requestAnimationFrame(() => {
@@ -112,5 +124,11 @@ import '../components/Hero.css'
         }
       })
     })
+  })
+
+  // Recalculate on resize
+  window.addEventListener('resize', () => {
+    const current = document.querySelector('.hero-tab.active')
+    if (current) moveSlider(current)
   })
 </script>

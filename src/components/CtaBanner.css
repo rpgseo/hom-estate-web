@@ -1,6 +1,6 @@
 .cta-banner {
   padding: 80px 24px 120px;
-  background: transparent;
+  background: var(--color-white);
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -14,20 +14,19 @@
   width: 600px;
   height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(247, 242, 134, 0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(27, 42, 74, 0.03) 0%, transparent 70%);
   pointer-events: none;
 }
-
 
 .cta-text {
   font-size: clamp(2.5rem, 6vw, 5rem);
   font-weight: 800;
-  color: var(--color-white);
+  color: var(--color-navy);
   position: relative;
   z-index: 1;
   line-height: 1.1;
 }
 
 .cta-text .dot {
-  color: var(--color-yellow);
+  color: var(--color-navy-light);
 }
