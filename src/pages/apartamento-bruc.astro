@@ -1,13 +1,38 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import PageHero from '../components/PageHero.astro'
 import './pages.css'
+import { Image } from 'astro:assets'
+
+import imgSalon from '../assets/BARCELONA/salon-sofa-escritorio-tv.webp'
+import imgSalonComedor from '../assets/BARCELONA/salon-comedor-vista-amplia.webp'
+import imgTerraza from '../assets/BARCELONA/terraza-balcon.webp'
+import imgCocina from '../assets/BARCELONA/cocina-salon-vista-completa.webp'
+import imgDormitorio from '../assets/BARCELONA/dormitorio-cama-ventilador-techo.webp'
+import imgBano from '../assets/BARCELONA/bano-lavabo-espejo-ducha.webp'
+import imgEscritorio from '../assets/BARCELONA/habitacion-escritorio-balcon.webp'
+import imgLavadero from '../assets/BARCELONA/lavadero-lavadora.webp'
+import imgCocinaDetalle from '../assets/BARCELONA/cocina-fregadero-horno.webp'
+import imgDormitorioArmario from '../assets/BARCELONA/dormitorio-armario-empotrado.webp'
+import imgBanoDetalle from '../assets/BARCELONA/bano-ducha-inodoro.webp'
+import imgSalonLogo from '../assets/BARCELONA/salon-logo-homestate.webp'
+
+const HERO_PHOTOS = [
+  { img: imgSalon, label: 'salon' },
+  { img: imgSalonComedor, label: 'salon-comedor' },
+  { img: imgTerraza, label: 'terraza' },
+  { img: imgCocina, label: 'cocina' },
+  { img: imgDormitorio, label: 'dormitorio' },
+]
 
 const GALLERY = [
-  'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&fm=webp',
-  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&fm=webp',
-  'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&fm=webp',
-  'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&fm=webp',
+  { img: imgBano, alt: 'Bano con lavabo y espejo' },
+  { img: imgEscritorio, alt: 'Escritorio junto al balcon' },
+  { img: imgLavadero, alt: 'Cuarto de lavado' },
+  { img: imgCocinaDetalle, alt: 'Cocina equipada' },
+  { img: imgDormitorioArmario, alt: 'Dormitorio con armario empotrado' },
+  { img: imgBanoDetalle, alt: 'Bano completo' },
+  { img: imgSalonLogo, alt: 'Salon con logo HOM.ESTATE' },
+  { img: imgSalonComedor, alt: 'Salon comedor vista amplia' },
 ]
 
 const FEATURES = [
@@ -39,50 +64,78 @@ const BENEFITS = [
 ---
 
 <BaseLayout>
-  <PageHero
-    title="Espectacular HOM en Barcelona"
-    breadcrumbs={[{ label: 'Apartamento Bruc' }]}
-    image="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&fm=webp"
-  />
-
-  <!-- Property Summary -->
-  <section class="page-section">
-    <div class="page-container">
-      <div class="property-summary" data-animate>
-        <div class="property-summary-specs">
-          <span class="spec-item">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3"/><path d="M2 11v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v2H6v-2a2 2 0 0 0-4 0Z"/></svg>
-            1 Salon-cocina
-          </span>
-          <span class="spec-divider">&bull;</span>
-          <span class="spec-item">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>
-            1 Dormitorio
-          </span>
-          <span class="spec-divider">&bull;</span>
-          <span class="spec-item">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><line x1="2" x2="22" y1="12" y2="12"/></svg>
-            1 Bano
-          </span>
-          <span class="spec-divider">&bull;</span>
-          <span class="spec-item">Laundry</span>
-          <span class="spec-divider">&bull;</span>
-          <span class="spec-item">Garaje (opcional)</span>
+  <!-- Hero: Full-width photo grid + property info -->
+  <section class="listing-hero">
+    <div class="listing-hero-frame">
+      <!-- Photo Grid -->
+      <div class="listing-hero-gallery">
+        <div class="hero-photo-main">
+          <Image src={HERO_PHOTOS[0].img} alt={HERO_PHOTOS[0].label} width={800} height={600} loading="eager" />
+          <span class="hero-photo-label">{HERO_PHOTOS[0].label}</span>
         </div>
-        <div class="property-summary-price">
-          <span class="price-label">Desde</span>
-          <span class="price-value">1.580&euro;</span>
-          <span class="price-period">/mes</span>
+        <div class="hero-photo-grid-right">
+          {HERO_PHOTOS.slice(1).map((photo) => (
+            <div class="hero-photo-thumb">
+              <Image src={photo.img} alt={photo.label} width={400} height={300} loading="eager" />
+              <span class="hero-photo-label">{photo.label}</span>
+            </div>
+          ))}
         </div>
       </div>
 
-      <div class="property-actions" data-animate data-delay="1">
-        <a href="#contacto" class="btn-primary">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          Contactanos
-        </a>
-        <a href="#tour-virtual" class="btn-outline">Tour virtual</a>
-        <a href="#planes" class="btn-outline">Planes y precios</a>
+      <!-- Property Info -->
+      <div class="listing-hero-info">
+        <div class="listing-hero-header">
+          <h1 class="listing-hero-title">Apartamento Bruc</h1>
+          <p class="listing-hero-address">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            Dreta de l'Eixample, Barcelona
+          </p>
+        </div>
+
+        <div class="listing-hero-meta">
+          <div class="listing-hero-price-block">
+            <span class="listing-hero-price">1.580&euro;</span>
+            <span class="listing-hero-price-label">/mes</span>
+          </div>
+          <span class="listing-availability-badge">Disponible</span>
+        </div>
+
+        <div class="listing-hero-divider"></div>
+
+        <div class="listing-hero-specs">
+          <div class="listing-spec">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3"/><path d="M2 11v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v2H6v-2a2 2 0 0 0-4 0Z"/></svg>
+            <span>1 Salon-Cocina</span>
+          </div>
+          <div class="listing-spec">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>
+            <span>1 Dormitorio</span>
+          </div>
+          <div class="listing-spec">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><line x1="2" x2="22" y1="12" y2="12"/></svg>
+            <span>1 Bano</span>
+          </div>
+          <div class="listing-spec">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="2"/><circle cx="12" cy="12" r="5"/></svg>
+            <span>Laundry</span>
+          </div>
+          <div class="listing-spec">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>Garaje (opcional)</span>
+          </div>
+        </div>
+
+        <p class="listing-hero-tagline">Espectacular apartamento en la Dreta de l'Eixample, completamente equipado con acabados premium. Todo incluido.</p>
+
+        <div class="listing-hero-actions">
+          <a href="#contacto" class="btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Contactanos
+          </a>
+          <a href="#tour-virtual" class="btn-outline">Tour virtual</a>
+          <a href="#planes" class="btn-outline">Planes y precios</a>
+        </div>
       </div>
     </div>
   </section>
@@ -100,26 +153,6 @@ const BENEFITS = [
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
               Dreta de l'Eixample, Barcelona
             </p>
-          </div>
-
-          <!-- Room Specs -->
-          <div class="room-specs" data-animate data-delay="1">
-            <div class="room-spec-card">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3"/><path d="M2 11v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v2H6v-2a2 2 0 0 0-4 0Z"/></svg>
-              <span>1 Salon-Cocina</span>
-            </div>
-            <div class="room-spec-card">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>
-              <span>1 Dormitorio</span>
-            </div>
-            <div class="room-spec-card">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><line x1="2" x2="22" y1="12" y2="12"/></svg>
-              <span>1 Bano</span>
-            </div>
-            <div class="room-spec-card">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-              <span>Garaje (Opcional)</span>
-            </div>
           </div>
 
           <!-- Description -->
@@ -143,9 +176,9 @@ const BENEFITS = [
 
           <!-- Gallery -->
           <div class="detail-gallery" data-animate data-delay="3">
-            {GALLERY.map((img, i) => (
+            {GALLERY.map((photo) => (
               <div class="gallery-item">
-                <img src={img} alt={`Apartamento Bruc foto ${i + 1}`} width="600" height="400" loading="lazy" />
+                <Image src={photo.img} alt={photo.alt} width={600} height={400} loading="lazy" />
               </div>
             ))}
           </div>
