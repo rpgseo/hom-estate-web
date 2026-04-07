@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 1060;
   height: var(--header-height);
   transition: background var(--transition-medium), box-shadow var(--transition-medium);
   pointer-events: none;
@@ -199,8 +199,13 @@
   display: block;
   width: 24px;
   height: 2px;
+  background: var(--color-navy);
+  transition: transform var(--transition-fast), opacity var(--transition-fast), background var(--transition-fast);
+}
+
+.header.scrolled .hamburger span,
+.hamburger.active span {
   background: var(--color-white);
-  transition: transform var(--transition-fast), opacity var(--transition-fast);
 }
 
 .hamburger.active span:nth-child(1) {
