@@ -16,23 +16,25 @@ import imgDormitorioArmario from '../assets/BARCELONA/dormitorio-armario-empotra
 import imgBanoDetalle from '../assets/BARCELONA/bano-ducha-inodoro.webp'
 import imgSalonLogo from '../assets/BARCELONA/salon-logo-homestate.webp'
 
+const RAW = '/images/barcelona-raw'
+
 const HERO_PHOTOS = [
-  { img: imgSalon, label: 'salon' },
-  { img: imgSalonComedor, label: 'salon-comedor' },
-  { img: imgTerraza, label: 'terraza' },
-  { img: imgCocina, label: 'cocina' },
-  { img: imgDormitorio, label: 'dormitorio' },
+  { img: imgSalon, label: 'salon', full: `${RAW}/salon-sofa-escritorio-tv.png` },
+  { img: imgSalonComedor, label: 'salon-comedor', full: `${RAW}/salon-comedor-vista-amplia.png` },
+  { img: imgTerraza, label: 'terraza', full: `${RAW}/terraza-balcon.png` },
+  { img: imgCocina, label: 'cocina', full: `${RAW}/cocina-salon-vista-completa.png` },
+  { img: imgDormitorio, label: 'dormitorio', full: `${RAW}/dormitorio-cama-ventilador-techo.png` },
 ]
 
 const GALLERY = [
-  { img: imgBano, alt: 'Bano con lavabo y espejo' },
-  { img: imgEscritorio, alt: 'Escritorio junto al balcon' },
-  { img: imgLavadero, alt: 'Cuarto de lavado' },
-  { img: imgCocinaDetalle, alt: 'Cocina equipada' },
-  { img: imgDormitorioArmario, alt: 'Dormitorio con armario empotrado' },
-  { img: imgBanoDetalle, alt: 'Bano completo' },
-  { img: imgSalonLogo, alt: 'Salon con logo HOM.ESTATE' },
-  { img: imgSalonComedor, alt: 'Salon comedor vista amplia' },
+  { img: imgBano, alt: 'Bano con lavabo y espejo', full: `${RAW}/bano-lavabo-espejo-ducha.png` },
+  { img: imgEscritorio, alt: 'Escritorio junto al balcon', full: `${RAW}/habitacion-escritorio-balcon.png` },
+  { img: imgLavadero, alt: 'Cuarto de lavado', full: `${RAW}/lavadero-lavadora.png` },
+  { img: imgCocinaDetalle, alt: 'Cocina equipada', full: `${RAW}/cocina-fregadero-horno.png` },
+  { img: imgDormitorioArmario, alt: 'Dormitorio con armario empotrado', full: `${RAW}/dormitorio-armario-empotrado.png` },
+  { img: imgBanoDetalle, alt: 'Bano completo', full: `${RAW}/bano-ducha-inodoro.png` },
+  { img: imgSalonLogo, alt: 'Salon con logo HOM.ESTATE', full: `${RAW}/salon-logo-homestate.png` },
+  { img: imgSalonComedor, alt: 'Salon comedor vista amplia', full: `${RAW}/salon-comedor-vista-amplia.png` },
 ]
 
 const FEATURES = [
@@ -75,18 +77,17 @@ const BENEFITS = [
         </div>
         <div class="listing-hero-header-right">
           <span class="listing-hero-price">1.580&euro;</span>
-          <span class="listing-availability-badge">Disponible</span>
         </div>
       </div>
 
       <!-- Photo Grid -->
       <div class="listing-hero-gallery">
-        <div class="hero-photo-main">
+        <div class="hero-photo-main" data-lightbox="0" data-full={HERO_PHOTOS[0].full}>
           <Image src={HERO_PHOTOS[0].img} alt={HERO_PHOTOS[0].label} width={800} height={600} loading="eager" />
           <span class="hero-photo-label">{HERO_PHOTOS[0].label}</span>
         </div>
-        {HERO_PHOTOS.slice(1).map((photo) => (
-          <div class="hero-photo-thumb">
+        {HERO_PHOTOS.slice(1).map((photo, i) => (
+          <div class="hero-photo-thumb" data-lightbox={i + 1} data-full={photo.full}>
             <Image src={photo.img} alt={photo.label} width={400} height={300} loading="eager" />
             <span class="hero-photo-label">{photo.label}</span>
           </div>
@@ -130,9 +131,10 @@ const BENEFITS = [
           </div>
 
           <!-- Gallery -->
+          <h3 data-animate data-delay="3">Fotos</h3>
           <div class="detail-gallery" data-animate data-delay="3">
-            {GALLERY.map((photo) => (
-              <div class="gallery-item">
+            {GALLERY.map((photo, i) => (
+              <div class="gallery-item" data-lightbox={HERO_PHOTOS.length + i} data-full={photo.full}>
                 <Image src={photo.img} alt={photo.alt} width={600} height={400} loading="lazy" />
               </div>
             ))}
@@ -299,4 +301,168 @@ const BENEFITS = [
       </div>
     </div>
   </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox-overlay" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" aria-label="Cerrar">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <button class="lightbox-prev" aria-label="Anterior">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+    <button class="lightbox-next" aria-label="Siguiente">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+    <div class="lightbox-content">
+      <img id="lightbox-img" src="" alt="" />
+    </div>
+    <div class="lightbox-counter" id="lightbox-counter"></div>
+  </div>
+
+  <style>
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .lightbox-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .lightbox-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      padding: 60px 80px;
+      box-sizing: border-box;
+    }
+    .lightbox-content img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      z-index: 10;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+      padding: 8px;
+    }
+    .lightbox-close:hover { opacity: 1; }
+    .lightbox-prev,
+    .lightbox-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      z-index: 10;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.7;
+      transition: opacity 0.2s, background 0.2s;
+    }
+    .lightbox-prev:hover,
+    .lightbox-next:hover {
+      opacity: 1;
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .lightbox-prev { left: 20px; }
+    .lightbox-next { right: 20px; }
+    .lightbox-counter {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    @media (max-width: 768px) {
+      .lightbox-content { padding: 60px 16px; }
+      .lightbox-prev { left: 8px; }
+      .lightbox-next { right: 8px; }
+      .lightbox-prev,
+      .lightbox-next {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  </style>
+
+  <script>
+    const lightbox = document.getElementById('lightbox')
+    const lightboxImg = document.getElementById('lightbox-img')
+    const lightboxCounter = document.getElementById('lightbox-counter')
+    const galleryItems = document.querySelectorAll('[data-lightbox]')
+    const srcs = []
+    let current = 0
+
+    galleryItems.forEach((item) => {
+      srcs.push(item.dataset.full)
+      item.addEventListener('click', () => {
+        current = parseInt(item.dataset.lightbox)
+        openLightbox()
+      })
+    })
+
+    function openLightbox() {
+      lightboxImg.src = srcs[current]
+      lightboxCounter.textContent = `${current + 1} / ${srcs.length}`
+      lightbox.classList.add('active')
+      lightbox.setAttribute('aria-hidden', 'false')
+      document.body.style.overflow = 'hidden'
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active')
+      lightbox.setAttribute('aria-hidden', 'true')
+      document.body.style.overflow = ''
+    }
+
+    function navigate(dir) {
+      current = (current + dir + srcs.length) % srcs.length
+      lightboxImg.src = srcs[current]
+      lightboxCounter.textContent = `${current + 1} / ${srcs.length}`
+    }
+
+    lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox)
+    lightbox.querySelector('.lightbox-prev').addEventListener('click', () => navigate(-1))
+    lightbox.querySelector('.lightbox-next').addEventListener('click', () => navigate(1))
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox || e.target.classList.contains('lightbox-content')) closeLightbox()
+    })
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return
+      if (e.key === 'Escape') closeLightbox()
+      if (e.key === 'ArrowLeft') navigate(-1)
+      if (e.key === 'ArrowRight') navigate(1)
+    })
+  </script>
 </BaseLayout>

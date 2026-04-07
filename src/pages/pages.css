@@ -695,7 +695,7 @@
 .listing-hero-container {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 32px 24px 0;
+  padding: 32px 24px 40px;
 }
 
 /* ---- Header: title left, price right ---- */
