@@ -14,11 +14,17 @@ async function fetchStrapi<T>(endpoint: string, query: string = ''): Promise<Str
     headers['Authorization'] = `Bearer ${STRAPI_TOKEN}`
   }
 
-  const res = await fetch(url, { headers })
-  if (!res.ok) {
+  const maxRetries = 3
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    const res = await fetch(url, { headers })
+    if (res.ok) return res.json()
+    if (res.status === 503 && attempt < maxRetries) {
+      await new Promise((r) => setTimeout(r, attempt * 2000))
+      continue
+    }
     throw new Error(`Strapi API error: ${res.status} ${res.statusText} on ${endpoint}`)
   }
-  return res.json()
+  throw new Error(`Strapi API failed after ${maxRetries} retries on ${endpoint}`)
 }
 
 /** Build full media URL from Strapi media object */
