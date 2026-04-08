@@ -26,3 +26,6 @@ dist-ssr
 # Original source assets (not for web)
 src/assets/HOME/
 src/assets/Coliving*
+
+.wrangler/
+.astro/

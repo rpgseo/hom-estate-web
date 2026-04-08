@@ -17,18 +17,18 @@ function WindowCard({ coliving, index, floor }) {
       transition={{ duration: 0.5, delay: index * 0.06 }}
     >
       <div className="bld-window-frame">
-        <div className="bld-window-hole">
+        <a href={coliving.href || '#contacto'} className="bld-window-hole" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
           <div className="bld-window-glass">
             <motion.img src={coliving.img} alt={coliving.name} loading="lazy" style={{ y }} />
           </div>
           <div className="bld-window-overlay">
             <h3>{coliving.name}</h3>
             <p>{coliving.desc}</p>
-            <a href="#contacto" className="bld-window-arrow" aria-label={`Ver ${coliving.name}`}>
+            <span className="bld-window-arrow" aria-label={`Ver ${coliving.name}`}>
               <ArrowRight size={16} />
-            </a>
+            </span>
           </div>
-        </div>
+        </a>
       </div>
       <div className="bld-window-sill" />
       <div className="bld-balcony">

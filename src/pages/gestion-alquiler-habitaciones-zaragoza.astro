@@ -12,6 +12,7 @@ const BUILDING_COLIVINGS = facadeProperties.map((p: any) => ({
   name: p.name,
   img: getStrapiMedia(p.facadeImage) || '/images/colivings-zaragoza/coliving-01.webp',
   desc: p.shortDescription || '',
+  href: `/propiedad/${p.slug}`,
 }))
 
 const SERVICES = [

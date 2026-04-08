@@ -1,0 +1,8 @@
+# Redirect old property URLs to new Strapi-powered routes
+/coliving-zaragoza /propiedad/coliving-zaragoza 301
+/coliving-zaragoza-sagasta /propiedad/coliving-zaragoza-sagasta 301
+/coliving-zaragoza-tb11 /propiedad/coliving-zaragoza-tb11 301
+/coliving-zaragoza-jjr5 /propiedad/coliving-zaragoza-jjr5 301
+/coliving-zaragoza-pc29 /propiedad/coliving-zaragoza-pc29 301
+/coliving-zaragoza-ca47 /propiedad/coliving-zaragoza-ca47 301
+/apartamento-bruc /propiedad/apartamento-bruc 301
