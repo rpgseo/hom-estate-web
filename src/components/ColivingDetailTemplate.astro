@@ -1,105 +1,247 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import PageHero from './PageHero.astro'
 import AvailabilityCalendar from './AvailabilityCalendar.jsx'
 import '../pages/pages.css'
+import './ColivingDetail.css'
 
 const { coliving, pathname } = Astro.props
 
 const GALLERY_IMAGES = coliving.gallery?.length > 0
   ? coliving.gallery
   : [
-    'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&fm=webp',
-    'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&fm=webp',
-    'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&fm=webp',
-    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&fm=webp',
+    'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&fm=webp',
+    'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&fm=webp',
+    'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&fm=webp',
+    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&fm=webp',
+    'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&fm=webp',
   ]
 
 const rooms = coliving.rooms || []
+const features = coliving.features || []
+const pricingPlans = coliving.pricingPlans || []
+const amenities = coliving.amenities || []
+const heroImage = coliving.image || GALLERY_IMAGES[0]
+const description = coliving.description || `Disfruta de una experiencia de coliving unica en ${coliving.location}. Nuestros espacios estan disenados para ofrecer comodidad, comunidad y flexibilidad. Habitaciones completamente amuebladas con todos los servicios incluidos.`
+
+const propertyTypeLabel = {
+  coliving: 'Coliving',
+  apartamento: 'Apartamento',
+  loft: 'Loft',
+}[coliving.propertyType] || 'Propiedad'
 ---
 
-<BaseLayout>
-  <PageHero
-    title={coliving.name}
-    breadcrumbs={[
-      { label: 'Colivings', href: '/colivings-zaragoza' },
-      { label: coliving.name },
-    ]}
-    image={coliving.image}
-  />
+<BaseLayout
+  title={coliving.seoTitle || `${coliving.name} | HOM.ESTATE`}
+  description={coliving.seoDescription || coliving.tagline}
+>
+  <!-- HERO SECTION -->
+  <section class="cd-hero">
+    <div class="cd-hero-container">
+      <!-- Header: name + price -->
+      <div class="cd-hero-header">
+        <div class="cd-hero-header-left">
+          <nav class="cd-breadcrumb">
+            <a href="/">Inicio</a>
+            <span>/</span>
+            <a href="/colivings-zaragoza">Colivings</a>
+            <span>/</span>
+            <span>{coliving.name}</span>
+          </nav>
+          <h1 class="cd-hero-title">{coliving.name}</h1>
+          <p class="cd-hero-location">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            {coliving.location}
+          </p>
+        </div>
+        <div class="cd-hero-header-right">
+          {coliving.priceFrom && (
+            <div class="cd-hero-price">
+              <span class="cd-price-from">Desde</span>
+              <span class="cd-price-amount">{coliving.priceFrom}&euro;</span>
+              <span class="cd-price-period">/mes</span>
+            </div>
+          )}
+          <span class="cd-badge">{propertyTypeLabel}</span>
+        </div>
+      </div>
 
-  <section class="page-section">
-    <div class="page-container">
-      <div class="detail-layout">
-        <div class="detail-main">
-          <div data-animate>
-            <h2 class="detail-tagline">{coliving.tagline}</h2>
-            <p class="detail-location">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-              {coliving.location}
-            </p>
-            <p class="detail-description">
-              Disfruta de una experiencia de coliving unica en {coliving.location}.
-              Nuestros espacios estan disenados para ofrecer comodidad, comunidad y
-              flexibilidad. Habitaciones completamente amuebladas con todos los
-              servicios incluidos para que solo tengas que preocuparte de disfrutar.
-            </p>
+      <!-- Photo grid -->
+      <div class="cd-photo-grid">
+        <div class="cd-photo-main">
+          <img src={heroImage} alt={coliving.name} loading="eager" />
+        </div>
+        {GALLERY_IMAGES.slice(0, 4).map((img, i) => (
+          <div class="cd-photo-thumb">
+            <img src={img} alt={`${coliving.name} foto ${i + 1}`} loading="lazy" />
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
 
-          <div class="detail-gallery" data-animate data-delay="1">
-            {GALLERY_IMAGES.map((img, i) => (
-              <div class="gallery-item">
-                <img src={img} alt={`${coliving.name} foto ${i + 1}`} width="600" height="400" loading="lazy" />
-              </div>
-            ))}
-          </div>
+  <!-- QUICK FACTS BAR -->
+  <section class="cd-facts">
+    <div class="cd-facts-container">
+      <div class="cd-fact">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>
+        <div>
+          <strong>{rooms.length}</strong>
+          <span>Habitaciones</span>
+        </div>
+      </div>
+      <div class="cd-fact-divider"></div>
+      <div class="cd-fact">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div>
+          <strong>{rooms.reduce((acc, r) => acc + (r.maxOccupants || 1), 0)}</strong>
+          <span>Plazas</span>
+        </div>
+      </div>
+      <div class="cd-fact-divider"></div>
+      <div class="cd-fact">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+        <div>
+          <strong>Flexible</strong>
+          <span>Estancia</span>
+        </div>
+      </div>
+      <div class="cd-fact-divider"></div>
+      <div class="cd-fact">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+        <div>
+          <strong>Todo</strong>
+          <span>Incluido</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          <div class="detail-features" data-animate data-delay="2">
-            <h3>Caracteristicas incluidas</h3>
-            <ul class="features-list">
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13a10 10 0 0 1 14 0"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><path d="M2 8.82a15 15 0 0 1 20 0"/><line x1="12" x2="12.01" y1="20" y2="20"/></svg>
-                <span>WiFi de alta velocidad</span>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3"/><path d="M2 11v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v2H6v-2a2 2 0 0 0-4 0Z"/><path d="M4 18v2"/><path d="M20 18v2"/><path d="M12 4v9"/></svg>
-                <span>Totalmente amueblado</span>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
-                <span>Suministros incluidos</span>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
-                <span>Limpieza semanal</span>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                <span>Zonas comunes</span>
-              </li>
-            </ul>
-          </div>
+  <!-- MAIN CONTENT -->
+  <section class="cd-content">
+    <div class="cd-content-container">
+      <div class="cd-main">
+        <!-- About -->
+        <div class="cd-section" data-animate>
+          <h2 class="cd-section-title">{coliving.tagline || `Sobre ${coliving.name}`}</h2>
+          <div class="cd-description" set:html={description} />
         </div>
 
-        <aside class="detail-sidebar">
-          <div class="sidebar-card" data-animate="slide-left" data-delay="3">
-            <h3>Disponibilidad</h3>
-            {rooms.length > 0 ? (
-              <AvailabilityCalendar rooms={rooms} client:visible />
-            ) : (
-              <>
-                <p>Contacta con nosotros para conocer disponibilidad y precios actualizados.</p>
-                <a href="tel:+34636155847" class="btn-primary btn-full">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                  Llamar ahora
-                </a>
-                <a href="mailto:info@hom.estate" class="btn-outline btn-full">
-                  Enviar email
-                </a>
-              </>
-            )}
+        <!-- Amenities -->
+        {features.length > 0 && (
+          <div class="cd-section" data-animate>
+            <h2 class="cd-section-title">Que incluye</h2>
+            <div class="cd-amenities-grid">
+              {features.map((f) => (
+                <div class="cd-amenity">
+                  <div class="cd-amenity-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                  </div>
+                  <span>{f.label}</span>
+                </div>
+              ))}
+            </div>
           </div>
-        </aside>
+        )}
+
+        <!-- Rooms -->
+        {rooms.length > 0 && (
+          <div class="cd-section" data-animate>
+            <h2 class="cd-section-title">Habitaciones</h2>
+            <div class="cd-rooms-list">
+              {rooms.map((room) => (
+                <div class="cd-room-card">
+                  <div class="cd-room-info">
+                    <h3>{room.name}</h3>
+                    <div class="cd-room-specs">
+                      <span class="cd-room-type">{room.roomType}</span>
+                      {room.size && <span>{room.size} m&sup2;</span>}
+                      {room.maxOccupants && <span>Max. {room.maxOccupants} {room.maxOccupants > 1 ? 'personas' : 'persona'}</span>}
+                    </div>
+                  </div>
+                  <div class="cd-room-price">
+                    <strong>{room.priceMonthly}&euro;</strong>
+                    <span>/mes</span>
+                  </div>
+                  <span class={`cd-room-status cd-room-status--${room.status}`}>
+                    {room.status === 'available' ? 'Disponible' : room.status === 'occupied' ? 'Ocupado' : room.status === 'reserved' ? 'Reservado' : 'Mantenimiento'}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Pricing Plans -->
+        {pricingPlans.length > 0 && (
+          <div class="cd-section" data-animate>
+            <h2 class="cd-section-title">Planes de precio</h2>
+            <div class="cd-pricing-grid">
+              {pricingPlans.map((plan, i) => (
+                <div class={`cd-pricing-card ${i === 1 ? 'cd-pricing-card--featured' : ''}`}>
+                  {i === 1 && <span class="cd-pricing-badge">Popular</span>}
+                  <h3>{plan.name}</h3>
+                  <div class="cd-pricing-amount">
+                    <strong>{plan.price}&euro;</strong>
+                    <span>/mes</span>
+                  </div>
+                  {plan.tagline && <p class="cd-pricing-tagline">{plan.tagline}</p>}
+                  {plan.minMonths && <p class="cd-pricing-min">Min. {plan.minMonths} {plan.minMonths === 1 ? 'mes' : 'meses'}</p>}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside class="cd-sidebar">
+        <div class="cd-sidebar-card cd-sidebar-card--sticky" data-animate="slide-left">
+          <h3>Disponibilidad</h3>
+          {rooms.length > 0 ? (
+            <AvailabilityCalendar rooms={rooms} client:visible />
+          ) : (
+            <>
+              <p>Contacta con nosotros para conocer disponibilidad y precios.</p>
+              <a href="tel:+34636155847" class="cd-btn cd-btn--primary cd-btn--full">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                Llamar ahora
+              </a>
+              <a href="mailto:info@hom.estate" class="cd-btn cd-btn--outline cd-btn--full">
+                Enviar email
+              </a>
+            </>
+          )}
+        </div>
+
+        <!-- Contact card -->
+        <div class="cd-sidebar-card cd-sidebar-card--dark" data-animate="slide-left" data-delay="1">
+          <h3>Interesado?</h3>
+          <p>Contacta con nosotros para agendar una visita o resolver tus dudas.</p>
+          <a href="tel:+34636155847" class="cd-btn cd-btn--yellow cd-btn--full">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +34 636 155 847
+          </a>
+          <a href="mailto:info@hom.estate" class="cd-btn cd-btn--outline-light cd-btn--full">
+            info@hom.estate
+          </a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- CTA BOTTOM -->
+  <section class="cd-cta">
+    <div class="cd-cta-container" data-animate>
+      <h2>Te interesa {coliving.name}?</h2>
+      <p>Contacta con nosotros para conocer disponibilidad y agendar una visita.</p>
+      <div class="cd-cta-buttons">
+        <a href="tel:+34636155847" class="cd-btn cd-btn--yellow">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Llamar ahora
+        </a>
+        <a href="mailto:info@hom.estate" class="cd-btn cd-btn--outline">
+          Enviar email
+        </a>
       </div>
     </div>
   </section>
