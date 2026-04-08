@@ -43,7 +43,7 @@ const propertyTypeLabel = {
           <nav class="cd-breadcrumb">
             <a href="/">Inicio</a>
             <span>&gt;</span>
-            <a href="/colivings-zaragoza">Colivings</a>
+            <a href={`/gestion-alquiler-habitaciones-${coliving.city?.slug || 'zaragoza'}`}>{coliving.city?.name || 'Zaragoza'}</a>
             <span>&gt;</span>
             <span>{coliving.name}</span>
           </nav>
