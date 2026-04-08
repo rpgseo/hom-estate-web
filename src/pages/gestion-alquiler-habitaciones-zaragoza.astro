@@ -2,10 +2,17 @@
 import BaseLayout from '../layouts/BaseLayout.astro'
 import BuildingFacade from '../components/BuildingFacade.jsx'
 import { SEO_CONFIG } from '../data/seo-config.js'
-import { BUILDING_COLIVINGS } from '../data/colivings.js'
+import { getPropertiesForFacade, getStrapiMedia } from '../lib/strapi'
 import '../pages/GestionZaragoza.css'
 
 const seo = SEO_CONFIG['/gestion-alquiler-habitaciones-zaragoza']
+
+const { data: facadeProperties } = await getPropertiesForFacade()
+const BUILDING_COLIVINGS = facadeProperties.map((p: any) => ({
+  name: p.name,
+  img: getStrapiMedia(p.facadeImage) || '/images/colivings-zaragoza/coliving-01.webp',
+  desc: p.shortDescription || '',
+}))
 
 const SERVICES = [
   { icon: '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>', title: 'Gestión integral', desc: 'Desde la búsqueda de inquilinos hasta el mantenimiento, nos encargamos de todo el proceso.' },

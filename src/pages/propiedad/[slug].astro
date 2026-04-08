@@ -1,0 +1,41 @@
+---
+import ColivingDetailTemplate from '../../components/ColivingDetailTemplate.astro'
+import { getProperties, getPropertyBySlug, getStrapiMedia } from '../../lib/strapi'
+
+export async function getStaticPaths() {
+  const { data: properties } = await getProperties()
+  return properties.map((p: any) => ({
+    params: { slug: p.slug },
+  }))
+}
+
+const { slug } = Astro.params
+const { data: results } = await getPropertyBySlug(slug!)
+const property = results[0]
+
+if (!property) {
+  return Astro.redirect('/404')
+}
+
+// Map Strapi data to the shape ColivingDetailTemplate expects
+const coliving = {
+  name: property.name,
+  tagline: property.tagline || '',
+  location: property.location || '',
+  image: getStrapiMedia(property.heroImage) || '',
+  gallery: property.gallery?.map((img: any) => getStrapiMedia(img)) || [],
+  features: property.features || [],
+  amenities: property.amenities || [],
+  pricingPlans: property.pricingPlans || [],
+  rooms: property.rooms || [],
+  description: property.description || '',
+  shortDescription: property.shortDescription || '',
+  propertyType: property.propertyType || 'coliving',
+  priceFrom: property.priceFrom,
+  city: property.city,
+  seoTitle: property.seoTitle,
+  seoDescription: property.seoDescription,
+  documentId: property.documentId,
+}
+---
+<ColivingDetailTemplate coliving={coliving} pathname={`/propiedad/${slug}`} />

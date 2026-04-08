@@ -2,8 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PageHero from '../components/PageHero.astro'
 import PropertyCard from '../components/PropertyCard.astro'
-import { COLIVINGS_LIST } from '../data/colivings.js'
+import { getPropertiesByCity, getStrapiMedia } from '../lib/strapi'
 import './pages.css'
+
+const { data: properties } = await getPropertiesByCity('zaragoza')
 ---
 
 <BaseLayout>
@@ -23,14 +25,14 @@ import './pages.css'
       </div>
 
       <div class="property-grid">
-        {COLIVINGS_LIST.map((coliving) => (
+        {properties.map((property: any) => (
           <PropertyCard
-            name={coliving.name}
-            location={coliving.location}
-            price={coliving.price}
-            href={coliving.href}
-            image={coliving.image}
-            features={coliving.features}
+            name={property.name}
+            location={property.location}
+            price={property.priceFrom ? `Desde ${property.priceFrom} EUR/mes` : ''}
+            href={`/propiedad/${property.slug}`}
+            image={getStrapiMedia(property.heroImage) || ''}
+            features={property.features?.map((f: any) => ({ icon: f.icon, label: f.label })) || []}
           />
         ))}
       </div>
