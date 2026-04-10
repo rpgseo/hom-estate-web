@@ -558,6 +558,56 @@
   color: var(--color-text, #374151);
 }
 
+/* SIDEBAR ROOMS */
+.cd-sidebar-rooms {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cd-sidebar-room {
+  padding: 12px 14px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
+
+.cd-sidebar-room-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.cd-sidebar-room-top strong {
+  font-size: 0.88rem;
+  color: var(--color-navy, #1a1a2e);
+}
+
+.cd-sidebar-room-top .cd-room-status {
+  font-size: 0.65rem;
+  padding: 3px 10px;
+}
+
+.cd-sidebar-room-bottom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--color-text-light, #6b7280);
+}
+
+.cd-sidebar-room-bottom .cd-room-type {
+  font-size: 0.72rem;
+  padding: 1px 8px;
+}
+
+.cd-sidebar-room-price {
+  margin-left: auto;
+  color: var(--color-navy, #1a1a2e);
+  font-size: 0.85rem;
+}
+
 /* BUTTONS */
 .cd-btn {
   display: inline-flex;

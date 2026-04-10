@@ -206,40 +206,35 @@ const propertyTypeLabel = {
               <span>{rooms.reduce((acc, r) => acc + (r.maxOccupants || 1), 0)}</span>
             </div>
           </div>
+
+          <!-- Rooms list in sidebar -->
+          {rooms.length > 0 && (
+            <>
+              <h4 class="cd-sidebar-section-title">Habitaciones</h4>
+              <div class="cd-sidebar-rooms">
+                {rooms.map((room) => (
+                  <div class="cd-sidebar-room">
+                    <div class="cd-sidebar-room-top">
+                      <strong>{room.name}</strong>
+                      <span class={`cd-room-status cd-room-status--${room.status}`}>
+                        {room.status === 'available' ? 'Disponible' : room.status === 'occupied' ? 'Ocupado' : room.status === 'reserved' ? 'Reservado' : 'Mantenimiento'}
+                      </span>
+                    </div>
+                    <div class="cd-sidebar-room-bottom">
+                      <span class="cd-room-type">{room.roomType}</span>
+                      {room.size && <span>{room.size} m²</span>}
+                      <strong class="cd-sidebar-room-price">{room.priceMonthly}&euro;/mes</strong>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </aside>
     </div>
   </section>
 
-  <!-- ROOMS - Full width below sidebar -->
-  {rooms.length > 0 && (
-    <section class="cd-fullwidth-section">
-      <div class="cd-fullwidth-container">
-        <h2 class="cd-section-title">Habitaciones</h2>
-        <div class="cd-rooms-list">
-          {rooms.map((room) => (
-            <div class="cd-room-card">
-              <div class="cd-room-info">
-                <h3>{room.name}</h3>
-                <div class="cd-room-specs">
-                  <span class="cd-room-type">{room.roomType}</span>
-                  {room.size && <span>{room.size} m&sup2;</span>}
-                  {room.maxOccupants && <span>Max. {room.maxOccupants} {room.maxOccupants > 1 ? 'personas' : 'persona'}</span>}
-                </div>
-              </div>
-              <div class="cd-room-price">
-                <strong>{room.priceMonthly}&euro;</strong>
-                <span>/mes</span>
-              </div>
-              <span class={`cd-room-status cd-room-status--${room.status}`}>
-                {room.status === 'available' ? 'Disponible' : room.status === 'occupied' ? 'Ocupado' : room.status === 'reserved' ? 'Reservado' : 'Mantenimiento'}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
 
   <!-- PRICING PLANS - Full width -->
   {pricingPlans.length > 0 && (
