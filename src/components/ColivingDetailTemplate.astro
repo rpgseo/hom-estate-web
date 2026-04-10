@@ -120,53 +120,6 @@ const propertyTypeLabel = {
           <div class="cd-description" set:html={description} />
         </div>
 
-        <!-- Rooms -->
-        {rooms.length > 0 && (
-          <div class="cd-section" data-animate>
-            <h2 class="cd-section-title">Habitaciones</h2>
-            <div class="cd-rooms-list">
-              {rooms.map((room) => (
-                <div class="cd-room-card">
-                  <div class="cd-room-info">
-                    <h3>{room.name}</h3>
-                    <div class="cd-room-specs">
-                      <span class="cd-room-type">{room.roomType}</span>
-                      {room.size && <span>{room.size} m&sup2;</span>}
-                      {room.maxOccupants && <span>Max. {room.maxOccupants} {room.maxOccupants > 1 ? 'personas' : 'persona'}</span>}
-                    </div>
-                  </div>
-                  <div class="cd-room-price">
-                    <strong>{room.priceMonthly}&euro;</strong>
-                    <span>/mes</span>
-                  </div>
-                  <span class={`cd-room-status cd-room-status--${room.status}`}>
-                    {room.status === 'available' ? 'Disponible' : room.status === 'occupied' ? 'Ocupado' : room.status === 'reserved' ? 'Reservado' : 'Mantenimiento'}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        <!-- Pricing Plans -->
-        {pricingPlans.length > 0 && (
-          <div class="cd-section" data-animate>
-            <h2 class="cd-section-title">Planes y precios</h2>
-            <div class="cd-pricing-grid">
-              {pricingPlans.map((plan, i) => (
-                <div class={`cd-pricing-card ${i === 1 ? 'cd-pricing-card--featured' : ''}`}>
-                  {i === 1 && <span class="cd-pricing-badge">Popular</span>}
-                  <p class="cd-pricing-label">Todo incluido! desde:</p>
-                  <div class="cd-pricing-amount">
-                    <strong>{plan.price}&euro;</strong>
-                  </div>
-                  <h3>{plan.name}</h3>
-                  {plan.tagline && <p class="cd-pricing-tagline">{plan.tagline}</p>}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
 
       <!-- SIDEBAR (like haaus.eu reference) -->
@@ -257,6 +210,58 @@ const propertyTypeLabel = {
       </aside>
     </div>
   </section>
+
+  <!-- ROOMS - Full width below sidebar -->
+  {rooms.length > 0 && (
+    <section class="cd-fullwidth-section">
+      <div class="cd-fullwidth-container">
+        <h2 class="cd-section-title">Habitaciones</h2>
+        <div class="cd-rooms-list">
+          {rooms.map((room) => (
+            <div class="cd-room-card">
+              <div class="cd-room-info">
+                <h3>{room.name}</h3>
+                <div class="cd-room-specs">
+                  <span class="cd-room-type">{room.roomType}</span>
+                  {room.size && <span>{room.size} m&sup2;</span>}
+                  {room.maxOccupants && <span>Max. {room.maxOccupants} {room.maxOccupants > 1 ? 'personas' : 'persona'}</span>}
+                </div>
+              </div>
+              <div class="cd-room-price">
+                <strong>{room.priceMonthly}&euro;</strong>
+                <span>/mes</span>
+              </div>
+              <span class={`cd-room-status cd-room-status--${room.status}`}>
+                {room.status === 'available' ? 'Disponible' : room.status === 'occupied' ? 'Ocupado' : room.status === 'reserved' ? 'Reservado' : 'Mantenimiento'}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- PRICING PLANS - Full width -->
+  {pricingPlans.length > 0 && (
+    <section class="cd-fullwidth-section cd-fullwidth-section--light">
+      <div class="cd-fullwidth-container">
+        <h2 class="cd-section-title">Planes y precios</h2>
+        <div class="cd-pricing-grid">
+          {pricingPlans.map((plan, i) => (
+            <div class={`cd-pricing-card ${i === 1 ? 'cd-pricing-card--featured' : ''}`}>
+              {i === 1 && <span class="cd-pricing-badge">Popular</span>}
+              <p class="cd-pricing-label">Todo incluido! desde:</p>
+              <div class="cd-pricing-amount">
+                <strong>{plan.price}&euro;</strong>
+              </div>
+              <h3>{plan.name}</h3>
+              {plan.tagline && <p class="cd-pricing-tagline">{plan.tagline}</p>}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 
   <!-- CTA BOTTOM -->
   <section class="cd-cta">

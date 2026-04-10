@@ -632,6 +632,21 @@
   margin-top: 10px;
 }
 
+/* FULL WIDTH SECTIONS (Rooms, Pricing - below sidebar) */
+.cd-fullwidth-section {
+  padding: 48px 0;
+}
+
+.cd-fullwidth-section--light {
+  background: var(--color-light, #f7f7f5);
+}
+
+.cd-fullwidth-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
 /* CTA BOTTOM */
 .cd-cta {
   background: var(--color-navy, #1a1a2e);
