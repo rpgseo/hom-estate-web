@@ -236,6 +236,26 @@
   margin-bottom: 4px;
 }
 
+/* MAP */
+.cd-map-location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.92rem;
+  color: var(--color-text-light, #6b7280);
+  margin-bottom: 16px;
+}
+
+.cd-map-container {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+.cd-map-container iframe {
+  display: block;
+}
+
 /* ROOMS LIST */
 .cd-rooms-list {
   display: flex;
