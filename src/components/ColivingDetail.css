@@ -170,6 +170,37 @@
   letter-spacing: -0.01em;
 }
 
+.cd-quick-specs {
+  font-size: 0.95rem;
+  color: var(--color-text, #374151);
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+.cd-spec-dot {
+  margin: 0 8px;
+  color: var(--color-text-lighter, #9ca3af);
+}
+
+.cd-inline-price {
+  font-size: 1.1rem;
+  color: var(--color-navy, #1a1a2e);
+  margin-bottom: 4px;
+}
+
+.cd-inline-price strong {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #16a34a;
+}
+
+.cd-all-included {
+  font-size: 0.95rem;
+  color: #16a34a;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
 .cd-description {
   font-size: 1rem;
   color: var(--color-text, #374151);
@@ -180,36 +211,29 @@
   margin-bottom: 16px;
 }
 
-/* AMENITIES GRID */
-.cd-amenities-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+.cd-description h3,
+.cd-description h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-navy, #1a1a2e);
+  margin: 24px 0 8px;
 }
 
-.cd-amenity {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 16px;
-  background: var(--color-light, #f7f7f5);
-  border-radius: 10px;
-  transition: background 0.2s;
+.cd-description ul,
+.cd-description ol {
+  margin: 12px 0;
+  padding-left: 20px;
 }
 
-.cd-amenity:hover {
-  background: #eef0ec;
+.cd-description li {
+  margin-bottom: 6px;
+  line-height: 1.6;
 }
 
-.cd-amenity-icon {
-  flex-shrink: 0;
-  color: #16a34a;
-}
-
-.cd-amenity span {
-  font-size: 0.92rem;
-  color: var(--color-text, #374151);
-  font-weight: 500;
+.cd-pricing-label {
+  font-size: 0.82rem;
+  color: var(--color-text-light, #6b7280);
+  margin-bottom: 4px;
 }
 
 /* ROOMS LIST */

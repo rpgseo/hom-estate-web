@@ -102,28 +102,27 @@ const propertyTypeLabel = {
   <section class="cd-content">
     <div class="cd-content-container">
       <div class="cd-main">
-        <!-- About -->
+        <!-- Tagline + Quick specs -->
         <div class="cd-section" data-animate>
-          <h2 class="cd-section-title">{coliving.tagline || `Sobre ${coliving.name}`}</h2>
-          <div class="cd-description" set:html={description} />
+          <h2 class="cd-section-title">{coliving.tagline || coliving.name}</h2>
+          {features.length > 0 && (
+            <p class="cd-quick-specs">
+              {features.map((f, i) => (
+                <>{i > 0 && <span class="cd-spec-dot">&bull;</span>}{f.label}</>
+              ))}
+            </p>
+          )}
+          {coliving.priceFrom && (
+            <p class="cd-inline-price">Desde <strong>{coliving.priceFrom}&euro;</strong></p>
+          )}
+          <p class="cd-all-included">Todos los servicios incluidos!</p>
         </div>
 
-        <!-- Amenities -->
-        {features.length > 0 && (
-          <div class="cd-section" data-animate>
-            <h2 class="cd-section-title">Que incluye</h2>
-            <div class="cd-amenities-grid">
-              {features.map((f) => (
-                <div class="cd-amenity">
-                  <div class="cd-amenity-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
-                  </div>
-                  <span>{f.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+        <!-- Description (rich text from Strapi) -->
+        <div class="cd-section" data-animate>
+          <h2 class="cd-section-title">Informacion del {propertyTypeLabel}</h2>
+          <div class="cd-description" set:html={description} />
+        </div>
 
         <!-- Rooms -->
         {rooms.length > 0 && (
@@ -156,18 +155,17 @@ const propertyTypeLabel = {
         <!-- Pricing Plans -->
         {pricingPlans.length > 0 && (
           <div class="cd-section" data-animate>
-            <h2 class="cd-section-title">Planes de precio</h2>
+            <h2 class="cd-section-title">Planes y precios</h2>
             <div class="cd-pricing-grid">
               {pricingPlans.map((plan, i) => (
                 <div class={`cd-pricing-card ${i === 1 ? 'cd-pricing-card--featured' : ''}`}>
                   {i === 1 && <span class="cd-pricing-badge">Popular</span>}
-                  <h3>{plan.name}</h3>
+                  <p class="cd-pricing-label">Todo incluido! desde:</p>
                   <div class="cd-pricing-amount">
                     <strong>{plan.price}&euro;</strong>
-                    <span>/mes</span>
                   </div>
+                  <h3>{plan.name}</h3>
                   {plan.tagline && <p class="cd-pricing-tagline">{plan.tagline}</p>}
-                  {plan.minMonths && <p class="cd-pricing-min">Min. {plan.minMonths} {plan.minMonths === 1 ? 'mes' : 'meses'}</p>}
                 </div>
               ))}
             </div>
