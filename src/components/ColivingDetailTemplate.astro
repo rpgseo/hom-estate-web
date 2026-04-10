@@ -16,11 +16,14 @@ const GALLERY_IMAGES = coliving.gallery?.length > 0
     'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&fm=webp',
   ]
 
+import { marked } from 'marked'
+
 const rooms = coliving.rooms || []
 const features = coliving.features || []
 const pricingPlans = coliving.pricingPlans || []
 const heroImage = coliving.image || GALLERY_IMAGES[0]
-const description = coliving.description || `Disfruta de una experiencia de coliving unica en ${coliving.location}. Nuestros espacios estan disenados para ofrecer comodidad, comunidad y flexibilidad. Habitaciones completamente amuebladas con todos los servicios incluidos.`
+const rawDescription = coliving.description || `Disfruta de una experiencia de coliving unica en ${coliving.location}. Nuestros espacios estan disenados para ofrecer comodidad, comunidad y flexibilidad. Habitaciones completamente amuebladas con todos los servicios incluidos.`
+const description = marked.parse(rawDescription)
 
 const propertyTypeLabel = {
   coliving: 'Coliving',
