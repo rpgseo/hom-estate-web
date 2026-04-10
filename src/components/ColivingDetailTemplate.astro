@@ -1,11 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import AvailabilityCalendar from './AvailabilityCalendar.jsx'
 import PhotoLightbox from './PhotoLightbox.jsx'
 import '../pages/pages.css'
 import './ColivingDetail.css'
 
-const { coliving, pathname } = Astro.props
+const { coliving } = Astro.props
 
 const GALLERY_IMAGES = coliving.gallery?.length > 0
   ? coliving.gallery
@@ -20,7 +19,6 @@ const GALLERY_IMAGES = coliving.gallery?.length > 0
 const rooms = coliving.rooms || []
 const features = coliving.features || []
 const pricingPlans = coliving.pricingPlans || []
-const amenities = coliving.amenities || []
 const heroImage = coliving.image || GALLERY_IMAGES[0]
 const description = coliving.description || `Disfruta de una experiencia de coliving unica en ${coliving.location}. Nuestros espacios estan disenados para ofrecer comodidad, comunidad y flexibilidad. Habitaciones completamente amuebladas con todos los servicios incluidos.`
 
@@ -112,15 +110,10 @@ const propertyTypeLabel = {
               ))}
             </p>
           )}
-          {coliving.priceFrom && (
-            <p class="cd-inline-price">Desde <strong>{coliving.priceFrom}&euro;</strong></p>
-          )}
-          <p class="cd-all-included">Todos los servicios incluidos!</p>
         </div>
 
-        <!-- Description (rich text from Strapi) -->
-        <div class="cd-section" data-animate>
-          <h2 class="cd-section-title">Informacion del {propertyTypeLabel}</h2>
+        <!-- Full description from Strapi (rich text with all property info) -->
+        <div class="cd-section cd-section--description" data-animate>
           <div class="cd-description" set:html={description} />
         </div>
 
