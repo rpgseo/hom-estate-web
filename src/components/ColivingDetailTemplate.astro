@@ -23,7 +23,19 @@ const features = coliving.features || []
 const pricingPlans = coliving.pricingPlans || []
 const heroImage = coliving.image || GALLERY_IMAGES[0]
 const rawDescription = coliving.description || `Disfruta de una experiencia de coliving unica en ${coliving.location}. Nuestros espacios estan disenados para ofrecer comodidad, comunidad y flexibilidad. Habitaciones completamente amuebladas con todos los servicios incluidos.`
-const description = marked.parse(rawDescription)
+
+// Strip sections that are shown elsewhere (sidebar features, vecindario accordion)
+// Extract vecindario section for the accordion
+const vecindarioMatch = rawDescription.match(/#+\s*Vecindario\s*\n([\s\S]*?)(?=\n#+\s|$)/i)
+const vecindarioHtml = vecindarioMatch ? marked.parse(vecindarioMatch[1].trim()) : ''
+
+// Strip sections that are shown elsewhere (sidebar features, vecindario accordion)
+const strippedDescription = rawDescription
+  .replace(/#+\s*Informacion del Coliving y comodidades[\s\S]*?(?=\n#+\s|\n\n[A-Z])/i, '')
+  .replace(/#+\s*Vecindario[\s\S]*?(?=\n#+\s|$)/i, '')
+  .replace(/\n{3,}/g, '\n\n')
+  .trim()
+const description = marked.parse(strippedDescription)
 
 const propertyTypeLabel = {
   coliving: 'Coliving',
@@ -62,40 +74,25 @@ const propertyTypeLabel = {
     </div>
   </section>
 
-  <!-- QUICK FACTS BAR -->
-  <section class="cd-facts">
-    <div class="cd-facts-container">
-      <div class="cd-fact">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>
-        <div>
-          <strong>{rooms.length}</strong>
-          <span>Habitaciones</span>
-        </div>
-      </div>
-      <div class="cd-fact-divider"></div>
-      <div class="cd-fact">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        <div>
-          <strong>{rooms.reduce((acc, r) => acc + (r.maxOccupants || 1), 0)}</strong>
-          <span>Plazas</span>
-        </div>
-      </div>
-      <div class="cd-fact-divider"></div>
-      <div class="cd-fact">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-        <div>
-          <strong>Flexible</strong>
-          <span>Estancia</span>
-        </div>
-      </div>
-      <div class="cd-fact-divider"></div>
-      <div class="cd-fact">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
-        <div>
-          <strong>Todo</strong>
-          <span>Incluido</span>
-        </div>
-      </div>
+  <!-- QUICK TAGS BAR (idealista style) -->
+  <section class="cd-tags">
+    <div class="cd-tags-container">
+      <button class="cd-tag" id="cd-tag-fotos" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+        <span class="cd-tag-label">{GALLERY_IMAGES.length} fotos</span>
+      </button>
+      <button class="cd-tag" id="cd-tag-plano" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3v18"/><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M21 9H3"/><path d="M21 15H3"/></svg>
+        <span class="cd-tag-label">Plano</span>
+      </button>
+      <button class="cd-tag" id="cd-tag-video" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.934a.5.5 0 0 0-.777-.416L16 11"/><rect width="14" height="12" x="2" y="6" rx="2"/></svg>
+        <span class="cd-tag-label">Video</span>
+      </button>
+      <a class="cd-tag" href="#mapa">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span class="cd-tag-label">Mapa</span>
+      </a>
     </div>
   </section>
 
@@ -121,8 +118,8 @@ const propertyTypeLabel = {
         </div>
 
         <!-- Map -->
-        <div class="cd-section" data-animate>
-          <h2 class="cd-section-title">Vecindario</h2>
+        <div class="cd-section" id="mapa" data-animate>
+          <h2 class="cd-section-title">Ubicacion</h2>
           <p class="cd-map-location">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
             {coliving.location}
@@ -139,15 +136,38 @@ const propertyTypeLabel = {
           </div>
         </div>
 
+        <!-- Vecindario accordion -->
+        {vecindarioHtml && (
+          <div class="cd-section" data-animate>
+            <details class="cd-accordion">
+              <summary class="cd-accordion-trigger">
+                <h2 class="cd-section-title">Vecindario</h2>
+                <svg class="cd-accordion-chevron" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <div class="cd-accordion-body cd-description" set:html={vecindarioHtml} />
+            </details>
+          </div>
+        )}
+
       </div>
 
-      <!-- SIDEBAR (like haaus.eu reference) -->
+      <!-- SIDEBAR -->
       <aside class="cd-sidebar">
         <div class="cd-sidebar-card cd-sidebar-card--sticky" data-animate="slide-left">
+          <!-- Property characteristics -->
+          {features.length > 0 && (
+            <ul class="cd-sidebar-features">
+              {features.map((f) => (
+                <li>{f.label}</li>
+              ))}
+            </ul>
+          )}
+
           <!-- Price + Availability header -->
           {coliving.priceFrom && (
             <div class="cd-sidebar-price-row">
               <div class="cd-sidebar-price">
+                <span class="cd-sidebar-price-desde">Desde</span>
                 <strong>{coliving.priceFrom}&euro;</strong>
                 <span>/mes</span>
               </div>
@@ -214,18 +234,6 @@ const propertyTypeLabel = {
             </div>
           </div>
 
-          <!-- Property specs -->
-          <div class="cd-sidebar-specs">
-            <div class="cd-sidebar-spec-row">
-              <strong>Habitaciones</strong>
-              <span>{rooms.length}</span>
-            </div>
-            <div class="cd-sidebar-spec-row">
-              <strong>Plazas</strong>
-              <span>{rooms.reduce((acc, r) => acc + (r.maxOccupants || 1), 0)}</span>
-            </div>
-          </div>
-
           <!-- Rooms list in sidebar -->
           {rooms.length > 0 && (
             <>
@@ -239,11 +247,23 @@ const propertyTypeLabel = {
                         {room.status === 'available' ? 'Disponible' : room.status === 'occupied' ? 'Ocupado' : room.status === 'reserved' ? 'Reservado' : 'Mantenimiento'}
                       </span>
                     </div>
-                    <div class="cd-sidebar-room-bottom">
+                    <div class="cd-sidebar-room-meta">
                       <span class="cd-room-type">{room.roomType}</span>
-                      {room.size && <span>{room.size} m²</span>}
-                      <strong class="cd-sidebar-room-price">{room.priceMonthly}&euro;/mes</strong>
                     </div>
+                    {pricingPlans.length > 0 && (
+                      <div class="cd-room-plans">
+                        <p class="cd-room-plans-label">Todo incluido! desde:</p>
+                        <div class="cd-room-plans-grid">
+                          {pricingPlans.map((plan, i) => (
+                            <div class={`cd-room-plan ${i === pricingPlans.length - 1 ? 'cd-room-plan--best' : ''}`}>
+                              <strong class="cd-room-plan-price">{plan.price}&euro;</strong>
+                              <span class="cd-room-plan-name">{plan.name}</span>
+                              {plan.tagline && <span class="cd-room-plan-save">{plan.tagline}</span>}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
@@ -254,28 +274,6 @@ const propertyTypeLabel = {
     </div>
   </section>
 
-
-  <!-- PRICING PLANS - Full width -->
-  {pricingPlans.length > 0 && (
-    <section class="cd-fullwidth-section cd-fullwidth-section--light">
-      <div class="cd-fullwidth-container">
-        <h2 class="cd-section-title">Planes y precios</h2>
-        <div class="cd-pricing-grid">
-          {pricingPlans.map((plan, i) => (
-            <div class={`cd-pricing-card ${i === 1 ? 'cd-pricing-card--featured' : ''}`}>
-              {i === 1 && <span class="cd-pricing-badge">Popular</span>}
-              <p class="cd-pricing-label">Todo incluido! desde:</p>
-              <div class="cd-pricing-amount">
-                <strong>{plan.price}&euro;</strong>
-              </div>
-              <h3>{plan.name}</h3>
-              {plan.tagline && <p class="cd-pricing-tagline">{plan.tagline}</p>}
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
 
   <!-- CTA BOTTOM -->
   <section class="cd-cta">
@@ -293,4 +291,21 @@ const propertyTypeLabel = {
       </div>
     </div>
   </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Fotos tag → open lightbox at first image
+      document.getElementById('cd-tag-fotos')?.addEventListener('click', () => {
+        window.dispatchEvent(new CustomEvent('open-lightbox', { detail: { index: 0 } }))
+      })
+      // Plano tag → open lightbox at first image (placeholder until floor plan images are separate)
+      document.getElementById('cd-tag-plano')?.addEventListener('click', () => {
+        window.dispatchEvent(new CustomEvent('open-lightbox', { detail: { index: 0 } }))
+      })
+      // Video tag → open lightbox at first image (placeholder until video support)
+      document.getElementById('cd-tag-video')?.addEventListener('click', () => {
+        window.dispatchEvent(new CustomEvent('open-lightbox', { detail: { index: 0 } }))
+      })
+    })
+  </script>
 </BaseLayout>

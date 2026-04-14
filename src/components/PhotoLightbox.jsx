@@ -22,6 +22,16 @@ export default function PhotoLightbox({ images = [], altPrefix = 'Foto' }) {
   const prev = useCallback(() => setCurrent((c) => (c - 1 + images.length) % images.length), [images.length])
   const next = useCallback(() => setCurrent((c) => (c + 1) % images.length), [images.length])
 
+  // Listen for external open-lightbox events (from tag buttons)
+  useEffect(() => {
+    const handler = (e) => {
+      const idx = e.detail?.index ?? 0
+      openAt(idx)
+    }
+    window.addEventListener('open-lightbox', handler)
+    return () => window.removeEventListener('open-lightbox', handler)
+  }, [openAt])
+
   useEffect(() => {
     if (!open) return
     const handler = (e) => {
