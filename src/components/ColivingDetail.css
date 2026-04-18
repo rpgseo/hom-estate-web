@@ -867,6 +867,17 @@
 @media (max-width: 1024px) {
   .cd-content-container {
     grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* On mobile/tablet: sidebar (price card) appears BEFORE main content */
+  .cd-sidebar {
+    order: -1;
+  }
+
+  .cd-main {
+    order: 1;
   }
 
   .cd-sidebar-card--sticky {

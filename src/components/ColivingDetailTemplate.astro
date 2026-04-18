@@ -21,6 +21,10 @@ import { marked } from 'marked'
 const rooms = coliving.rooms || []
 const features = coliving.features || []
 const pricingPlans = coliving.pricingPlans || []
+// Split features: first 4 are structural specs (Salon, Dormitorios, Banos, Garaje)
+// shown as quick-specs; the rest are amenity-style, shown only in sidebar
+const structuralFeatures = features.slice(0, 4)
+const amenityFeatures = features.slice(4)
 const heroImage = coliving.image || GALLERY_IMAGES[0]
 const rawDescription = coliving.description || `Disfruta de una experiencia de coliving unica en ${coliving.location}. Nuestros espacios estan disenados para ofrecer comodidad, comunidad y flexibilidad. Habitaciones completamente amuebladas con todos los servicios incluidos.`
 
@@ -103,9 +107,9 @@ const propertyTypeLabel = {
         <!-- Tagline + Quick specs -->
         <div class="cd-section" data-animate>
           <h2 class="cd-section-title">{coliving.tagline || coliving.name}</h2>
-          {features.length > 0 && (
+          {structuralFeatures.length > 0 && (
             <p class="cd-quick-specs">
-              {features.map((f, i) => (
+              {structuralFeatures.map((f, i) => (
                 <>{i > 0 && <span class="cd-spec-dot">&bull;</span>}{f.label}</>
               ))}
             </p>
@@ -154,10 +158,10 @@ const propertyTypeLabel = {
       <!-- SIDEBAR -->
       <aside class="cd-sidebar">
         <div class="cd-sidebar-card cd-sidebar-card--sticky" data-animate="slide-left">
-          <!-- Property characteristics -->
-          {features.length > 0 && (
+          <!-- Structural specs (compact) -->
+          {structuralFeatures.length > 0 && (
             <ul class="cd-sidebar-features">
-              {features.map((f) => (
+              {structuralFeatures.map((f) => (
                 <li>{f.label}</li>
               ))}
             </ul>
