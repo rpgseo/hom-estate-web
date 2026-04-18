@@ -18,6 +18,12 @@ if (!property) {
 }
 
 // Map Strapi data to the shape ColivingDetailTemplate expects
+// Floor plan: prefer Strapi field, fall back to a name-based convention
+const floorPlanByName: Record<string, string> = {
+  'Coliving PSA31': '/images/psa31/plano-SGA31.png',
+}
+const floorPlan = getStrapiMedia(property.floorPlan) || floorPlanByName[property.name] || ''
+
 const coliving = {
   name: property.name,
   tagline: property.tagline || '',
@@ -36,6 +42,7 @@ const coliving = {
   seoTitle: property.seoTitle,
   seoDescription: property.seoDescription,
   documentId: property.documentId,
+  floorPlan,
 }
 ---
 <ColivingDetailTemplate coliving={coliving} pathname={`/propiedad/${slug}`} />
