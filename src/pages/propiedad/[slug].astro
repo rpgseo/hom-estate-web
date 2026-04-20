@@ -21,6 +21,7 @@ if (!property) {
 // Floor plan: prefer Strapi field, fall back to a name-based convention
 const floorPlanByName: Record<string, string> = {
   'Coliving PSA31': '/images/psa31/plano-SGA31.png',
+  'Coliving CA53.1': '/images/ca53-1/plano-CA53.1.png',
 }
 const floorPlan = getStrapiMedia(property.floorPlan) || floorPlanByName[property.name] || ''
 
