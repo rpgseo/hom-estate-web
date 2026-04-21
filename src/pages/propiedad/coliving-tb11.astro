@@ -1,0 +1,187 @@
+---
+import ColivingDetailTemplate from '../../components/ColivingDetailTemplate.astro'
+
+// Load every image in src/assets/Coliving TB11 as a URL (Vite-optimized)
+// Astro returns ImageMetadata ({ src, width, height, format }) — extract .src
+import type { ImageMetadata } from 'astro'
+const imageModules = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/Coliving TB11/*.{png,jpg,jpeg,webp}',
+  { eager: true }
+)
+
+const imagesByName: Record<string, string> = {}
+for (const [path, mod] of Object.entries(imageModules)) {
+  const filename = path.split('/').pop()!
+  imagesByName[filename] = mod.default.src
+}
+
+const pick = (name: string) => imagesByName[name] || ''
+
+const heroImage = pick('entrada_logo_homestate_silla_mimbre_v1.png')
+const floorPlan = pick('plano_tb11.jpg')
+
+const galleryOrder = [
+  'comedor_mesa_alta_espejos_arco_v1.png',
+  'comedor_barra_taburetes_espejos_arco.png',
+  'comedor_vista_lateral_cocina_al_fondo.png',
+  'cocina_mesa_microondas_tostadora.png',
+  'cocina_cafetera_nespresso_tazas.png',
+  'habitacion_doble_dos_camas_escritorio_tv_v1.png',
+  'habitacion_doble_dos_camas_escritorio_tv_v2.png',
+  'habitacion_doble_dos_camas_tv_armario.png',
+  'habitacion_doble_dos_camas_detalle_camas.png',
+  'habitacion_doble_dos_camas_escritorio_vista_completa.png',
+  'habitacion_doble_dos_camas_escritorio_lavabo_panoramica.jpeg',
+  'habitacion_individual_cama_doble_escritorio_tv.png',
+  'habitacion_individual_cama_doble_balcon.png',
+  'habitacion_individual_cama_tv_ventilador_v1.png',
+  'habitacion_individual_cama_tv_ventilador_v2.png',
+  'habitacion_individual_detalle_cama.png',
+  'escritorio_compartido_dos_sillas_v1.png',
+  'escritorio_compartido_dos_sillas_v2.png',
+  'bano_completo_ducha.png',
+  'aseo_papel_floral_v1.png',
+  'aseo_papel_floral_v2.png',
+  'armario_empotrado_espejo.png',
+  'pasillo_apliques_luz.png',
+  'puerta_habitacion_numero_1.png',
+  'puerta_habitacion_numero_2.png',
+  'comedor_mesa_alta_espejos_arco_v2.png',
+  'espejo_arco_dorado_reflejo_zona_comedor.png',
+  'espejo_ovalado_reflejo_habitacion_doble.png',
+  'cuadros_decorativos_good_morning_coffee.png',
+  'entrada_logo_homestate_silla_mimbre_v2.png',
+]
+
+const gallery = galleryOrder
+  .map((name) => imagesByName[name])
+  .filter((url): url is string => Boolean(url))
+
+const description = `
+## Sobre el coliving
+
+Descubre este exclusivo coliving en Zaragoza, ubicado en la calle Tomás Bretón, en una de las zonas más valoradas por su tranquilidad, seguridad y calidad de vida. Situado a 1 minuto de Fernando el Católico, este espacio es perfecto para estudiantes universitarios y jóvenes profesionales que buscan una experiencia de convivencia cómoda, moderna y bien conectada.
+
+La ubicación es uno de sus grandes puntos fuertes: estarás a solo unos minutos caminando de la zona universitaria, con fácil acceso al tranvía y rodeado de todos los servicios necesarios para tu día a día. Encontrarás supermercados, cafeterías, gimnasios, parques y comercios, todo a escasos metros, además de una excelente conexión con el centro de Zaragoza.
+
+El piso ha sido reformado recientemente y cuenta con habitaciones totalmente equipadas, zonas comunes modernas y todos los gastos incluidos (agua, luz, internet, calefacción). Es un entorno pensado para ofrecer comodidad, privacidad y vida en comunidad, combinando lo mejor de un hogar con la flexibilidad del coliving.
+
+Si estás buscando un lugar donde vivir en Zaragoza, con buena energía, una ubicación estratégica y todas las facilidades, este coliving en Tomás Bretón es tu mejor opción.
+
+### Incluimos
+
+- WiFi de alta velocidad + Smart TV en cada habitación
+- Calefacción
+- Ropa de cama y baño
+- Lavabo independiente en la habitación doble
+- Limpieza semanal de zonas comunes
+- Consumos incluidos hasta 30€/mes por persona
+- Cocina completa: lavavajillas, microondas y horno (espacios independientes)
+- Lavadora
+- 1 baño completo + 1 aseo
+- Ventiladores de techo en cada habitación
+- Terraza
+
+## Planes de estancia
+
+**Mensual** — Ideal para proyectos de trabajo, vacaciones o estancias temporales con flexibilidad de mudanza a corto plazo.
+
+**Semestral** — Perfecto para Erasmus, prácticas en empresas o un semestre de estudios, sin pagar un año entero.
+
+**Anual** — La opción más convencional, con la mejor tarifa del año.
+
+Todos los planes son combinables entre sí (ejemplo: para 7 meses, 1 semestre + 1 mes con sus respectivas tarifas). Esto es una gran ventaja, porque puedes ahorrar los meses que no necesitas y modular el periodo de estancia.
+
+## Contratos y fianza
+
+Los contratos se establecen según la duración de la estancia y son de obligado cumplimiento (por ejemplo, si has firmado por 6 meses, se abonarán los 6 meses sin excepciones).
+
+Para garantizar una correcta estancia deberá cumplirse lo pactado: cuidado y conservación del mobiliario, normas del vecindario, convivencia, respeto e higiene.
+
+Como garantía se depositan 2 mensualidades: 1 mes de fianza + 1 mes de garantía por conservación del mobiliario e instalaciones.
+
+**Importante:** El periodo de estancia siempre se podrá alargar, pero nunca acortar.
+
+(*) En caso de incumplimiento de contrato por parte de los inquilinos, HOM.ESTATE se reserva el derecho a la rescisión unilateral del contrato, con la consecuente pérdida de la fianza.
+
+## Vecindario
+
+Nuestra HOM se encuentra en una ubicación privilegiada, en plena calle Tomás Bretón, junto al Paseo Fernando el Católico, una de las zonas más tranquilas, seguras y bien comunicadas de Zaragoza.
+
+A solo 3 minutos caminando dispones de supermercados, cafeterías, panaderías, gimnasios, parques y otros servicios que harán tu vida diaria más cómoda.
+
+La zona universitaria está a tan solo 10 minutos a pie, mientras que la parada del tranvía Fernando el Católico se encuentra a escasos 5 minutos andando, ofreciéndote una rápida conexión con cualquier punto de la ciudad.
+
+Además, estarás a solo 6 minutos de la Gran Vía, muy cerca del corazón comercial del centro de Zaragoza, y apenas a 15 minutos caminando de la Plaza del Pilar, epicentro histórico y cultural de la ciudad.
+
+Una ubicación estratégica que combina tranquilidad, accesibilidad y calidad de vida en pleno centro de Zaragoza.
+`.trim()
+
+const coliving = {
+  name: 'Coliving TB11',
+  tagline: 'Coliving en universidad - centro Zaragoza',
+  location: 'Calle Tomás Bretón, zona universidad-centro, Zaragoza',
+  image: heroImage,
+  gallery,
+  features: [
+    { label: '1 Cocina' },
+    { label: '4 Dormitorios (3 + 1 Doble)' },
+    { label: '2 Baños' },
+    { label: 'Garaje (opcional)' },
+  ],
+  amenities: [],
+  pricingPlans: [],
+  rooms: [
+    {
+      name: 'Hab. 1',
+      roomType: 'Individual',
+      status: 'available',
+      plans: [
+        { name: 'Mensual', price: 560 },
+        { name: 'Semestral', price: 510, tagline: 'Ahorra 50€/mes' },
+        { name: 'Anual', price: 460, tagline: 'Ahorra 100€/mes' },
+      ],
+    },
+    {
+      name: 'Hab. 2 (Doble)',
+      roomType: 'Doble con lavabo independiente',
+      status: 'available',
+      plans: [
+        { name: 'Mensual', price: 720 },
+        { name: 'Semestral', price: 670, tagline: 'Ahorra 50€/mes' },
+        { name: 'Anual', price: 620, tagline: 'Ahorra 100€/mes' },
+      ],
+    },
+    {
+      name: 'Hab. 3',
+      roomType: 'Individual',
+      status: 'available',
+      plans: [
+        { name: 'Mensual', price: 520 },
+        { name: 'Semestral', price: 470, tagline: 'Ahorra 50€/mes' },
+        { name: 'Anual', price: 420, tagline: 'Ahorra 100€/mes' },
+      ],
+    },
+    {
+      name: 'Hab. 4',
+      roomType: 'Individual',
+      status: 'available',
+      plans: [
+        { name: 'Mensual', price: 580 },
+        { name: 'Semestral', price: 530, tagline: 'Ahorra 50€/mes' },
+        { name: 'Anual', price: 480, tagline: 'Ahorra 100€/mes' },
+      ],
+    },
+  ],
+  description,
+  shortDescription: 'Coliving en universidad-centro de Zaragoza, calle Tomás Bretón. 4 habitaciones, todo incluido desde 420€/mes.',
+  propertyType: 'coliving',
+  priceFrom: 420,
+  city: { slug: 'zaragoza', name: 'Zaragoza' },
+  seoTitle: 'Coliving TB11 — Universidad-centro Zaragoza (Tomás Bretón) | HOM.ESTATE',
+  seoDescription: 'Coliving en Tomás Bretón, zona universidad-centro de Zaragoza. 4 habitaciones amuebladas, todo incluido desde 420€/mes. Planes mensual, semestral y anual.',
+  documentId: 'coliving-tb11',
+  floorPlan,
+}
+---
+<ColivingDetailTemplate coliving={coliving} pathname="/propiedad/coliving-tb11" />

@@ -1,0 +1,148 @@
+---
+import ColivingDetailTemplate from '../../components/ColivingDetailTemplate.astro'
+import type { ImageMetadata } from 'astro'
+
+// Load every image in src/assets/Coliving JJR5 as a URL (Vite-optimized)
+const imageModules = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/Coliving JJR5/*.{png,jpg,jpeg,webp}',
+  { eager: true }
+)
+
+const imagesByName: Record<string, string> = {}
+for (const [path, mod] of Object.entries(imageModules)) {
+  const filename = path.split('/').pop()!
+  imagesByName[filename] = mod.default.src
+}
+
+const pick = (name: string) => imagesByName[name] || ''
+
+const heroImage = pick('salon_comedor_completo_sofa_tv_logo_homestate.jpeg')
+
+const galleryOrder = [
+  'salon_sofa_gris_logo_homestate_cojines_teal.jpeg',
+  'salon_sofa_gris_logo_homestate_comedor_estanteria.jpeg',
+  'salon_comedor_pasillo_vista_habitacion_beige.jpeg',
+  'comedor_mesa_cristal_sillas_blancas_tv_lampara.jpeg',
+  'comedor_mesa_cristal_estanteria_vista_habitaciones.jpeg',
+  'comedor_lampara_vista_habitacion_beige.jpeg',
+  'cocina_isla_naranja_encimera_granito_armarios_blancos.jpeg',
+  'cocina_isla_naranja_campana_extractora_estanteria.jpeg',
+  'habitacion_beige_cama_escritorio_ventana_cortinas.jpeg',
+  'habitacion_beige_detalle_cabecero_cuadro_circulo_arco.jpeg',
+  'habitacion_beige_detalle_cama_cojines_cuadro_azul.jpeg',
+  'habitacion_beige_detalle_cama_cuadro_circulo_arco_lampara.jpeg',
+  'habitacion_beige_armario_espejo_cuadro_negro_vista_salon.jpeg',
+  'habitacion_beige_armario_espejo_detalle_v1.jpeg',
+  'habitacion_beige_armario_espejo_detalle_v2.jpeg',
+  'habitacion_beige_panoramica_armario_cuadro_negro_vista_salon.jpeg',
+  'habitacion_2_floral_cama_armario_escritorio_cuadro_arco.jpeg',
+  'habitacion_2_floral_armario_grande_espejo_ventana.jpeg',
+  'habitacion_2_floral_cuadro_arco_marron_puerta_bano.jpeg',
+  'habitacion_3_verde_sage_cama_escritorio_v1.jpeg',
+  'habitacion_3_verde_sage_cama_escritorio_v2.jpeg',
+  'habitacion_3_verde_sage_armario_puerta_bano.jpeg',
+  'habitacion_3_verde_sage_cuadro_abstracto_escritorio.jpeg',
+  'habitacion_3_verde_detalle_cabecero_cuadro_cojin_amarillo.jpeg',
+  'bano_completo_lavabo_inodoro_ducha_esquinera.jpeg',
+  'bano_detalle_ducha_esquinera_inodoro.jpeg',
+  'bano_detalle_lavabo_espejo_plantas.jpeg',
+  'pasillo_suelo_madera_vista_habitacion_floral.jpeg',
+]
+
+const gallery = galleryOrder
+  .map((name) => imagesByName[name])
+  .filter((url): url is string => Boolean(url))
+
+const description = `
+## Sobre el coliving
+
+Descubre este exclusivo coliving en Zaragoza, situado en la calle Juan José Rivas, una de las zonas más valoradas por su tranquilidad, seguridad y calidad de vida. A solo 3 minutos de Fernando el Católico, es ideal para estudiantes y jóvenes profesionales que buscan una estancia cómoda, moderna y bien conectada.
+
+La ubicación es uno de sus mayores atractivos: estarás a pocos minutos de la zona universitaria, con acceso directo al tranvía y rodeado de todos los servicios necesarios. Supermercados, cafeterías, gimnasios, parques y tiendas se encuentran a escasos metros, además de una excelente conexión con el centro de la ciudad.
+
+El piso, recién reformado, ofrece habitaciones totalmente equipadas, zonas comunes modernas y todos los gastos incluidos (agua, luz, internet y calefacción). Está diseñado para garantizar comodidad, privacidad y convivencia, combinando lo mejor de un hogar con la flexibilidad del coliving.
+
+Si buscas un lugar donde vivir en Zaragoza, con buena energía, ubicación estratégica y todas las comodidades, este coliving en Juan José Rivas es tu mejor opción.
+
+### Incluimos
+
+- WiFi de alta velocidad + Smart TV en cada habitación
+- Calefacción
+- Ropa de cama y baño
+- Limpieza semanal de zonas comunes
+- Consumos incluidos hasta 30€/mes por persona
+- Cocina completa: lavavajillas, microondas y horno (espacios independientes)
+- Laundry
+- 1 baño completo
+- Ventiladores de techo en cada habitación
+
+## Planes de estancia
+
+**Mensual** — Ideal para proyectos de trabajo, vacaciones o estancias temporales con flexibilidad de mudanza a corto plazo.
+
+**Semestral** — Perfecto para Erasmus, prácticas en empresas o un semestre de estudios, sin pagar un año entero.
+
+**Anual** — La opción más convencional, con la mejor tarifa del año.
+
+Todos los planes son combinables entre sí (ejemplo: para 7 meses, 1 semestre + 1 mes con sus respectivas tarifas). Esto es una gran ventaja, porque puedes ahorrar los meses que no necesitas y modular el periodo de estancia.
+
+## Contratos y fianza
+
+Los contratos se establecen según la duración de la estancia y son de obligado cumplimiento (por ejemplo, si has firmado por 6 meses, se abonarán los 6 meses sin excepciones).
+
+Para garantizar una correcta estancia deberá cumplirse lo pactado: cuidado y conservación del mobiliario, normas del vecindario, convivencia, respeto e higiene.
+
+Como garantía se depositan 2 mensualidades: 1 mes de fianza + 1 mes de garantía por conservación del mobiliario e instalaciones.
+
+**Importante:** El periodo de estancia siempre se podrá alargar, pero nunca acortar.
+
+(*) En caso de incumplimiento de contrato por parte de los inquilinos, HOM.ESTATE se reserva el derecho a la rescisión unilateral del contrato, con la consecuente pérdida de la fianza.
+
+## Vecindario
+
+Nuestra HOM está en una ubicación privilegiada, en la calle Juan José Rivas, junto al Paseo Fernando el Católico, una de las zonas más tranquilas, seguras y mejor comunicadas de Zaragoza.
+
+A solo 5 minutos a pie encontrarás supermercados, cafeterías, panaderías, gimnasios, parques y todos los servicios necesarios para tu día a día.
+
+La zona universitaria se sitúa a 10 minutos caminando, y la parada del tranvía Fernando el Católico está a apenas 5 minutos, facilitando el acceso rápido a cualquier punto de la ciudad.
+
+También estarás a solo 8 minutos de la Gran Vía, muy cerca del centro comercial de Zaragoza, y a 17 minutos de la Plaza del Pilar, núcleo histórico y cultural de la ciudad.
+
+Una ubicación estratégica que une tranquilidad, accesibilidad y calidad de vida en pleno corazón de Zaragoza.
+`.trim()
+
+const coliving = {
+  name: 'Coliving JJR5',
+  tagline: 'Coliving en universidad - centro Zaragoza',
+  location: 'Calle Juan José Rivas, zona universidad-centro, Zaragoza',
+  image: heroImage,
+  gallery,
+  features: [
+    { label: '1 Cocina' },
+    { label: '3 Dormitorios' },
+    { label: '1 Baño' },
+    { label: 'Garaje (opcional)' },
+  ],
+  amenities: [],
+  pricingPlans: [
+    { name: 'Mensual', price: 565 },
+    { name: 'Semestral', price: 515, tagline: 'Ahorra 50€/mes' },
+    { name: 'Anual', price: 465, tagline: 'Ahorra 100€/mes' },
+  ],
+  rooms: [
+    { name: 'Hab. 1', roomType: 'Individual', status: 'available' },
+    { name: 'Hab. 2', roomType: 'Individual', status: 'available' },
+    { name: 'Hab. 3', roomType: 'Individual', status: 'available' },
+  ],
+  description,
+  shortDescription: 'Coliving en Juan José Rivas, zona universidad-centro de Zaragoza. 3 habitaciones, todo incluido desde 465€/mes.',
+  propertyType: 'coliving',
+  priceFrom: 465,
+  city: { slug: 'zaragoza', name: 'Zaragoza' },
+  seoTitle: 'Coliving JJR5 — Universidad-centro Zaragoza (Juan José Rivas) | HOM.ESTATE',
+  seoDescription: 'Coliving en Juan José Rivas, zona universidad-centro de Zaragoza. 3 habitaciones amuebladas, todo incluido desde 465€/mes. Planes mensual, semestral y anual.',
+  documentId: 'coliving-jjr5',
+  floorPlan: '',
+}
+---
+<ColivingDetailTemplate coliving={coliving} pathname="/propiedad/coliving-jjr5" />

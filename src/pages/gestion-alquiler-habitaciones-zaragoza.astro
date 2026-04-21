@@ -3,17 +3,43 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 import BuildingFacade from '../components/BuildingFacade.jsx'
 import { SEO_CONFIG } from '../data/seo-config.js'
 import { getPropertiesForFacade, getStrapiMedia } from '../lib/strapi'
+import ca47FacadeImg from '../assets/Coliving CA47-49/entrada_logo_homestate_butacas_pasillo_v1.jpeg'
+import jjr5FacadeImg from '../assets/Coliving JJR5/salon_sofa_gris_logo_homestate_cojines_teal.jpeg'
 import '../pages/GestionZaragoza.css'
 
 const seo = SEO_CONFIG['/gestion-alquiler-habitaciones-zaragoza']
 
 const { data: facadeProperties } = await getPropertiesForFacade()
-const BUILDING_COLIVINGS = facadeProperties.map((p: any) => ({
-  name: p.name,
-  img: getStrapiMedia(p.facadeImage) || '/images/colivings-zaragoza/coliving-01.webp',
-  desc: p.shortDescription || '',
-  href: `/propiedad/${p.slug}`,
-}))
+
+type FacadeOverride = { name?: string; desc?: string; href?: string; img?: string }
+const OVERRIDES: Record<string, FacadeOverride> = {
+  'TB11': { href: '/propiedad/coliving-tb11' },
+  'JJR5': {
+    name: 'Coliving CA47-49',
+    desc: 'Coliving en Cortes de Aragón, zona universidad-centro. 5 habitaciones, todo incluido desde 465€/mes.',
+    href: '/propiedad/coliving-ca47-49',
+    img: ca47FacadeImg.src,
+  },
+  'Pedro Cerbuna': {
+    name: 'Coliving JJR5',
+    desc: 'Coliving en Juan José Rivas, zona universidad-centro. 3 habitaciones, todo incluido desde 465€/mes.',
+    href: '/propiedad/coliving-jjr5',
+    img: jjr5FacadeImg.src,
+  },
+}
+
+const applyOverride = (p: any) => {
+  const key = Object.keys(OVERRIDES).find((k) => p.name?.includes(k))
+  const ov: FacadeOverride = key ? OVERRIDES[key] : {}
+  return {
+    name: ov.name || p.name,
+    img: ov.img || getStrapiMedia(p.facadeImage) || '/images/colivings-zaragoza/coliving-01.webp',
+    desc: ov.desc || p.shortDescription || '',
+    href: ov.href || `/propiedad/${p.slug}`,
+  }
+}
+
+const BUILDING_COLIVINGS = facadeProperties.map(applyOverride)
 
 const SERVICES = [
   { icon: '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>', title: 'Gestión integral', desc: 'Desde la búsqueda de inquilinos hasta el mantenimiento, nos encargamos de todo el proceso.' },
