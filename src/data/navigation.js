@@ -2,7 +2,7 @@ export const NAV_DROPDOWNS = [
   {
     label: 'HOMs',
     items: [
-      { label: 'Barcelona', href: '/apartamento-bruc' },
+      { label: 'Barcelona', href: '/propiedad/apartamento-bruc' },
       { label: 'Madrid', href: '/gestion-alquiler-habitaciones-madrid' },
       { label: 'Zaragoza', href: '/gestion-alquiler-habitaciones-zaragoza' },
     ],

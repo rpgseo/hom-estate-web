@@ -51,7 +51,7 @@ const SEO_CONFIG = {
     description: 'Coliving en zona universidad-centro de Zaragoza. Ideal para estudiantes o trabajadores del hospital. Amueblado y todo incluido.',
     keywords: 'coliving CA47 Zaragoza, coliving hospital Zaragoza, habitación estudiantes',
   },
-  '/apartamento-bruc': {
+  '/propiedad/apartamento-bruc': {
     title: 'Apartamento de Lujo en Barcelona Eixample | HOM.ESTATE',
     description: 'Exclusivo apartamento de lujo en Calle Bruc, Eixample, Barcelona. Acabados premium, ubicación privilegiada.',
     keywords: 'apartamento lujo Barcelona, piso Eixample, apartamento Bruc Barcelona, inversión Barcelona',

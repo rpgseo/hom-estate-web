@@ -1,0 +1,147 @@
+---
+import ColivingDetailTemplate from '../../components/ColivingDetailTemplate.astro'
+import type { ImageMetadata } from 'astro'
+
+// Load every image in src/assets/BARCELONA as a URL (Vite-optimized)
+const imageModules = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/BARCELONA/*.{png,jpg,jpeg,webp}',
+  { eager: true }
+)
+
+const imagesByName: Record<string, string> = {}
+for (const [path, mod] of Object.entries(imageModules)) {
+  const filename = path.split('/').pop()!
+  imagesByName[filename] = mod.default.src
+}
+
+const pick = (name: string) => imagesByName[name] || ''
+
+const heroImage = pick('salon-logo-homestate-amplio.webp')
+const floorPlan = pick('plano-coliving-barcelona.png')
+
+const galleryOrder = [
+  'salon-logo-homestate.webp',
+  'salon-sofa-escritorio-tv.webp',
+  'salon-comedor-vista-amplia.webp',
+  'salon-comedor-mesa-comedor.webp',
+  'comedor-mesa-4-sillas.webp',
+  'cocina-salon-vista-completa.webp',
+  'cocina-mesa-abatible-2-sillas.webp',
+  'cocina-mesa-puerta-corredera.webp',
+  'cocina-mesa-puerta-corredera-amplio.webp',
+  'cocina-fregadero-horno.webp',
+  'dormitorio-cama-armario.webp',
+  'dormitorio-cama-ventilador-techo.webp',
+  'dormitorio-armario-empotrado.webp',
+  'habitacion-escritorio-balcon.webp',
+  'bano-lavabo-espejo-ducha.webp',
+  'bano-ducha-inodoro.webp',
+  'bano-ducha-inodoro-superior.webp',
+  'bano-ducha-inodoro-detalle.webp',
+  'lavadero-lavadora.webp',
+  'terraza-balcon.webp',
+  'pareja-consultando-portatil.webp',
+  'pareja-riendo-portatil.webp',
+  'pareja-selfie.webp',
+]
+
+const gallery = galleryOrder
+  .map((name) => imagesByName[name])
+  .filter((url): url is string => Boolean(url))
+
+const description = `
+## Sobre el apartamento
+
+Espectacular apartamento ubicado en la Dreta de l'Eixample en Barcelona. Este elegante apartamento cuenta con una distribución única que combina comodidad y estilo en cada uno de sus espacios.
+
+Al entrar, te recibirá una cocina amplia y luminosa, diseñada con un enfoque moderno y funcional. La cocina está completamente equipada con electrodomésticos de última generación y ofrece mucho espacio de almacenamiento. Además, está conectada con el espacioso salón-comedor, creando un ambiente abierto y acogedor para disfrutar tanto del cocinar como de las comidas con familiares y amigos.
+
+En el salón, encontrarás dos puestos de trabajo ideales para aquellos que necesitan teletrabajar o tener un espacio de estudio. Estos espacios están estratégicamente ubicados para aprovechar la luz natural que se filtra a través de las ventanas, creando un entorno inspirador y productivo.
+
+El apartamento también cuenta con un amplio dormitorio, minimalista y relajado, equipado con un armario empotrado que ofrece un generoso espacio de almacenamiento. Además, dispone de un cuarto de lavado (laundry) independiente que brinda la máxima comodidad para el cuidado de tu ropa.
+
+El lujoso baño está meticulosamente diseñado con grandes acabados. Los materiales de alta calidad y los detalles cuidadosamente seleccionados crean un ambiente de lujo y confort. Cuenta con una ducha de alta gama que permite disfrutar de una ducha revitalizante al final del día.
+
+Por último, este apartamento es exterior y tiene vistas a la calle Bruc. Desde la sala de estar podrás acceder a una terraza muy acogedora, perfecta para disfrutar del clima mediterráneo y relajarte al aire libre. Este espacio íntimo es ideal para tomar una taza de café por la mañana o para compartir una cena romántica al atardecer.
+
+### Incluimos
+
+- WiFi de alta velocidad + Smart TV
+- Aire acondicionado frío/calor
+- Ropa de cama y baño
+- Limpieza semanal completa
+- Consumos incluidos
+- Cocina completa: lavavajillas, microondas y horno
+- Laundry independiente
+- 1 baño completo
+- Ventilador de techo en habitación
+
+## Planes de estancia
+
+**Mensual** — Ideal para proyectos de trabajo, vacaciones o estancias temporales con flexibilidad de mudanza a corto plazo.
+
+**Semestral** — Perfecto para Erasmus, prácticas en empresas o un semestre de estudios, sin pagar un año entero.
+
+**Anual** — La opción más convencional, con la mejor tarifa del año.
+
+Todos los planes son combinables entre sí (ejemplo: para 7 meses, 1 semestre + 1 mes con sus respectivas tarifas). Esto es una gran ventaja, porque puedes ahorrar los meses que no necesitas y modular el periodo de estancia.
+
+## Contratos y fianza
+
+Los contratos se establecen según la duración de la estancia y son de obligado cumplimiento (por ejemplo, si has firmado por 6 meses, se abonarán los 6 meses sin excepciones).
+
+Para garantizar una correcta estancia deberá cumplirse lo pactado: cuidado y conservación del mobiliario, normas del vecindario, convivencia, respeto e higiene.
+
+Como garantía se depositan 2 mensualidades: 1 mes de fianza + 1 mes de garantía por conservación del mobiliario e instalaciones.
+
+**Importante:** El periodo de estancia siempre se podrá alargar, pero nunca acortar.
+
+(*) En caso de incumplimiento de contrato por parte de los inquilinos, HOM.ESTATE se reserva el derecho a la rescisión unilateral del contrato, con la consecuente pérdida de la fianza.
+
+## Vecindario
+
+La Dreta de l'Eixample es un encantador barrio situado en el corazón de Barcelona. Conocido por su elegante arquitectura modernista, calles amplias y ambiente cosmopolita, el barrio ofrece una combinación única de historia y modernidad.
+
+Caminar por las calles de la Dreta de l'Eixample te sumergirá en un ambiente vibrante y sofisticado. Podrás admirar magníficos edificios diseñados por reconocidos arquitectos como Antoni Gaudí y Lluís Domènech i Montaner. Además, el barrio alberga tiendas de lujo, boutiques de diseño y una amplia variedad de restaurantes, cafés y bares que deleitarán tus sentidos.
+
+La Dreta de l'Eixample también es conocida por su vida cultural. Aquí encontrarás una gran cantidad de museos, galerías de arte y teatros que ofrecen una amplia gama de eventos culturales y exposiciones.
+
+El barrio está muy bien comunicado, lo que facilita el acceso a otras partes de la ciudad. Además, cuenta con una excelente oferta de transporte público, incluyendo estaciones de metro y autobús que te permitirán desplazarte fácilmente por Barcelona.
+`.trim()
+
+const coliving = {
+  name: 'Apartamento Bruc',
+  tagline: 'Espectacular HOM en Barcelona',
+  location: 'Calle Bruc, Dreta de l\'Eixample, Barcelona',
+  image: heroImage,
+  gallery,
+  features: [
+    { label: '1 Salón-cocina' },
+    { label: '1 Dormitorio' },
+    { label: '1 Baño' },
+    { label: 'Laundry' },
+    { label: 'Garaje (opcional)' },
+  ],
+  amenities: [],
+  pricingPlans: [
+    { name: 'Mensual', price: 2100 },
+    { name: 'Semestral', price: 1780, tagline: 'Ahorra 320€/mes' },
+    { name: 'Anual', price: 1580, tagline: 'Ahorra 520€/mes' },
+  ],
+  rooms: [
+    { name: 'Dormitorio', roomType: 'Doble con armario empotrado', status: 'available' },
+  ],
+  description,
+  shortDescription: 'Espectacular apartamento en la Dreta de l\'Eixample, Barcelona. 1 dormitorio, terraza y acabados premium, todo incluido desde 1.580€/mes.',
+  propertyType: 'apartamento',
+  priceFrom: 1580,
+  city: { slug: 'barcelona', name: 'Barcelona', href: '/propiedad/apartamento-bruc' },
+  seoTitle: 'Apartamento de Lujo en Barcelona Eixample (Bruc) | HOM.ESTATE',
+  seoDescription: 'Exclusivo apartamento en Calle Bruc, Dreta de l\'Eixample, Barcelona. 1 dormitorio, laundry, terraza y acabados premium. Todo incluido desde 1.580€/mes.',
+  documentId: 'apartamento-bruc',
+  floorPlan,
+  mapBbox: '2.1500,41.3850,2.1900,41.4100',
+  mapMarker: '41.3945,2.1696',
+}
+---
+<ColivingDetailTemplate coliving={coliving} pathname="/propiedad/apartamento-bruc" />
