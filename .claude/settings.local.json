@@ -9,7 +9,9 @@
       "Bash(curl -sL https://hom-estate-web.pages.dev/gestion-alquiler-habitaciones-zaragoza -o /tmp/prod.html)",
       "Bash(cygpath -w /tmp/prod.html)",
       "Bash(cygpath -w /tmp/devzgz.html)",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "Bash(curl -sL https://hom-estate-web.pages.dev/propiedad/coliving-tb11 -o /tmp/tb11-v3.html)",
+      "Bash(cygpath -w /tmp/tb11-v3.html)"
     ]
   }
 }

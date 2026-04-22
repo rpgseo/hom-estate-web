@@ -2,6 +2,21 @@
    COLIVING DETAIL PAGE - Cohabs-inspired
    ============================================= */
 
+/* PHOTO GALLERY — responsive desktop grid / mobile carousel */
+.cd-gallery-desktop { display: grid; }
+.cd-gallery-mobile { display: none; }
+.cd-lightbox { padding: 40px 60px; }
+.cd-lightbox-nav-prev { left: 16px; }
+.cd-lightbox-nav-next { right: 16px; }
+.cd-gallery-mobile::-webkit-scrollbar { display: none; }
+@media (max-width: 767px) {
+  .cd-gallery-desktop { display: none; }
+  .cd-gallery-mobile { display: flex; }
+  .cd-lightbox { padding: 16px; }
+  .cd-lightbox-nav-prev { left: 8px; }
+  .cd-lightbox-nav-next { right: 8px; }
+}
+
 /* HERO */
 .cd-hero {
   background: #fff;

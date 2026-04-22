@@ -107,8 +107,44 @@ description = description.replace(
         </div>
       </div>
 
-      <!-- Photo grid with lightbox -->
-      <PhotoLightbox images={[heroImage, ...GALLERY_IMAGES]} altPrefix={coliving.name} client:visible />
+      <!-- Photo grid (static HTML) -->
+      {(() => {
+        const allImages = [heroImage, ...GALLERY_IMAGES]
+        const mainImage = allImages[0]
+        const thumbs = allImages.slice(1, 5)
+        return (
+          <>
+            {/* Mobile carousel */}
+            <div class="cd-gallery-mobile" style="gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;border-radius:12px;scrollbar-width:none">
+              {allImages.map((img, i) => (
+                <div class="cd-gallery-tile" data-photo-index={i} style="flex:0 0 85%;scroll-snap-align:center;border-radius:12px;overflow:hidden;aspect-ratio:4 / 3;cursor:pointer">
+                  <img src={img} alt={`${coliving.name} ${i + 1}`} loading={i === 0 ? 'eager' : 'lazy'} style="width:100%;height:100%;object-fit:cover" />
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop grid: 1 large + 4 thumbs */}
+            <div class="cd-gallery-desktop" style="grid-template-columns:1.15fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:8px;aspect-ratio:2.2 / 1">
+              <div class="cd-gallery-tile" data-photo-index="0" style="grid-row:1 / -1;overflow:hidden;border-radius:12px;cursor:pointer">
+                <img src={mainImage} alt={`${coliving.name} 1`} loading="eager" style="width:100%;height:100%;object-fit:cover" />
+              </div>
+              {thumbs.map((img, i) => (
+                <div class="cd-gallery-tile" data-photo-index={i + 1} style="overflow:hidden;border-radius:12px;cursor:pointer;position:relative">
+                  <img src={img} alt={`${coliving.name} ${i + 2}`} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+                  {i === thumbs.length - 1 && allImages.length > 5 && (
+                    <div style="position:absolute;inset:0;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:0.9rem;pointer-events:none">
+                      Ver {allImages.length} fotos
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </>
+        )
+      })()}
+
+      {/* Lightbox modal (React, only mounts when opened) */}
+      <PhotoLightbox images={[heroImage, ...GALLERY_IMAGES]} altPrefix={coliving.name} client:load />
     </div>
   </section>
 
@@ -392,6 +428,14 @@ description = description.replace(
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Gallery tiles → open lightbox at tile index
+      document.querySelectorAll('.cd-gallery-tile').forEach((tile) => {
+        tile.addEventListener('click', () => {
+          const idx = Number((tile as HTMLElement).dataset.photoIndex) || 0
+          window.dispatchEvent(new CustomEvent('open-lightbox', { detail: { index: idx } }))
+        })
+      })
+
       // Fotos tag → open lightbox at first image
       document.getElementById('cd-tag-fotos')?.addEventListener('click', () => {
         window.dispatchEvent(new CustomEvent('open-lightbox', { detail: { index: 0 } }))
