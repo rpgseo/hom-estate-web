@@ -1,25 +1,12 @@
-import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 
-function WindowCard({ coliving, index, floor }) {
-  const ref = useRef(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const y = useTransform(scrollYProgress, [0, 1], ['-25%', '25%'])
-
+function WindowCard({ coliving, floor }) {
   return (
-    <motion.div
-      ref={ref}
-      className={`bld-window bld-window--${floor}`}
-      initial={{ scale: 0.97 }}
-      whileInView={{ scale: 1 }}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.5, delay: index * 0.06 }}
-    >
+    <div className={`bld-window bld-window--${floor}`}>
       <div className="bld-window-frame">
         <a href={coliving.href || '#contacto'} className="bld-window-hole" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
           <div className="bld-window-glass">
-            <motion.img src={coliving.img} alt={coliving.name} loading="lazy" style={{ y }} />
+            <img src={coliving.img} alt={coliving.name} loading="lazy" />
           </div>
           <div className="bld-window-overlay">
             <h3>{coliving.name}</h3>
@@ -35,7 +22,7 @@ function WindowCard({ coliving, index, floor }) {
         <div className="bld-balcony-railing" />
         <div className="bld-balcony-platform" />
       </div>
-    </motion.div>
+    </div>
   )
 }
 

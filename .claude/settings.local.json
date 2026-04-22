@@ -3,7 +3,13 @@
     "allow": [
       "mcp__stitch__update_design_system",
       "mcp__stitch__generate_screen_from_text",
-      "mcp__stitch__list_screens"
+      "mcp__stitch__list_screens",
+      "Bash(curl -sL https://hom-estate-web.pages.dev/gestion-alquiler-habitaciones-zaragoza -o /tmp/zgz5.html)",
+      "Bash(grep -oE \"\\\\.bld-edificio[^{]{0,50}\\\\{[^}]{0,300}|\\\\.bld-wall[^{]{0,50}\\\\{[^}]{0,300}|\\\\.bld-floor[^{]{0,50}\\\\{[^}]{0,300}\" /tmp/zgz.css)",
+      "Bash(curl -sL https://hom-estate-web.pages.dev/gestion-alquiler-habitaciones-zaragoza -o /tmp/prod.html)",
+      "Bash(cygpath -w /tmp/prod.html)",
+      "Bash(cygpath -w /tmp/devzgz.html)",
+      "Bash(node -e ' *)"
     ]
   }
 }
