@@ -5,6 +5,10 @@ import { SEO_CONFIG } from '../data/seo-config.js'
 import { getPropertiesForFacade, getStrapiMedia } from '../lib/strapi'
 import ca47FacadeImg from '../assets/Coliving CA47-49/entrada_logo_homestate_butacas_pasillo_v1.jpeg'
 import jjr5FacadeImg from '../assets/Coliving JJR5/salon_sofa_gris_logo_homestate_cojines_teal.jpeg'
+import pc29FacadeImg from '../assets/Coliving PC29/terraza_sofa_esquinero_olivo_logo_homestate_v1.jpg'
+import ca53FacadeImg from '../assets/Coliving CA53.1/entrada_espejo_panel_madera.jpg'
+import psa31FacadeImg from '../assets/Coliving PSA31/salon_general.jpeg'
+import tb11FacadeImg from '../assets/Coliving TB11/entrada_logo_homestate_silla_mimbre_v1.png'
 import '../pages/GestionZaragoza.css'
 
 const seo = SEO_CONFIG['/gestion-alquiler-habitaciones-zaragoza']
@@ -13,7 +17,9 @@ const { data: facadeProperties } = await getPropertiesForFacade()
 
 type FacadeOverride = { name?: string; desc?: string; href?: string; img?: string }
 const OVERRIDES: Record<string, FacadeOverride> = {
-  'TB11': { href: '/propiedad/coliving-tb11' },
+  'TB11': { href: '/propiedad/coliving-tb11', img: tb11FacadeImg.src },
+  'CA53.1': { img: ca53FacadeImg.src },
+  'PSA31': { img: psa31FacadeImg.src },
   'JJR5': {
     name: 'Coliving CA47-49',
     desc: 'Coliving en Cortes de Aragón, zona universidad-centro. 5 habitaciones, todo incluido desde 465€/mes.',
@@ -25,6 +31,12 @@ const OVERRIDES: Record<string, FacadeOverride> = {
     desc: 'Coliving en Juan José Rivas, zona universidad-centro. 3 habitaciones, todo incluido desde 465€/mes.',
     href: '/propiedad/coliving-jjr5',
     img: jjr5FacadeImg.src,
+  },
+  'CA47': {
+    name: 'Coliving PC29',
+    desc: 'Coliving en Pedro Cerbuna, frente al campus. 4 habitaciones con terraza, todo incluido desde 450€/mes.',
+    href: '/propiedad/coliving-pc29',
+    img: pc29FacadeImg.src,
   },
 }
 

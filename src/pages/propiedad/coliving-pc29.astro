@@ -1,0 +1,149 @@
+---
+import ColivingDetailTemplate from '../../components/ColivingDetailTemplate.astro'
+import type { ImageMetadata } from 'astro'
+
+// Load every image in src/assets/Coliving PC29 as a URL (Vite-optimized)
+const imageModules = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/Coliving PC29/*.{png,jpg,jpeg,webp}',
+  { eager: true }
+)
+
+const imagesByName: Record<string, string> = {}
+for (const [path, mod] of Object.entries(imageModules)) {
+  const filename = path.split('/').pop()!
+  imagesByName[filename] = mod.default.src
+}
+
+const pick = (name: string) => imagesByName[name] || ''
+
+const heroImage = pick('entrada_logo_homestate_sillones_cuero_lampara_v1.jpg')
+const floorPlan = pick('Plano-Coliving PC29.png')
+
+const galleryOrder = [
+  'entrada_logo_homestate_sillones_cuero_lampara_v2.jpg',
+  'terraza_sofa_esquinero_olivo_logo_homestate_v1.jpg',
+  'terraza_sofa_esquinero_olivo_logo_homestate_v2.jpg',
+  'terraza_cesped_artificial_vista_frontal.jpg',
+  'terraza_cesped_artificial_vista_lateral.jpg',
+  'habitacion_naranja_cama_cuadro_montana_armario_vista_completa.jpg',
+  'habitacion_naranja_cama_armario_blanco_pasillo.jpg',
+  'habitacion_naranja_detalle_cabecero_cuadro_lampara.jpg',
+  'habitacion_naranja_detalle_cama_cuadro_montana_espejo.jpg',
+  'habitacion_naranja_zona_escritorio_espejo.jpg',
+  'habitacion_amarilla_cama_cuadro_circulos_dorados_escritorio.jpg',
+  'habitacion_gris_cama_armario_espejo_ventana_jardin.jpg',
+  'habitacion_vichy_gris_cama_cuadro_abstracto_escritorio_v1.jpg',
+  'habitacion_vichy_gris_cama_cuadro_abstracto_escritorio_v2.jpg',
+  'habitacion_vichy_gris_cama_escritorio_ventana_jardin.jpg',
+  'habitacion_vichy_gris_armario_cuadro_verde_oliva_puerta.jpg',
+  'habitacion_rayas_azules_cama_cuadro_geometrico_armario_escritorio.jpg',
+  'habitacion_rayas_azules_detalle_cama_cuadro_geometrico.jpg',
+  'detalle_escritorio_blanco_lampara_espejo.jpg',
+  'pasillo_lamparas_cristal_puertas_madera.jpg',
+  'pasillo_lamparas_vista_bano_lavabo_espejo.jpg',
+  'puerta_habitacion_numero_1.jpg',
+  'puerta_habitacion_numero_2.jpg',
+  'puerta_habitacion_numero_3.jpg',
+  'puerta_habitacion_numero_4.jpg',
+]
+
+const gallery = galleryOrder
+  .map((name) => imagesByName[name])
+  .filter((url): url is string => Boolean(url))
+
+const description = `
+## Sobre el coliving
+
+Descubre este exclusivo coliving en Zaragoza, situado en la calle Pedro Cerbuna, la avenida universitaria por excelencia y uno de los puntos más cotizados por estudiantes y jóvenes profesionales. Vivir aquí significa estar en primera línea del campus, justo frente a la Ciudad Universitaria, con todo lo que necesitas a pie de calle.
+
+Te encontrarás en el epicentro de la vida universitaria: facultades a menos de dos minutos, parada del tranvía a unos pasos y una oferta imbatible de servicios alrededor. Supermercados, cafeterías, gimnasios, librerías, zonas verdes y todo tipo de comercios crean un entorno dinámico, seguro y perfectamente conectado con el centro.
+
+El piso, recién reformado, ofrece habitaciones totalmente equipadas, en un entorno silencioso, una amplia terraza de interior y todos los gastos incluidos (agua, luz, wifi y calefacción). Está diseñado para maximizar tu comodidad y privacidad, con espacios pensados para convivir, estudiar y disfrutar, combinando el confort de un hogar con la practicidad del coliving.
+
+Si buscas una estancia en Zaragoza con ubicación privilegiada, ambiente joven y todas las comodidades, este coliving en Pedro Cerbuna es la elección más inteligente.
+
+### Incluimos
+
+- WiFi de alta velocidad + Smart TV en cada habitación
+- Calefacción
+- Ropa de cama y baño
+- Limpieza semanal de zonas comunes
+- Consumos incluidos hasta 30€/mes por persona
+- Cocina completa: lavavajillas, microondas y horno (espacios independientes)
+- Laundry
+- 1 baño completo
+- Ventiladores de techo en cada habitación
+
+## Planes de estancia
+
+**Mensual** — Ideal para proyectos de trabajo, vacaciones o estancias temporales con flexibilidad de mudanza a corto plazo.
+
+**Semestral** — Perfecto para Erasmus, prácticas en empresas o un semestre de estudios, sin pagar un año entero.
+
+**Anual** — La opción más convencional, con la mejor tarifa del año.
+
+Todos los planes son combinables entre sí (ejemplo: para 7 meses, 1 semestre + 1 mes con sus respectivas tarifas). Esto es una gran ventaja, porque puedes ahorrar los meses que no necesitas y modular el periodo de estancia.
+
+## Contratos y fianza
+
+Los contratos se establecen según la duración de la estancia y son de obligado cumplimiento (por ejemplo, si has firmado por 6 meses, se abonarán los 6 meses sin excepciones).
+
+Para garantizar una correcta estancia deberá cumplirse lo pactado: cuidado y conservación del mobiliario, normas del vecindario, convivencia, respeto e higiene.
+
+Como garantía se depositan 2 mensualidades: 1 mes de fianza + 1 mes de garantía por conservación del mobiliario e instalaciones.
+
+**Importante:** El periodo de estancia siempre se podrá alargar, pero nunca acortar.
+
+(*) En caso de incumplimiento de contrato por parte de los inquilinos, HOM.ESTATE se reserva el derecho a la rescisión unilateral del contrato, con la consecuente pérdida de la fianza.
+
+## Vecindario
+
+Nuestra HOM está en una ubicación inmejorable, en la calle Pedro Cerbuna, pleno corazón del distrito universitario de Zaragoza y una de las zonas más valoradas por su ambiente joven, seguridad y comodidad.
+
+A tu alrededor tendrás todo lo que necesitas en tu día a día: supermercados, cafeterías, panaderías, gimnasios, librerías, zonas verdes y todo tipo de servicios a pocos minutos a pie. Es un barrio vibrante pero muy cómodo, pensado para vivir con facilidad.
+
+La Ciudad Universitaria está literalmente enfrente, convirtiéndolo en un lugar perfecto para estudiantes y jóvenes profesionales que buscan cercanía real al campus. Además, la parada del tranvía está a solo unos pasos, conectándote rápidamente con cualquier punto de la ciudad.
+
+A menos de cinco minutos encontrarás otra de sus grandes joyas: el Parque Grande José Antonio Labordeta, el pulmón verde de Zaragoza. Ideal para correr, pasear, estudiar al aire libre o desconectar entre clases.
+
+También estarás muy cerca del Paseo Fernando el Católico y la Gran Vía, con acceso directo al centro y a las principales arterias de la ciudad. El Casco Histórico y la Plaza del Pilar quedan a un corto trayecto en tranvía o en bici.
+
+Una ubicación privilegiada que combina campus, naturaleza, servicios y conectividad, ofreciendo una calidad de vida difícil de igualar en Zaragoza.
+`.trim()
+
+const coliving = {
+  name: 'Coliving PC29',
+  tagline: 'Coliving en plena zona universitaria de Zaragoza',
+  location: 'Calle Pedro Cerbuna, zona universitaria, Zaragoza',
+  image: heroImage,
+  gallery,
+  features: [
+    { label: '1 Cocina' },
+    { label: '4 Dormitorios' },
+    { label: '1 Baño' },
+    { label: 'Terraza' },
+  ],
+  amenities: [],
+  pricingPlans: [
+    { name: 'Mensual', price: 550 },
+    { name: 'Semestral', price: 500, tagline: 'Ahorra 50€/mes' },
+    { name: 'Anual', price: 450, tagline: 'Ahorra 100€/mes' },
+  ],
+  rooms: [
+    { name: 'Hab. 1', roomType: 'Individual', status: 'available' },
+    { name: 'Hab. 2', roomType: 'Individual', status: 'available' },
+    { name: 'Hab. 3', roomType: 'Individual', status: 'available' },
+    { name: 'Hab. 4', roomType: 'Individual', status: 'available' },
+  ],
+  description,
+  shortDescription: 'Coliving en Pedro Cerbuna, frente a Ciudad Universitaria de Zaragoza. 4 habitaciones, todo incluido desde 450€/mes.',
+  propertyType: 'coliving',
+  priceFrom: 450,
+  city: { slug: 'zaragoza', name: 'Zaragoza' },
+  seoTitle: 'Coliving PC29 — Pedro Cerbuna, zona universitaria Zaragoza | HOM.ESTATE',
+  seoDescription: 'Coliving en Pedro Cerbuna, frente al campus de la Universidad de Zaragoza. 4 habitaciones amuebladas con terraza, todo incluido desde 450€/mes.',
+  documentId: 'coliving-pc29',
+  floorPlan,
+}
+---
+<ColivingDetailTemplate coliving={coliving} pathname="/propiedad/coliving-pc29" />

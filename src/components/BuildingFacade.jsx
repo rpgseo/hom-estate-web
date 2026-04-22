@@ -11,8 +11,8 @@ function WindowCard({ coliving, index, floor }) {
     <motion.div
       ref={ref}
       className={`bld-window bld-window--${floor}`}
-      initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
+      initial={{ scale: 0.97 }}
+      whileInView={{ scale: 1 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.5, delay: index * 0.06 }}
     >
